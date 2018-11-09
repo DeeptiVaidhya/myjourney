@@ -1,0 +1,30 @@
+agm-map {
+    height: 300px;
+    min-height: 312px;
+    display: block;
+    border: 6px solid #FFF;
+}
+
+.signin-form p.error {
+    position: absolute;
+    font-size: 13px;
+    padding: 0 4px;
+    background: #ffe4e4;
+    top: 28px;
+    right: 21px;
+    border-radius: 0 0 4px 0;
+    font-weight: bold;
+}
+
+.btn-signin-block {
+    z-index: 2
+}
+
+.forgot-password {
+    color: #fff;
+    float: right;
+    font-size: 15px;
+    border-bottom: 1px solid #fff;
+    line-height: 22px;
+    padding-top: 4px;
+}

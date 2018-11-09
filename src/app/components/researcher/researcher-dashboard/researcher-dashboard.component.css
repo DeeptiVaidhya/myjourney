@@ -1,0 +1,101 @@
+.complete-notification {
+    margin-top: 40px;
+}
+
+.complete-notification .well {
+    padding: 32px 30px;
+    border-radius: 0;
+    border: 0 none;
+    background-color: #f7f9fa;
+    box-shadow: none;
+}
+
+.complete-notification .onco-alert {
+    font-size: 54px;
+    color: #ff4fa1;
+}
+
+.complete-notification p.h7 {
+    margin: 14px 0;
+}
+
+.complete-notification .alert-icon {
+    width: 80px;
+    float: left;
+}
+
+.complete-notification .alert-text {
+    float: left;
+    width: 60.5%;
+    margin-right: 10px;
+}
+
+.complete-notification .alert-Complete-btn {
+    float: left;
+    width: 30%;
+}
+
+.alert-Complete-btn .btn-violet {
+    line-height: 35px
+}
+
+.dash-tbl thead>tr {
+    background: #f7f9fa;
+}
+
+.dash-tbl thead>tr>th {
+    padding: 10px 15px;
+    font-size: 20px;
+    color: #ff4fa1;
+    text-align: center;
+    border: 0 none;
+}
+
+.dash-tbl thead>tr>th:first-child {
+    text-align: left;
+}
+
+.dash-tbl tbody>tr:nth-child(even) {
+    background: #f7f9fa;
+}
+
+.dash-tbl tbody>tr>td {
+    padding: 20px 15px;
+    font-size: 16px;
+    color: #565b61;
+    text-align: center;
+    border: 0 none;
+}
+
+.dash-tbl tbody>tr>td:first-child {
+    text-align: left;
+}
+
+.dash-tbl tbody>tr>td:nth-child(odd) {
+    font-family: 'Montserrat-SemiBold';
+}
+
+.dash-tbl tbody>tr>td>a {
+    color: #ff4fa1;
+    text-decoration: underline;
+}
+
+.view-all-bg {
+    padding-top: 50px;
+    padding-bottom: 35px;
+}
+
+.view-all-bg .h5 {
+    font-size: 30px;
+    font-family: 'Montserrat-Medium';
+    color: #ff4fa1;
+}
+
+.view-all-bg p {
+    font-size: 22px;
+    font-family: 'Montserrat-Regular';
+}
+
+.blue-modal .pop-heading {
+    border-bottom: 2px solid #edf1f5;
+}

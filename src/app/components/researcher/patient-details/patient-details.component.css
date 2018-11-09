@@ -1,0 +1,36 @@
+.pat-det-bg{
+	margin-bottom: 30px;
+}
+.pat-det-bg .dash-heading{
+	padding-bottom: 0;
+	padding-top: 10px;
+}
+.pat-det-bg .row{
+	padding-top: 36px;
+    padding-bottom: 36px;
+}
+.dash-tbl-list thead>tr{
+	background: #f7f9fa;
+}
+.dash-tbl-list tbody>tr:nth-child(even){
+	background: #f7f9fa;
+}
+.dash-tbl-list tbody>tr>td{
+	padding:20px 15px;
+	font-size: 16px;
+	color: #565b61;
+	text-align: left;
+	border: 0 none;
+	font-family: 'Montserrat-Medium';
+}
+.dash-tbl-list tbody>tr>td:first-child{
+	text-align: left;
+	font-family: 'Montserrat-Bold';
+}
+.dash-tbl-list tbody>tr>td>a{
+	color: #007b96;
+	font-family: 'Montserrat-SemiBold';
+}
+.dash-tbl-list tbody>tr>td>a>span{
+	padding-right: 10px;
+}

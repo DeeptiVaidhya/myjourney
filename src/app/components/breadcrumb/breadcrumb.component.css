@@ -1,0 +1,81 @@
+.breadcrumb-top ul {
+    list-style: none;
+    padding: 10px 0;
+    width: 100%;
+    float: left;
+    margin: 0;
+}
+
+.breadcrumb-top ul li:first-child,
+.breadcrumb-top ul li:first-child a {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.breadcrumb-top ul li {
+    float: left;
+    position: relative;
+    margin: 0 12px;
+}
+
+.breadcrumb-top li:not(:last-child)::after {
+    position: absolute;
+    content: "\0203A";
+    right: -15px;
+    font-size: 28px;
+    top: -3px;
+}
+
+.breadcrumb-top ul li a.active,
+.breadcrumb-top ul li span.active {
+    color: #565b61;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.breadcrumb-top ul li a,
+.breadcrumb-top ul li span {
+    padding: 0px 4px 2px 8px;
+    color: #666;
+    vertical-align: middle;
+}
+
+.bc-footer {
+    margin-bottom: 0;
+    border-top: 1px solid #e6edf0;
+    /** Stick to footer */
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.breadcrumb-top ul li:first-child span {
+    padding: 0px 4px 2px 0;
+}
+
+@media (max-width: 1024px) {
+    .breadcrumb-top {
+        margin-bottom: 30px;
+        padding: 0;
+    }
+    .breadcrumb-top ul li {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .breadcrumb-top {
+        margin-bottom: 20px;
+    }
+    .breadcrumb-top ul li {
+        font-size: 12px;
+    }
+    .breadcrumb-top ul li span {
+        padding: 0px 4px 4px 8px;
+        color: #bcc2c8;
+        vertical-align: middle;
+    }
+    .breadcrumb-top ul li:first-child span {
+        padding: 0px 4px 4px 0;
+    }
+}

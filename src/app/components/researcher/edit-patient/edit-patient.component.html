@@ -1,0 +1,103 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Edit Patient"></app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="dash-heading">Personal Details</h2>
+            </div>
+            <form [formGroup]="editPatientForm" (ngSubmit)="updatePatientInfo()" autocomplete="off" class="ot-form" enctype="multipart/form-data">
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="subject_id">Subject ID</label>
+                    <input formControlName="subject_id" type="text" class="form-control" id="subject_id" name="subject_id" (blur)="isSubjectIdUnique($event.target.value)" value="{{patient_detail['subject_id']}}" [(ngModel)]="patient_detail.subject_id">
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['subject_id'].hasError('required') && editPatientForm.controls['subject_id'].touched">Subject ID field is required.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['subject_id'].hasError('pattern') && editPatientForm.controls['subject_id'].touched">Subject ID field should be numeric.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="!is_unique_subject_id">{{is_unique_subject_id_msg}}</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="first_name">First name</label>
+                    <input formControlName="first_name" id="first_name" type="text" [class.invalid]="!editPatientForm.controls.first_name.valid && (editPatientForm.controls.first_name.dirty)" type="text" class="form-control" id="first_name" name="first_name" value="{{patient_detail['first_name']}}"
+                        [(ngModel)]="patient_detail.first_name">
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['first_name'].hasError('required') && editPatientForm.controls['first_name'].touched">First name field is required.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['first_name'].hasError('pattern') && editPatientForm.controls['first_name'].touched">Please enter a valid first name.</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="last_name">Last name</label>
+                    <input formControlName="last_name" id="last_name" type="text" [class.invalid]="!editPatientForm.controls.last_name.valid && (editPatientForm.controls.last_name.dirty)" type="text" class="form-control" id="last_name" name="last_name" value="{{patient_detail['last_name']}}"
+                        [(ngModel)]="patient_detail.last_name">
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['last_name'].hasError('required') && editPatientForm.controls['last_name'].touched">Last name field is required.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['last_name'].hasError('pattern') && editPatientForm.controls['last_name'].touched">Please enter a valid last name.</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="email">Email</label>
+                    <input value="{{patient_detail['email']}}" [(ngModel)]="patient_detail.email" class="form-control" formControlName="email" id="email" type="text" (blur)="isEmailUnique($event.target.value)" [class.invalid]="!editPatientForm.controls.email.valid && (editPatientForm.controls.email.dirty)">
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['email'].hasError('required') && editPatientForm.controls['email'].touched">Email field is required.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['email'].hasError('pattern') && editPatientForm.controls['email'].touched">Please enter a valid email.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="!is_unique_email && !editPatientForm.controls['email'].hasError('pattern')">{{is_unique_email_msg}}</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label>Gender</label>
+                    <div class="clearfix p-b-30">
+                        <div class="radio-container pull-left">
+                            <input type="radio" formControlName="gender" value="female" [(ngModel)]="patient_detail.gender" [checked]="patient_detail['gender'] == 'female'" />
+                            <span></span>
+                            <div class="lbl-inline">
+                                <strong>Female</strong>
+                            </div>
+                        </div>
+                        <div class="radio-container pull-left">
+                            <input [checked]="patient_detail['gender'] == 'male'" type="radio" formControlName="gender" value="male" [(ngModel)]="patient_detail.gender" />
+                            <span></span>
+                            <div class="lbl-inline">
+                                <strong>Male</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="cancer_type">Cancer type</label>
+                    <select class="form-control" formControlName="cancer_type" id="cancer_type" [(ngModel)]="patient_detail.cancer_id">
+						<option value="" disabled></option>
+						<option *ngFor="let cancer of cancer_list" [selected]="patient_detail['cancer_id'] == cancer.id" [(ngValue)]=cancer.id>
+							{{cancer.title}}
+						</option>
+					</select>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['cancer_type'].hasError('required') && editPatientForm.controls['cancer_type'].touched">Cancer type field is required.</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="primary_provider">Primary provider</label>
+                    <select class="form-control" id="primary_provider" formControlName="primary_provider" [(ngModel)]="patient_detail.primary_provider_id">
+						<option value="" disabled></option>
+						<option *ngFor="let pp of provider_list" [(ngValue)]="pp.user_id" [selected]="patient_detail['primary_provider_id'] == pp.user_id">
+							{{pp.fullname}}
+						</option>
+					</select>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="editPatientForm.controls['primary_provider'].hasError('required') && editPatientForm.controls['primary_provider'].touched">Primary provider field is required.</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="secondary_provider">Secondary provider</label>
+                    <select class="form-control" formControlName="secondary_provider" id="secondary_provider" [(ngModel)]="patient_detail.secondary_provider_id">
+						<option value="" disabled></option>
+						<option *ngFor="let sp of provider_list" [selected]="patient_detail['secondary_provider_id'] == sp.user_id" [(ngValue)]="sp.user_id">
+							{{sp.fullname}}
+						</option>
+					</select>
+                </div>
+                <div *ngIf="!is_questionnaire_started" class="form-group col-md-9 col-sm-12">
+                    <label for="genomic_test_start_date">Genomic testing result available date</label>
+                    <input value="{{patient_detail['genomic_test_start_date']}}" class="form-control" formControlName="genomic_test_start_date" id="genomic_test_start_date" type="text" bsDatepicker [bsConfig]="{ dateInputFormat:'MM/DD/YYYY'}" [minDate]="minDate">
+                </div>
+                <div class="form-group col-md-9 col-sm-12" *ngIf="is_questionnaire_started">
+                    <label for="genomic_test_start_date">Genomic testing result available date</label>
+                    <input value="{{patient_detail['week_started_at']}}" class="form-control" formControlName="genomic_test_start_date" id="genomic_test_start_date" type="text" readonly>
+                </div>
+                <div class="d-line col-xs-12">
+                    <button class="btn btn-violet pull-right btn-250" type="submit" [disabled]="!(editPatientForm.valid && is_unique_email && is_unique_subject_id)">Update</button>
+                    <!-- <button class="btn btn-violet pull-right btn-250" type="submit" [disabled]="!(editPatientForm.valid && is_unique_email && is_valid_file && is_unique_subject_id)">Update</button> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

@@ -1,0 +1,67 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="{{ patient_detail.fullname }}"></app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+    <div class="container-fluid bg-light pat-det-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-4">
+                    <h2 class="dash-heading">Patient Details</h2>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <a *ngIf="role==2" [routerLink]="['/researcher/edit-patient',patient_detail.user_id]" class="btn btn-gray btn-block ">Edit Patient</a>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <a [routerLink]="[(role==2? '/researcher':'/provider')+'/patient-report',patient_detail.user_id]" class="btn btn-violet btn-block ">Patient Report</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4" *ngIf="patient_detail?.is_reset_password_required==true">
+                <div class="col-xs-12"><button class="btn btn-violet" (click)="resetPassword(patient_detail.email)">Reset password</button></div>
+            </div>
+            <div class="col-md-3 col-sm-4" *ngIf="patient_detail?.is_reset_password_required==false">
+                <div class="col-xs-12"><button class="btn btn-violet" (click)="generateAccessCode(patient_detail.email)">Generate Access Code</button></div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <div class="col-xs-12" *ngIf="patient_detail.is_active == 0"><button class="btn btn-violet" (click)="changeActiveStatus(patient_detail.user_id,patient_detail.is_active)">Activate</button></div>
+                <div class="col-xs-12" *ngIf="patient_detail.is_active == 1"><button class="btn btn-violet" (click)="changeActiveStatus(patient_detail.user_id,patient_detail.is_active)">Deactivate</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 dash-tbl-list">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Subject ID:</td>
+                                <td>{{patient_detail.subject_id}}</td>
+                            </tr>
+                            <tr>
+                                <td>Gender:</td>
+                                <td class="t-capitalize">{{patient_detail.gender}}</td>
+                            </tr>
+                            <tr>
+                                <td>Primary Cancer Diagnosis:</td>
+                                <td>{{patient_detail.cancer_title}}</td>
+                            </tr>
+                            <tr>
+                                <td>Primary Provider:</td>
+                                <td class="t-capitalize">{{patient_detail.primary_provider}}</td>
+                            </tr>
+                            <tr>
+                                <td>Secondary Provider:</td>
+                                <td class="t-capitalize">{{patient_detail.secondary_provider}}</td>
+                            </tr>
+                            <tr>
+                                <td>Genomic testing result available date:</td>
+                                <td>{{patient_detail.is_questionnaire_started ? patient_detail.week_started_at:patient_detail.genomic_test_start_date}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

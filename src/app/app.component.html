@@ -1,0 +1,10 @@
+<app-header [isLoggedIn]="isLoggedIn" [maIsOpen]="maIsOpen" [link]="link" [hidden]="isHeaderHidden"></app-header>
+<ng4-loading-spinner> </ng4-loading-spinner>
+
+<!-- start main -->
+<div class="main">
+    <router-outlet></router-outlet>
+</div>
+<!-- end main -->
+
+<app-footer [hidden]="isHeaderHidden"></app-footer>

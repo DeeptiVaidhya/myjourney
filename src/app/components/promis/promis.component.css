@@ -1,0 +1,112 @@
+.b-line {
+    display: block;
+    background-color: #edf1f5;
+    height: 1px;
+    margin: 30px 0;
+}
+
+.lbl-text-right.symptom-options label {
+    display: block;
+    margin: 20px;
+}
+
+.lbl-text-right.symptom-options label .radio-container {
+    float: left;
+}
+
+.lbl-text-right.symptom-options strong {
+    margin-left: 16px;
+    vertical-align: middle;
+    line-height: 33px;
+}
+
+.blue-modal .modal-body {
+    padding-left: 65px;
+    padding-right: 65px;
+}
+
+.blue-modal .modal-body p {
+    font-size: 16px;
+    font-family: 'Montserrat-Regular';
+}
+
+.blue-modal h4 {
+    font-size: 24px;
+    font-family: 'Montserrat-Medium';
+    color: #007b96;
+}
+
+.blue-modal .pop-heading {
+    font-size: 34px;
+    font-family: 'Montserrat-Regular';
+    color: #cf10be;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #edf1f5;
+}
+
+.blue-modal.modal {
+    background-color: rgba(102, 62, 148, 0.9);
+}
+
+.blue-modal .modal-dialog {
+    width: 68%;
+}
+
+.blue-modal .modal-header {
+    padding: 40px 25px 0;
+    border-bottom: 0 none;
+}
+
+.blue-modal .modal-content {
+    border-radius: 12px;
+}
+
+.btn-250 {
+    width: 250px;
+}
+
+.modal-header .close {
+    position: absolute;
+    right: 20px;
+    top: 35px;
+    z-index: 99;
+    font-size: 65px;
+    line-height: 0;
+}
+
+@media (max-width: 1024px) {
+    .blue-modal .modal-body {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .blue-modal .modal-dialog {
+        width: 90%;
+    }
+}
+
+@media (max-width: 767px) {
+    .blue-modal {
+        width: auto;
+    }
+    .blue-modal .modal-body {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .blue-modal .modal-dialog {
+        width: auto;
+    }
+    .lbl-text-right.symptom-options label {
+        margin: 15px 0;
+    }
+    .modal-header .close {
+        font-size: 50px;
+        right: 15px;
+        top: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .btn-250 {
+        width: 100px;
+    }
+}

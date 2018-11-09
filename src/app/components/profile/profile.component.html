@@ -1,0 +1,62 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="My Details"></app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <form [formGroup]="profileForm" autocomplete="off" class="ot-form" (ngSubmit)="updateProfile()">
+                    <h2 class="dash-heading c-pink">Edit personal details</h2>
+                    <div class="form-group">
+                        <label for="first_name">First name</label>
+                        <input class="form-control" value="{{user_detail['first_name']}}" formControlName="first_name" id="first_name" type="text" [class.invalid]="!profileForm.controls.first_name.valid && (profileForm.controls.first_name.dirty)" [(ngModel)]="user_detail.first_name">
+
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.first_name.hasError('required') && profileForm.controls['first_name'].dirty">First name field is required.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.first_name.hasError('pattern') && profileForm.controls['first_name'].touched">Please enter a valid first name.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last name</label>
+                        <input class="form-control" value="{{ user_detail['last_name'] }}" formControlName="last_name" id="last_name" type="text" [class.invalid]="!profileForm.controls.last_name.valid && (profileForm.controls.last_name.dirty)" [(ngModel)]="user_detail.last_name">
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.last_name.hasError('required') && profileForm.controls['last_name'].dirty">Last name field is required.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.last_name.hasError('pattern') && profileForm.controls['last_name'].touched">Please enter a valid last name.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail address</label>
+                        <input class="form-control" value="{{ user_detail['email'] }}" formControlName="email" id="email" type="text" (blur)="isEmailUnique($event.target.value)" [class.invalid]="!profileForm.controls.email.valid && (profileForm.controls.email.dirty)" [(ngModel)]="user_detail.email">
+
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.email.hasError('required') && profileForm.controls['email'].dirty">Email field is required.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.email.hasError('pattern') && profileForm.controls['email'].dirty">Please enter a valid email.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="!is_unique_email">{{is_unique_email_msg}}</p>
+                    </div>
+                    <h2 class="dash-heading c-pink m-t-40">Edit login details</h2>
+                    <div class="form-group">
+                        <label for="current_password">Confirm current password *</label>
+                        <input class="form-control" value="" formControlName="current_password" id="current_password" type="password" (blur)="isCurrentPassword($event.target.value)" [class.invalid]="!profileForm.controls.current_password.valid && (profileForm.controls.current_password.dirty)">
+                        <small>* For security reasons, please enter your current password.</small>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="!is_current_password">{{is_current_password_msg}}</p>
+                    </div>
+                    <div class="form-group p-b-25">
+                        <label for="password">Enter new password</label>
+                        <input class="form-control" formControlName="password" id="password" type="password" [class.invalid]="!profileForm.controls.password.valid && (profileForm.controls.password.dirty)" (blur)="isPreviousPassword($event.target.value)">
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.password.hasError('required') && profileForm.controls['password'].touched">Password field is required.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="profileForm.controls.password.hasError('pattern') && profileForm.controls['password'].dirty">* The new password must be 8 characters long with a combination of upper and lower case letters, numbers AND symbols.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="!is_previous_password">{{is_previous_password_msg}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Re-type new password *</label>
+                        <input class="form-control" formControlName="confirm_password" id="confirm_password" type="password" [class.invalid]="!profileForm.controls.confirm_password.valid && (profileForm.controls.confirm_password.dirty)">
+                        <small>* To change your password, enter the new password again.</small>
+                        <p class="error m-0-auto" col-12 ion-text *ngIf="profileForm.controls.confirm_password.touched && profileForm.hasError('match_password')">
+                            Password does not match.
+                        </p>
+                        <p class="error m-0-auto" col-12 ion-text *ngIf="profileForm.controls.confirm_password.hasError('required') && profileForm.controls['confirm_password'].dirty">Confirm password field is required.</p>
+                    </div>
+                    <div class="d-line">
+                        <button type="submit" class="btn btn-violet pull-right btn-250">Update Details</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

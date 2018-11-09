@@ -1,0 +1,159 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Hi, {{user_detail.fullname}}"></app-inner-page-header>
+    <div class="container">
+        <div class="row p-b-20">
+            <!-- <div class="col-md-12 complete-notification" *ngIf="(all_week_status=='' ? (is_questionnaire_completed ? is_questionnaire_completed : incompleted_questionnaire!=0): false)"> -->
+            <div class="col-md-12 complete-notification" *ngIf="(all_week_status=='' ? is_genomic_result_date && ( is_questionnaire_completed ? is_questionnaire_completed : incompleted_questionnaire!=0): false)">
+                <!-- <div class="col-md-12 complete-notification" *ngIf="incompleted_questionnaire!=0"> -->
+                <!-- <div class="col-md-12 complete-notification"> -->
+                <div class="col-xs-12 well">
+                    <div class="alert-icon">
+                        <span class="onco-alert"></span>
+                    </div>
+                    <div class="alert-text">
+                        <p class="h7">
+                            <span>You have
+								<span class="c-pink">{{incompleted_questionnaire}}</span> questionnaires to complete this week.</span>
+                        </p>
+                    </div>
+
+                    <div class="alert-Complete-btn">
+                        <a routerLink='/patient/dashboard/{{questionnaire_link}}' type="button" class="btn btn-violet btn-block f-regular">Complete questionnaires</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 complete-notification" *ngIf="all_week_status!=''">
+                <div class="col-xs-12 well">
+                    <div class="alert-icon">
+                        <span class="onco-alert"></span>
+                    </div>
+                    <div class="alert-text">
+                        <p class="h7">
+                            <strong>{{all_week_status}}</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row p-b-30">
+            <div class="col-md-5 col-sm-6 col-xs-12 graph-left">
+                <div class="graph-bg">
+                    <div class="h6 f-medium">This Week’s Questionnaires</div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 text-center">
+                            <!-- <img src="assets/images/graph_circle.jpg" class="img-responsive img-center"> -->
+                            <div class="img-center" id="chartdiv" [style.width.px]="160" [style.height.px]="160"></div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <P class="text-center f-18"> You have completed
+                                <br />
+                                <span class="c-purple complete-number">{{completed_questionnaire}}</span>
+                                <br /> out of {{total_questionnaire}} questionnaires in total. </P>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-6 col-xs-12">
+                <div class="graph-bg">
+                    <div class="h6 f-medium">Things to Do</div>
+                    <div class="col-xs-12 things-to-link">
+                        <p class="link">
+                            <i class="onco-decision-making"> </i>
+                            <a routerLink='/patient/dashboard/decision-making'>{{is_CPS_Completed ? 'View Decision-Making Style Results' : 'Complete Decision-Making Style Questionnaire'}}</a>
+                        </p>
+                        <p class="link">
+                            <i class="onco-health-concerns"> </i>
+                            <a routerLink="/patient/dashboard/report">View Your Health Concerns</a>
+                        </p>
+                        <!-- <p class="link">
+							<i class="onco-download-genomic-profile-report"> </i>
+							<a *ngIf="user_detail.report_url == ''" (click)="reportNotFound()" href="javascript:void(0)">Download genomic profile report</a>
+							<a *ngIf="user_detail.report_url != ''" href="{{ user_detail.report_url }}" download>
+								Download genomic profile report</a>
+						</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 scheduled-session">
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 m-t-10">
+                            <h4 class="c-pink">Join a scheduled session</h4>
+                            <p><strong>Date:</strong> Mon April 16, 2016</p>
+                            <p><strong>Time:</strong> 2:00pm EST</p>
+                            <p><strong>Topic:</strong> In vitae erat cursus urna pharetra tristique</p>
+                            <button class="btn btn-gray m-t-10">Join</button>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div>
+                                <img class="img-responsive" src="assets/images/video_bg.jpg" alt="video bg">
+                            </div>
+                        </div>
+                    </div>    
+                </div>    
+            </div>
+        </div>
+        <div class="row p-b-30">
+            <div class="col-md-12">
+                <h4 class="c-pink p-b-20">What is Genomic Profiling?</h4>
+                <p class="content-p">Genomic Profiling is a laboratory method that is used to learn about all the genes in a person or in a specific cell type, and the way those genes interact with each other and with the environment.</p>
+            </div>
+        </div>
+        <div class="row genomic-profiling text-center">
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/understanding-breast-cancer" title="Understanding breast cancer" class="gaes-cls">
+                    <i class="onco-understanding-breast-cancer"></i>
+                    <span class="c-pink h6">Understanding Breast Cancer</span>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/eat-well-feel-well" title="Eat Well, Feel Well" class="gaes-cls">
+                    <i class="onco-eat-well-feel-well"></i>
+                    <span class="c-pink h6">Eat Well, Feel Well</span>
+                </a>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/healthy-mind" title="Healthy Mind" class="gaes-cls">
+                    <i class="onco-healthy-mind"></i>
+                    <span class="c-pink h6">Healthy Mind</span>
+                </a>
+            </div>
+            <div class="clearfix hidden-xs"></div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/healthy-at-any-age" title="Healthy at Any Age" class="gaes-cls">
+                    <i class="onco-healthy-at-any-age"></i>
+                    <span class="c-pink h6">Healthy at Any Age</span>
+                </a>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/staying-active" title="Staying Active" class="gaes-cls">
+                    <i class="onco-staying-active"></i>
+                    <span class="c-pink h6">Staying Active</span>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/care-after-cancer" title="Care After Cancer" class="gaes-cls">
+                    <i class="onco-care-after-cancer"></i>
+                    <span class="c-pink h6">Care After Cancer </span>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/life-after-cancer" title="Life After Cancer" class="gaes-cls">
+                    <i class="onco-life-after-cancer"></i>
+                    <span class="c-pink h6">Life After Cancer</span>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4">
+                <a href="javascript:void(0)" data-link="/patient/dashboard/wrapping-up" title="Wrapping Up" class="gaes-cls">
+                    <i class="onco-wrapping-up"></i>
+                    <span class="c-pink h6">Wrapping Up </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

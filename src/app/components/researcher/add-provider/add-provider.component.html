@@ -1,0 +1,38 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Add a Provider"></app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="dash-heading">Personal Details</h2>
+            </div>
+            <form [formGroup]="addProviderForm" (ngSubmit)="addProvider()" autocomplete="off" class="ot-form">
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="first_name">First name</label>
+                    <input formControlName="first_name" id="first_name" type="text" [class.invalid]="!addProviderForm.controls.first_name.valid && (addProviderForm.controls.first_name.dirty)" type="text" class="form-control" name="first_name">
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="addProviderForm.controls['first_name'].hasError('required') && addProviderForm.controls['first_name'].touched">First name field is required.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="addProviderForm.controls['first_name'].hasError('pattern') && addProviderForm.controls['first_name'].touched">Please enter a valid first name.</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="last_name">Last name</label>
+                    <input formControlName="last_name" id="last_name" type="text" [class.invalid]="!addProviderForm.controls.last_name.valid && (addProviderForm.controls.last_name.dirty)" type="text" class="form-control" name="last_name">
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="addProviderForm.controls['last_name'].hasError('required') && addProviderForm.controls['last_name'].touched">Last name field is required.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="addProviderForm.controls['last_name'].hasError('pattern') && addProviderForm.controls['last_name'].touched">Please enter a valid last name.</p>
+                </div>
+                <div class="form-group col-md-9 col-sm-12">
+                    <label for="email">Email</label>
+                    <input class="form-control" formControlName="email" id="email" type="text" (blur)="isEmailUnique($event.target.value)" [class.invalid]="!addProviderForm.controls.email.valid && (addProviderForm.controls.email.dirty)">
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="addProviderForm.controls['email'].hasError('required') && addProviderForm.controls['email'].touched">Email field is required.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="addProviderForm.controls['email'].hasError('pattern') && addProviderForm.controls['email'].touched">Please enter a valid email.</p>
+                    <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="!is_unique_email && !addProviderForm.controls['email'].hasError('pattern')">{{is_unique_email_msg}}</p>
+                </div>
+                <div class=" d-line col-xs-12 ">
+                    <button class="btn btn-violet pull-right btn-250" type="submit">Add Provider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

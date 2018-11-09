@@ -1,0 +1,47 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Questionnaire"></app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+    <div class="container">
+        <form [formGroup]="" autocomplete="off">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 class="c-blue p-b-20">Cancer Specific Distress - Impact of Events Scale - Revised</h4>
+                    <p>How often did you have following thoughts and feelings about cancer in the past week.</p>
+                    <p>For each statement please answer (not at all, rarely, sometimes, or often).</p>
+                </div>
+                <div class="col-xs-12">
+                    <div class="questionnaire-tbl">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="35%">&nbsp;</th>
+                                    <th *ngFor="let header_data of header|qtopt;">{{ header_data.name }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ies_question of default?.question">
+                                    <td>{{ ies_question.question}}</td>
+                                    <td *ngFor="let options_data of ies_question.ques_options|qtopt;">
+                                        <div class="m-option">{{ options_data.name }}</div>
+                                        <span class="radio-container">
+											<input type="radio" name="option[{{ies_question.question_id}}]" value="{{ options_data.id }}" attr.data-question-id="{{ies_question.question_id}}"
+											 checked="{{ (ies_question.answer['options_id'] == options_data.id) ? 'checked' : '' }}" />
+											<span></span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <button class="btn btn-violet btn-250" type="button" (click)="save()">Submit</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>
+<app-questionnaire-with-concern [toggle]="isShown"></app-questionnaire-with-concern>

@@ -1,0 +1,217 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Understanding breast cancer " back_link="/patient/dashboard" back_title="Dashboard">Understanding breast cancer </app-inner-page-header>
+    <div class="container">
+        <div class="row">
+            <!-- start content-left -->
+            <div class="col-md-7 col-sm-12 col-xs-12">
+                <h4 class="c-blue p-b-20">Precision oncology or cancer precision medicine is the process of personalizing cancer treatment based on a patient’s unique type of cancer.</h4>
+                <p class="content-p">
+                    Precision oncology is based on research that is designed to figure out which patients are more likely to respond to specific cancer treatments. Based on this research, oncologists can use information about a person’s specific cancer to find the most effective
+                    treatments for that person. They may also be able to find treatments that cause fewer side effects than standard cancer treatment options.
+                </p>
+                <div class="text-center content-p content-inner-img">
+                    <img class="img-responsive" src="assets/images/understanding_precision_medicine.jpg" alt="Understanding precision Medicine" />
+                </div>
+                <p class="content-p h9">Source: National Cancer Institute</p>
+                <p class="content-p">Sometimes when people first hear about precision oncology, they mistake it for radiation therapy. Although radiation therapy could be a part of your cancer treatment plan, it is different than precision oncology.</p>
+                <p class="content-p">Use the information in the following sections to learn more about what precision oncology is, how it works, and things to consider as you decide whether precision oncology is right for you.</p>
+                <div class="row content-p">
+                    <div class="col-xs-12 section">
+                        <div class="section-content">
+                            <span class="onco-article c-blue sec-icon"></span>
+                            <div class="sec-desc">
+                                <p class="h8">Precision Medicine in Cancer Treatment</p>
+                                <p class="h9">Information about precision medicine from the National Cancer Institute</p>
+                            </div>
+                            <a class="btn btn-violet btn-block sec-button gaes-cls" href="https://www.cancer.gov/about-cancer/treatment/types/precision-medicine" target="_blank" title="Precision Medicine in Cancer Treatment" data-ga-action="Read More">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <accordion class="main-accordion" [closeOthers]="true">
+                            <accordion-group #res0>
+                                <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="How is precision oncology different from standard of care?">
+                                    <span class="col-xs-10 h6">How is precision oncology different from standard of care?</span>
+                                    <span class="col-xs-2 text-right h6">
+										<i [ngClass]="res0?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+									</span>
+                                </div>
+                                <div class="accordion-inner">
+                                    <h6>Precision oncology is sometimes offered as an alternative to standard of care cancer treatment.</h6>
+                                    <p class="content-p">Before precision oncology, most patients with a specific type and stage of cancer received the same treatment. This is known as the standard of care. However, standard of care cancer treatments work better for some
+                                        patients than others. Medical research has helped oncologists understand why this is the case.</p>
+                                    <p class="content-p">Nowadays, in addition to a standard treatment plan (such as surgery to remove a tumor), oncologists are often able to recommend personalized cancer treatments based on information about a person’s specific tumor.</p>
+                                    <p class="content-p">Oncologists can use state-of-the-art analyses to learn detailed information about individual patients’ tumors. Information about a patient’s tumor can then be used to try to identify new treatment options.</p>
+                                    <p class="content-p">This information can be very helpful for treating patients with rare, unusual, or advanced and metastatic cancers whose tumors sometimes don’t respond adequately to standard of care treatments.</p>
+                                    <p class="content-p">Precision oncology treats cancer patients based on more than just their type of cancer, stage of cancer, and prior treatments. Precision oncology digs deeper to the gene level to try to find more appropriate treatments
+                                        for each individual patient.</p>
+
+                                    <div class="section-content">
+                                        <span class="onco-video c-blue sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Precision Oncology in Practice</p>
+                                            <p class="h9">In this video from NBC news, a patient describes his successful experience with precision oncology</p>
+                                        </div>
+                                        <a class="btn btn-violet btn-block sec-button gaes-cls" href="https://www.youtube.com/watch?v=uuLtiGmmBV4" target="_blank" title="Precision Oncology in Practice" data-ga-action="View Video">View Video</a>
+                                    </div>
+
+                                </div>
+                            </accordion-group>
+                            <accordion-group #res1>
+                                <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="How does precision oncology work?">
+                                    <span class="col-xs-10 h6">How does precision oncology work?</span>
+                                    <span class="col-xs-2 text-right h6">
+										<i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+									</span>
+                                </div>
+                                <div class="accordion-inner">
+                                    <h6>Precision oncology works in different ways for patients at different stages of disease.</h6>
+                                    <p class="content-p">For individuals with advanced or metastatic cancers, precision oncology often works by using a special type of testing called genomic tumor testing. Genomic tumor testing allows oncologists to look at the unique characteristics
+                                        of a person’s tumor. Oncologists are most interested in a tumor’s abnormal genes, which are referred to as mutations.</p>
+                                    <p class="content-p">We know from research that some tumor mutations respond to certain cancer treatments better than others. If you undergo genomic tumor testing and a mutation is found in your tumor, your oncologist can try to match that
+                                        mutation to a cancer treatment that we know targets the mutation (based on research).
+                                    </p>
+                                    <p class="uppercase c-blue h7">personalized cancer therapy</p>
+                                    <div class="text-center content-inner-img">
+                                        <img src="assets/images/cancer_therapy.jpg" class="img-responsive" alt="Cancer Therapy" />
+                                    </div>
+                                    <p class="h9">Source: MD Anderson</p>
+                                    <p>The types of tumor mutations your doctor is looking for are not inherited from your parents and cannot be passed on to your children. They are mutations that happened by chance. </p>
+                                    <p>For more information on this topic, see the section titled, “
+                                        <a href="javascript:void(0)" (click)="scroll(what_is_mutation)" class="c-blue"> What is a mutation and how did I get one?</a>”</p>
+                                </div>
+                            </accordion-group>
+                            <accordion-group #res2>
+                                <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="What will happen if I have genomic tumor testing?">
+                                    <span class="col-xs-10 h6">What will happen if I have genomic tumor testing?</span>
+                                    <span class="col-xs-2 text-right h6">
+										<i [ngClass]="res2?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+									</span>
+                                </div>
+                                <div class="accordion-inner">
+                                    <h6>Here’s what you can expect if you decide to undergo genomic tumor testing.</h6>
+                                    <p class="content-p">For genomic tumor testing, your oncologist will need a sample of your blood and likely a sample of your tumor. Many times, your oncologist can use a sample of your tumor from a previous biopsy. If not, you will need
+                                        to have another biopsy. Once your tumor sample and blood sample are ready, they will be sent to a laboratory for testing. This testing usually takes 2-4 weeks. Once the results are ready, they will be sent to your
+                                        oncologist. Your oncologist will review the results and set up a time to discuss them with you, either by phone or in person. </p>
+                                </div>
+                            </accordion-group>
+                            <accordion-group #res3>
+                                <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Things to consider about genomic tumor testing">
+                                    <span class="col-xs-10 h6">Things to consider about genomic tumor testing</span>
+                                    <span class="col-xs-2 text-right h6">
+										<i [ngClass]="res3?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+									</span>
+                                </div>
+                                <div class="accordion-inner">
+                                    <h6>Like most medical procedures, there are many things to consider. </h6>
+                                    <p class="content-p">As you read through the following sections, make note of the topics that you would like to talk about with your oncologist during your next visit.</p>
+                                    <p class="c-blue h8">Could my cancer treatment plan change as a result of genomic tumor testing?</p>
+                                    <!--<p>Researchers test an experimental drug or treatment in a small group of people (20–80) for the first time. The goal is to study the safety of the drug or treatment and identify any side effects.</p>-->
+                                    <p>It is a real possibility that your treatment plan may change after genomic tumor testing. Indeed, the goal of genomic tumor testing is to find tumor mutations and identify treatment options. However, there is no guarantee
+                                        that this will happen. We won’t know if new or different treatment options are available for you until the results are back.</p>
+                                    <p class="c-blue h8">What are the risks of genomic tumor testing?</p>
+                                    <p class="content-p">To do genomic tumor testing, your oncologist will need a sample of your tumor. Many times, your oncologist can use a sample of your tumor from a previous biopsy. However, if your oncologist needs another sample of your
+                                        tumor, you will need to have another biopsy. There may be risks to having a biopsy, especially if it requires surgery. Your oncologist and surgeon can explain any risks related to having a biopsy.</p>
+                                    <p class="content-p"> Another potential risk to consider is that the results of your genomic tumor testing will become a part of your medical record. Information in your medical record can be viewed by a third party such as an insurance
+                                        company (such as life insurance or health insurance) if you allow them to access to your medical record.</p>
+                                    <p class="c-blue h8">Will my insurance cover the cost of genomic tumor testing?</p>
+                                    <p class="content-p">Because genomic tumor testing is still new and changing as more research is done, it is not always considered the standard of care. Your insurance company many not cover some or all of the costs associated with genomic
+                                        tumor testing. Your oncologist or a representative from the cancer center will talk to you about the potential costs as well as payment options if your insurance does not cover the costs.</p>
+                                    <div class="text-center content-inner-img">
+                                        <img src="assets/images/will_my_insurance.jpg" class="img-responsive" alt="Will My Insurance" />
+                                    </div>
+                                    <p class="c-blue h8">Are there limits to precision oncology?</p>
+                                    <p class="content-p">Precision oncology is a new science and there is still a lot to learn about how genomic tumor testing can improve cancer treatment. Not all patients who undergo genomic tumor testing will have a mutation, and not all
+                                        mutations can be matched with known treatment options. Therefore, not all patients will benefit from genomic tumor testing. In fact, only a small portion of cancer patients will likely benefit from genomic tumor
+                                        testing. Only you and your oncologist can decide if you are a good candidate. </p>
+                                </div>
+                            </accordion-group>
+                            <accordion-group #res4>
+                                <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="What is a mutation and how did I get one?" #what_is_mutation>
+                                    <span class="col-xs-10 h6">What is a mutation and how did I get one?</span>
+                                    <span class="col-xs-2 text-right h6">
+										<i [ngClass]="res4?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+									</span>
+                                </div>
+                                <div class="accordion-inner">
+                                    <h6>“Mutation” might sound like a scary word, but it gives us more information about what makes you unique.</h6>
+                                    <p class="content-p">Each of us has a unique set of DNA, or chemical blueprints, that determine how our bodies look and function. DNA is found inside every cell in the body. The segments of DNA that contain instructions for making specific
+                                        body proteins are called genes. A mutation is an error in the DNA that makes up a gene. </p>
+                                    <div class="text-center content-inner-img">
+                                        <img src="assets/images/set_of_dna.jpg" class="img-responsive" alt="Set of DNA" />
+                                    </div>
+                                    <p class="content-p">Mutations fall into two major categories: hereditary mutations and acquired mutations. </p>
+                                    <p class="c-blue h8">What is a hereditary mutation?</p>
+                                    <p class="content-p">Hereditary mutations are inherited, or passed down through families, similar to eye color and hair color. They are also called germline mutations because they are found in the parent’s egg or sperm cells (germ cells).
+                                        Hereditary mutations are present throughout a person’s life and they can be found in every cell in the body.</p>
+                                    <p class="content-p"> Hereditary mutations can be identified through genetic testing. This sounds similar to genomic testing, but is a different kind of test. For example, the test for BRCA1 and BRCA2 genes is a genetic test of inherited
+                                        mutations that can help predict your risk for getting breast or ovarian cancer.</p>
+                                    <p class="content-p">Not all hereditary mutations are passed on to the next generation. Also, hereditary mutations are not always harmful; they can also be beneficial or have no effect at all.</p>
+                                    <p class="content-p">The purpose of genomic tumor testing is NOT to look for hereditary mutations. Read the next section (acquired mutations) to learn about the type of mutations that genomic tumor testing looks for.</p>
+                                    <div class="row">
+                                        <div class="col-md-1 col-sm-1 col-xs-2">
+                                            <span class="circle-list">A</span>
+                                        </div>
+                                        <div class="col-md-11 col-sm-11 col-xs-10">
+                                            <p class="c-blue h8">What if my genomic tumor testing finds a hereditary mutation that was passed down to me?</p>
+                                            <p class="content-p">Although the purpose of genomic tumor testing is NOT to look for hereditary mutations, some types of genomic tumor testing may also detect them. This can depend on the type of test ordered and the laboratory
+                                                where the samples are processed.</p>
+                                            <p class="content-p"> If your genomic tumor testing finds a hereditary mutation, you will be referred to a genetic counselor to help you or your family understand what this means for you.</p>
+                                        </div>
+                                    </div>
+                                    <p class="c-blue h8">What is an acquired mutation?</p>
+                                    <p class="content-p">Acquired (or somatic) mutations are not inherited or passed down through families. They occur at some time during a person’s life and they are only present in certain cells, not in every cell in the body.</p>
+                                    <p class="content-p">Acquired mutations happen randomly. For example, acquired mutations may occur if there is an error, like a typo, while DNA copies itself during cell division.</p>
+                                    <p class="content-p">Each person’s cancer has a unique combination of acquired mutations. Genomic tumor testing can help doctors identify acquired mutations in a patient’s cancer. Then, they can try to match those mutations to treatments
+                                        that target those mutations. </p>
+                                    <div class="text-center content-inner-img p-b-0">
+                                        <img src="assets/images/acquired_mutation.jpg" class="img-responsive" alt="Acquired Mutation" />
+                                    </div>
+                                    <p class="h9">Source: Autism Science Foundation, adapted from the National Cancer Institute and the American Society of Clinical Oncology
+                                    </p>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end content-left -->
+
+            <!-- start content-right -->
+            <div class="col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
+                <div class="content-right-bg">
+                    <div class="col-xs-12">
+                        <div class="h6">Useful Resources</div>
+                    </div>
+                    <div class="content-right-inner">
+                        <div class="col-xs-10">
+                            <p class="h8 c-blue">
+                                <a href="https://www.cancer.gov/about-cancer/treatment/types/precision-medicine" target="_blank" title="Precision Medicine in Cancer Treatment" class="gaes-cls" data-ga-action="Useful resources - Read More">Precision Medicine in Cancer Treatment</a>
+                            </p>
+                            <p>Information about precision medicine from the National Cancer Institute</p>
+                        </div>
+                        <div class="col-xs-2">
+                            <span class="onco-article c-blue sec-icon"></span>
+                        </div>
+                    </div>
+                    <div class="content-right-inner">
+                        <div class="col-xs-10">
+                            <p class="h8 c-blue">
+                                <a class="gaes-cls" data-ga-action="Useful resources - View Video" href="https://www.youtube.com/watch?v=uuLtiGmmBV4" target="_blank" title="Precision Oncology in Practice">Precision Oncology in Practice</a>
+                            </p>
+                            <p>In this video from NBC news, a patient describes his successful experience with precision oncology</p>
+                        </div>
+                        <div class="col-xs-2">
+                            <span class="onco-video c-blue sec-icon"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end content-right -->
+
+        </div>
+    </div>
+
+</div>

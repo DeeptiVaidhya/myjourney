@@ -1,0 +1,7 @@
+.ot-form input{
+	box-shadow: none;
+}
+.ot-form .form-group{
+	float: left;
+	width: 100%;
+}

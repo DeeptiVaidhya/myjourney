@@ -1,0 +1,609 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Resources">Resources</app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+    <!-- <app-inner-page-header page_title="Resources" back_link="/home" back_title="Home"></app-inner-page-header> -->
+    <div class="container">
+        <div class="row">
+            <!-- Start content-left -->
+            <div class="col-xs-12">
+                <p class="content-p">
+                    <strong>Below are some additional resources that you might find helpful. Please be aware that the links below will take you
+						to external websites and documents</strong>.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+
+                <accordion class="main-accordion panel-group" [closeOthers]="true">
+                    <accordion-group #res1>
+                        <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Tools for Understanding Precision Oncology">
+                            <span class="col-xs-10 h6">Tools for Understanding Precision Oncology</span>
+                            <span class="col-xs-2 text-right h6">
+								<i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+							</span>
+                        </div>
+                        <div class="accordion-inner">
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Precision Medicine in Cancer Treatment</p>
+                                            <p class="h9">Information about precision medicine from the National Cancer Institute</p>
+                                        </div>
+                                        <a href="https://www.cancer.gov/about-cancer/treatment/types/precision-medicine" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="Precision Medicine in Cancer Treatment">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Precision Oncology in Practice</p>
+                                            <p class="h9">In this video from NBC news, a patient describes his successful experience with precision oncology</p>
+                                        </div>
+                                        <a title="Precision Oncology in Practice" href="https://www.youtube.com/watch?v=uuLtiGmmBV4" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Genes, DNA, and Chromosomes Explained</p>
+                                            <p class="h9">This video from Science Explained provides information about DNA, genes, and mutations</p>
+                                        </div>
+                                        <a title="Genes, DNA, and Chromosomes Explained" href="https://www.youtube.com/watch?v=hywRdDVR76A&t=20s" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+
+                    <accordion-group #res2>
+                        <div accordion-heading>
+                            <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Tools for Preparing for Your Genomic Testing Results">
+                                <span class="col-xs-10 h6">Tools for Preparing for Your Genomic Testing Results</span>
+                                <span class="col-xs-2 text-right h6">
+									<i [ngClass]="res2?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+								</span>
+                            </div>
+
+                        </div>
+                        <div class="accordion-inner">
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Types of Cancer Treatment</p>
+                                            <p class="h9">Information about various cancer treatments from the National Cancer Institute</p>
+                                        </div>
+                                        <a href="https://www.cancer.gov/about-cancer/treatment/types" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="Types of Cancer Treatment">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Chemotherapy?</p>
+                                            <p class="h9">This video from the Susan G. Komen Foundation describes chemotherapy for breast cancer</p>
+                                        </div>
+                                        <a title="What is Chemotherapy?" href="https://www.youtube.com/watch?time_continue=44&v=3BCKnKEP2BQ" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Chemotherapy?</p>
+                                            <p class="h9">Information about chemotherapy from the American Cancer Society</p>
+                                        </div>
+                                        <a href="https://www.cancer.org/treatment/treatments-and-side-effects/treatment-types/chemotherapy/how-is-chemotherapy-used-to-treat-cancer.html" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="What is Chemotherapy?">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Radiation Therapy?</p>
+                                            <p class="h9">Information about radiation therapy from the American Cancer Society</p>
+                                        </div>
+                                        <a href="https://www.cancer.org/treatment/treatments-and-side-effects/treatment-types/radiation/basics.html" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="What is Radiation Therapy?">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What are Targeted Therapies?</p>
+                                            <p class="h9">This video from Macmillan Cancer Support describes targeted therapies</p>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=dh70Ocz6qp0" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video" title="What are Targeted Therapies?">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What are Targeted Therapies?</p>
+                                            <p class="h9">Information about targeted therapies from the American Cancer Society</p>
+                                        </div>
+                                        <a href="https://www.cancer.org/treatment/treatments-and-side-effects/treatment-types/targeted-therapy/what-is.html" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="What are Targeted Therapies?">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Immunotherapy?</p>
+                                            <p class="h9">Information about immunotherapy from the American Cancer Society</p>
+                                        </div>
+                                        <a href="https://www.cancer.org/treatment/treatments-and-side-effects/treatment-types/immunotherapy/what-is-immunotherapy.html" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="What is Immunotherapy?">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Immunotherapy? (1)</p>
+                                            <p class="h9">This video from the American Society of Clinical Oncology discusses immunotherapy for cancer</p>
+                                        </div>
+                                        <a href="https://youtu.be/zpVRdcWJBgQ" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video" title="What is Immunotherapy? (1)">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Immunotherapy? (2)</p>
+                                            <p class="h9">This video from the National Cancer Institute discusses immunotherapy as a cancer treatment</p>
+                                        </div>
+                                        <a href="https://youtu.be/leRwEwCCzX4" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video" title="What is Immunotherapy? (2)">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Phases of Clinical Trials</p>
+                                            <p class="h9">This video from the National Cancer Institute describes the phases of clinical trials</p>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=dsfPOpE-GEs&list=PLYKy4VbxNln61yshxvvGMNUXLTnDQ1VYG&index=3" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video" title="Phases of Clinical Trials">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Patient Safety in Clinical Trials</p>
+                                            <p class="h9">This video from the National Cancer Institute describes how patient safety is protected in clinical trials</p>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=y7TDwbrD7GQ&list=PLYKy4VbxNln61yshxvvGMNUXLTnDQ1VYG&index=2" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video" title="Patient Safety in Clinical Trials">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Patients' Personal Experiences with Clinical Trials</p>
+                                            <p class="h9">Patients' personal experiences with clinical trials through the National Institutes of Health</p>
+                                        </div>
+                                        <a href="https://www.nih.gov/health-information/nih-clinical-research-trials-you/personal-stories" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="Patients' Personal Experiences with Clinical Trials">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Palliative Medicine?</p>
+                                            <p class="h9">Information about palliative medicine from the National Cancer Institute</p>
+                                        </div>
+                                        <a href="https://www.cancer.gov/about-cancer/advanced-cancer/care-choices/palliative-care-fact-sheet" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="What is Palliative Medicine?">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">What is Hospice Care?</p>
+                                            <p class="h9">Information about hospice care from the National Cancer Institute</p>
+                                        </div>
+                                        <a href="https://www.cancer.gov/about-cancer/advanced-cancer/care-choices/hospice-fact-sheet" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="What is Hospice Care?">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+
+                    <accordion-group #res3>
+                        <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Tools for Making the Treatment Decision">
+                            <span class="col-xs-10 h6">Tools for Making the Treatment Decision</span>
+                            <span class="col-xs-2 text-right h6">
+								<i [ngClass]="res3?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+							</span>
+                        </div>
+                        <div class="accordion-inner">
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">More Information about Clinical Trials</p>
+                                            <p class="h9">This video from the National Cancer Institute describes clinical trials in detail</p>
+                                        </div>
+                                        <a title="More Information about Clinical Trials" href="https://www.youtube.com/watch?v=HuxA_ccCnUg" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Should I Participate in a Clinical Trial?</p>
+                                            <p class="h9">Information from the National Cancer Institute about deciding whether to participate in a clinical trial</p>
+                                        </div>
+                                        <a title="Should I Participate in a Clinical Trial?" href="https://www.cancer.org/treatment/treatments-and-side-effects/clinical-trials/what-you-need-to-know/who-does-clinical-trials.html" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls"
+                                            data-ga-action="Read More">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Communicating with Your Doctor</p>
+                                            <p class="h9">This video from Macmillan Cancer Support provides tips for communicating with your doctor</p>
+                                        </div>
+                                        <a title="Communicating with Your Doctor" href="https://www.youtube.com/watch?v=PMHsMey4i2Q" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </accordion-group>
+
+                    <accordion-group #res4>
+                        <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Tools for Managing Physical Side-Effects and Symptoms">
+                            <span class="col-xs-10 h6">Tools for Managing Physical Side-Effects and Symptoms</span>
+                            <span class="col-xs-2 text-right h6">
+								<i [ngClass]="res4?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+							</span>
+                        </div>
+                        <div class="accordion-inner">
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Appetite Loss</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses appetite loss</p>
+                                        </div>
+                                        <a title="Appetite Loss" href="https://www.youtube.com/watch?v=5B4Ww31LskI" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Constipation</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses constipation</p>
+                                        </div>
+                                        <a title="Constipation" href="https://www.youtube.com/watch?v=bL0xrZ3IxrA" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Diarrhea</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses diarrhea</p>
+                                        </div>
+                                        <a title="Diarrhea" href="https://www.youtube.com/watch?v=zhNGkXVsSEU&t=9s" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Fatigue</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses fatigue</p>
+                                        </div>
+                                        <a title="Fatigue" href="https://www.youtube.com/watch?v=oIWoj_MxFpQ" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Hair Loss</p>
+                                            <p class="h9">In this video, Dr. Marc Avram discusses hair loss and tips for managing hair loss</p>
+                                        </div>
+                                        <a title="Hair Loss" href="https://www.youtube.com/watch?v=xtg0PFaN_L0" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Hand Washing</p>
+                                            <p class="h9">This video from the World Health Organization demonstrated proper hand washing technique</p>
+                                        </div>
+                                        <a title="Hand Washing" href="https://www.youtube.com/watch?v=3PmVJQUCm4E" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Lymphedema</p>
+                                            <p class="h9">This video from the Susan G. Koman Foundation describes lymphedema after breast cancer surgery</p>
+                                        </div>
+                                        <a title="Lymphedema" href="https://www.youtube.com/watch?time_continue=95&v=H8vEtoqTfmI" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Mouth Sores</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses mouth sores during chemotherapy</p>
+                                        </div>
+                                        <a title="Mouth Sores" href="https://www.youtube.com/watch?v=OQGe1qFQpTs" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Nausea and Vomiting</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses nausea and vomiting</p>
+                                        </div>
+                                        <a title="Nausea and Vomiting" href="https://www.youtube.com/watch?v=ZMfkoEhs7aQ" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Neuropathy</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses neuropathy</p>
+                                        </div>
+                                        <a title="Neuropathy" href="https://www.youtube.com/watch?v=M3mzaka1PCc" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </accordion-group>
+
+                    <accordion-group #res5>
+                        <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Tools for Managing Non-Physical Side-Effects and Symptoms">
+                            <span class="col-xs-10 h6">Tools for Managing Non-Physical Side-Effects and Symptoms</span>
+                            <span class="col-xs-2 text-right h6">
+								<i [ngClass]="res5?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+							</span>
+                        </div>
+                        <div class="accordion-inner">
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Mood Changes during Cancer Treatment</p>
+                                            <p class="h9">This video from the Susan G. Koman Foundation discusses mood changes during breast cancer treatment</p>
+                                        </div>
+                                        <a title="Mood Changes during Cancer Treatment" href="https://www.youtube.com/watch?time_continue=58&v=p6AuT5n8XBo" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Chemo Brain</p>
+                                            <p class="h9">This video from Mark Yoder, an oncology nurse practitioner, discusses "chemo brain"</p>
+                                        </div>
+                                        <a title="Chemo Brain" href="https://www.youtube.com/watch?v=0Jiz9RDBuBE" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+
+                    <accordion-group #res6>
+                        <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Tools for Coping and Managing Quality of Life">
+                            <span class="col-xs-10 h6">Tools for Coping and Managing Quality of Life</span>
+                            <span class="col-xs-2 text-right h6">
+								<i [ngClass]="res6?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+							</span>
+                        </div>
+                        <div class="accordion-inner">
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-audio c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Deep Breathing Exercise</p>
+                                            <p class="h9">This audio track guides you through a deep breathing exercise (5 minutes long)</p>
+                                        </div>
+                                        <a title="Deep Breathing Exercise" href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/304464880" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Listen Audio">Listen Audio</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-audio c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">STOP Relaxation Exercise</p>
+                                            <p class="h9">This audio track guides you through a STOP relaxation exercise (3 minutes long)</p>
+                                        </div>
+                                        <a title="STOP Relaxation Exercise" href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/304172093" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Listen Audio">Listen Audio</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-resource c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">American Cancer Society Support Groups</p>
+                                            <p class="h9">Information about programs and support groups for cancer patients and families in your area</p>
+                                        </div>
+                                        <a title="American Cancer Society Support Groups" href="https://www.cancer.org/treatment/support-programs-and-services.html" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Visit Link">Visit Link</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-resource c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Cancer Support Center</p>
+                                            <p class="h9">Information about programs for cancer patients and caregivers</p>
+                                        </div>
+                                        <a title="Cancer Support Center" href="https://www.cancersupportcenter.org" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Visit Link">Visit Link</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-resource c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Gilda’s Club of Chicago</p>
+                                            <p class="h9">Information about Gilda’s Club of Chicago, which offers several support group options</p>
+                                        </div>
+                                        <a title="Gilda’s Club of Chicago" href="https://www.gildasclubchicago.org/" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Visit Link">Visit Link</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-video c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Gilda's Club of Chicago</p>
+                                            <p class="h9">This video provides information about Gilda’s Club of Chicago</p>
+                                        </div>
+                                        <a title="Gilda’s Club of Chicago" href="https://www.youtube.com/watch?v=Fi6moB6L_2U" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="View Video">View Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-resource c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Imerman Angels</p>
+                                            <p class="h9">Information about free and personalized cancer support for patients, survivors, and caregivers</p>
+                                        </div>
+                                        <a title="Imerman Angels" href="https://www.imermanangels.org" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Visit Link">Visit Link</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-resource c-pink sec-icon"></span>
+                                        <div class="sec-desc">
+                                            <p class="h8">Metropolitan Chicago Listing of Support Groups</p>
+                                            <p class="h9">Information about support groups for breast cancer patients, including Spanish speaking services</p>
+                                        </div>
+                                        <a title="Metropolitan Chicago Listing of Support Groups" href="http://www.chicagobreastcancer.org/supportgroups/" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Visit Link">Visit Link</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section">
+                                <div class="col-xs-12">
+                                    <div class="section-content">
+                                        <span class="onco-article c-pink sec-icon"></span>
+                                        <div class="col-xs-10 col-sm-11 col-md-11">
+                                            <p class="h8">Robert H. Lurie Comprehensive Cancer Center Supportive Oncology Program</p>
+                                            <p class="h9 p-b-20">Information about counseling services with social workers and psychologists for patients</p>
+                                            <h5 class="text-right contact-number">
+                                                <span class="glyphicon glyphicon-earphone"></span> 312-695-0990
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </accordion-group>
+                </accordion>
+            </div>
+            <!-- End content-left -->
+
+        </div>
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

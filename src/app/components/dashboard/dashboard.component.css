@@ -1,0 +1,262 @@
+.complete-notification {
+    margin-top: 40px;
+}
+
+.complete-notification .well {
+    padding: 32px 30px;
+    border-radius: 0;
+    border: 0 none;
+    background-color: #e5e9eb;
+    box-shadow: none;
+}
+
+.complete-notification .onco-alert {
+    font-size: 54px;
+    color: #ce10bf;
+}
+
+.complete-notification p.h7 {
+    margin: 14px 0;
+}
+
+.complete-notification .alert-icon {
+    width: 80px;
+    float: left;
+}
+
+.complete-notification .alert-text {
+    float: left;
+    width: 60.5%;
+    margin-right: 10px;
+}
+
+.complete-notification .alert-Complete-btn {
+    float: left;
+    width: 30%;
+}
+.alert-Complete-btn a{
+    text-transform: none;
+    line-height: 36px;
+}
+
+.graph-bg {
+    float: left;
+    width: 100%;
+    border: 4px solid #f0f0f0;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.graph-bg h6,
+.graph-bg .h6 {
+    padding-bottom: 25px;
+}
+
+.complete-number {
+    font-size: 46px;
+    font-family: 'Montserrat-SemiBold';
+    line-height: 46px;
+}
+
+.things-to-link i,
+.things-to-link a {
+    /* color: #00819e; */
+    vertical-align: middle
+}
+
+.things-to-link .link i {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.things-to-link .link {
+    font-family: 'Montserrat-SemiBold';
+    font-size: 20px;
+    line-height: 48px;
+}
+
+.things-to-link {
+    padding-left: 30px;
+}
+
+.genomic-profiling a i {
+    font-size: 220px;
+    display: block;
+    min-height: 250px;
+}
+
+.genomic-profiling a {
+    text-decoration: none;
+}
+
+.genomic-profiling span {
+    padding: 0 38px 70px 38px;
+    width: 100%;
+    display: inline-block;
+    line-height: 28px;
+    font-family: 'Montserrat-Regular';
+}
+
+.c-light-blue {
+    color: #38ccd1;
+}
+
+.c-green {
+    color: #37be9d;
+}
+
+.c-yellow {
+    color: #f0bb47;
+}
+
+.c-light-green {
+    color: #81d766;
+}
+
+.c-red {
+    color: #e0465f;
+}
+.scheduled-session{
+    border: 4px solid #f0f0f0;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 60px;
+}
+.scheduled-session p{
+    font-size: 18px;
+}
+.scheduled-session .btn-gray{
+    font-size: 15px;
+    font-weight: bold;
+    width: 140px;
+}
+
+@media (max-width: 1199px) {
+    .complete-notification .alert-text {
+        float: left;
+        width: 58%;
+        margin-right: 10px;
+    }
+    .complete-notification .alert-Complete-btn {
+        float: left;
+        width: 32%;
+    }
+    .complete-notification p.h7 {
+        margin: 14px 0;
+    }
+    .complete-notification .well {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 991px) {
+    .complete-notification .btn-violet {
+        white-space: normal;
+        font-size: 16px;
+        padding: 12px 0;
+    }
+    .complete-notification p.h7 {
+        margin: 0;
+    }
+    .complete-notification .well {
+        padding: 30px 4px;
+    }
+    .complete-notification .alert-icon {
+        width: 100px;
+    }
+    .complete-notification .alert-text {
+        float: left;
+        width: 50%;
+        margin-right: 10px;
+    }
+    .complete-notification .alert-Complete-btn {
+        float: left;
+        width: 32%;
+    }
+    .complete-notification .alert-icon {
+        padding-left: 15px;
+    }
+    .things-to-link .link {
+        font-size: 20px;
+        line-height: 30px;
+        display: flex;
+    }
+    .things-to-link .link i {
+        font-size: 30px;
+        margin-right: 15px;
+    }
+    .graph-left .graph-bg {
+        padding-bottom: 54px;
+    }
+    .graph-left {
+        margin-bottom: 20px;
+    }
+    .things-to-link {
+        padding-left: 20px;
+    }
+    .genomic-profiling a i {
+        font-size: 175px;
+        min-height: 200px;
+    }
+    .genomic-profiling span {
+        padding: 0 10px 70px 10px;
+    }
+    .alert-Complete-btn .btn-violet {
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .complete-notification .alert-text {
+        float: left;
+        width: 75%;
+        margin-right: 0;
+    }
+    .complete-notification .alert-Complete-btn {
+        float: left;
+        width: 100%;
+        padding: 15px 15px 0px;
+    }
+    .complete-notification p.h7 {
+        margin: 15px 0;
+    }
+    .complete-notification .alert-icon {
+        width: 90px;
+    }
+    .graph-left .col-xs-12 {
+        padding-top: 20px;
+    }
+    .genomic-profiling h6 {
+        padding: 15px 15px;
+    }
+    .genomic-profiling a i {
+        font-size: 180px;
+        display: block;
+        min-height: 135px;
+    }
+}
+
+@media (max-width: 500px) {
+    .complete-notification p.h7 {
+        margin: 4px 0;
+        font-size: 16px;
+    }
+    .complete-notification .btn-violet {
+        font-size: 18px;
+        padding: auto;
+    }
+    .complete-notification .alert-icon {
+        width: 70px;
+    }
+    .complete-notification .onco-alert {
+        font-size: 40px;
+    }
+    .genomic-profiling a i {
+        font-size: 120px;
+        display: block;
+        min-height: 120px;
+    }
+    .genomic-profiling span {
+        padding: 15px 0 30px;
+    }
+}

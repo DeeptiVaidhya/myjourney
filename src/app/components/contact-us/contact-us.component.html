@@ -1,0 +1,62 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Contact Us"></app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-sm-12 col-xs-12">
+                <p class="p-b-25">Our team is available to answer questions on weekdays between the hours of 9am and 5pm. We can be reached by phone or email. Please allow 24 hours for us to respond to any inquiries. </p>
+                <form [formGroup]="form" (ngSubmit)="send()" autocomplete="off" class="ot-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input formControlName="name" [class.invalid]="!form.controls.name.valid && (form.controls.name.dirty)" type="text" class="form-control" id="name" name="name">
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched">Name field is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input class="form-control" formControlName="email" id="email" type="text" [class.invalid]="!form.controls.email.valid && (form.controls.email.dirty)">
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">Email field is required.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="form.controls['email'].hasError('pattern') && form.controls['email'].touched">Please enter a valid email.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telephone number</label>
+                        <input class="form-control" formControlName="telephone" id="telephone" type="text" [class.invalid]="!form.controls.telephone.valid && (form.controls.telephone.dirty)">
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="form.controls['telephone'].hasError('pattern') && form.controls['telephone'].touched">Please enter a valid number.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" rows="7" formControlName="message" id="message" type="text" [class.invalid]="!form.controls.message.valid && (form.controls.message.dirty)"></textarea>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="form.controls['message'].hasError('required') && form.controls['message'].touched">Message field is required.</p>
+                    </div>
+                    <div class="d-line">
+                        <button class="btn btn-violet pull-right btn-250">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
+                <div class="content-right-bg">
+                    <div class="col-xs-12">
+                        <div class="h6">Contact Information</div>
+                    </div>
+                    <div class="content-right-inner">
+                        <div class="col-xs-12 p-b-40">
+                            <p class="content-p">Northwestern University<br/>Feinberg School of Medicine<br/>633 North Saint Clair,<br/>19th Floor<br/>Chicago, IL<br/>60611</p>
+                            <p><strong>T:</strong> 312-503-3609</p>
+                            <p><strong>E:</strong> <a href="mailto:Oncotool@northwestern.edu">Oncotool@northwestern.edu</a></p>
+                        </div>
+                        <div class="col-xs-12 contact-right">
+                            <p class="f-medium">People involved in the project</p>
+                            <span>Betina Yanez, Ph.D.</span>
+                            <span>Frank Penedo, Ph.D.</span>
+                            <span>Massimo Cristofanilli, M.D.</span>
+                            <span>Laura Bouchard, Ph.D.</span>
+                            <span>Namrata Shivaprakash, M.P.H.</span>
+                            <span>Diana Buitrago, B.A.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

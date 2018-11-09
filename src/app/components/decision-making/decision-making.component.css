@@ -1,0 +1,125 @@
+.decision-abcde {
+    padding-top: 30px;
+}
+
+.decision-abcde ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.decision-abcde ul li {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    color: #ce10bf;
+    background-color: #f7f7f7;
+    border-radius: 6px;
+    box-shadow: 0 0 15px 0 #ddd;
+    margin-bottom: 40px;
+    cursor: pointer;
+    border: 1px solid #e2e2e2;
+}
+
+.decision-abcde ul li.disabled {
+    cursor: not-allowed;
+    color: #c3c4c6 !important;
+}
+
+.decision-abcde ul li.active {
+    background-color: #ce10bf;
+    color: #fff;
+    box-shadow: none;
+}
+
+.tbl-cell {
+    display: table-cell;
+    float: none;
+    vertical-align: middle;
+    max-height: 190px;
+}
+
+.decision-abcde .first {
+    font-size: 68px;
+    font-family: 'Montserrat-SemiBold';
+    text-align: center;
+}
+
+.decision-abcde .last {
+    font-size: 18px;
+    font-family: 'Montserrat-SemiBold';
+    padding: 0 65px;
+    line-height: 30px;
+}
+
+.reset-cps {
+    font-size: 20px;
+    font-family: 'Montserrat-SemiBold';
+    margin-right: 50px;
+}
+
+@media (max-width: 991px) {
+    .decision-abcde .last {
+        padding: 0 10px;
+    }
+    .decision-abcde .first {
+        font-size: 55px;
+    }
+    .decision-abcde .last {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .tbl-cell {
+        display: block;
+        float: left;
+        width: 100%;
+        padding: 4px 0;
+        text-align: center;
+        max-height: 100%;
+    }
+    .decision-abcde .last {
+        font-size: 16px;
+    }
+    .decision-abcde {
+        font-size: 40px;
+        margin: 0;
+        padding-top: 10px;
+    }
+    .decision-abcde .first {
+        font-size: 35px;
+        padding: 0;
+        background-color: #fdfdfd;
+        width: 50px;
+        height: 50px;
+        margin: 8px auto;
+        border-radius: 100%;
+        line-height: 45px;
+        border: 2px solid #eaeaea;
+    }
+    .decision-abcde ul li.active .first {
+        color: #fff;
+        background-color: #ce10bf;
+        border: 1px solid #cc72c5;
+    }
+    .decision-abcde .last {
+        font-size: 16px;
+        padding: 10px;
+    }
+    .decision-abcde ul li {
+        margin-bottom: 20px;
+    }
+    .reset-cps {
+        width: 100%;
+        text-align: center;
+        float: left;
+        padding-bottom: 20px;
+        margin-right: 0;
+    }
+}
+
+.pop-heading {
+    border-bottom: 2px solid #edf1f5;
+}
