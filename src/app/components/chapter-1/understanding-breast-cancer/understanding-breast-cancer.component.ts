@@ -13,35 +13,44 @@ export class UnderstandingBreastCancerComponent implements OnInit, OnDestroy {
 	];
 	@ViewChild('res0') res0: ElementRef;
 	@ViewChild('res1') res1: ElementRef;
-	
 
-	constructor(private dataService:DataService) {
-		
-	}
+	constructor(private dataService: DataService) {}
 
 	ngOnInit() {
 		this.dataService.currentMessage.subscribe(param => {
 			// console.log(param);
-			let obj:any = param;
-			if(obj && obj['scrollTo']){
-				switch(obj.scrollTo){
+			let obj: any = param;
+			if (obj && obj['scrollTo']) {
+				switch (obj.scrollTo) {
 					case '#res0':
-						this.res0['isOpen']=true;
+						this.res0['isOpen'] = true;
 						break;
 					case '#res1':
-						this.res1['isOpen']=true;
+						this.res1['isOpen'] = true;
 						break;
 				}
-				setTimeout(()=>{
-					document.querySelector(obj.scrollTo).scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
-				},10);
+
+				setTimeout(() => {
+					let el = document.querySelector(obj.scrollTo);
+					if (el) {
+						el.scrollIntoView(true);
+						// now account for fixed header
+						let scrolledY = window.scrollY;
+						if (scrolledY) {
+							window.scrollTo({
+								top: scrolledY - document.querySelectorAll('nav')[0].clientHeight,
+								left: 0,
+								behavior: 'smooth',
+							});
+						}
+					}
+				}, 10);
 				// this.dataService.changeMessage(null);
 			}
-
 		});
 	}
 
-	ngOnDestroy(){
+	ngOnDestroy() {
 		this.dataService.changeMessage(null);
 	}
 }

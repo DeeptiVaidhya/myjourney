@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit {
 			type: 'pie',
 			theme: 'light',
 			startDuration: 0,
-			dataProvider: [{ value: this.completed_questionnaire, color: '#ff4fa1' }, { value: this.incompleted_questionnaire, color: '#dfdfdf' }],
+			dataProvider: [{ value: this.completed_questionnaire, color: '#8934d4' }, { value: this.incompleted_questionnaire, color: '#dfdfdf' }],
 			titleField: 'title',
 			valueField: 'value',
 			labelRadius: 5,
