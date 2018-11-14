@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
 			elementType: 'geometry',
 			stylers: [
 				{
-					color: '#5F9BB9',
+					color: '#9B77AB',
 				},
 			],
 		},
