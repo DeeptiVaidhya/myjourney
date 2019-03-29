@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../service/auth.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class PatientDetailsComponent implements OnInit {
 	user_id: any;
 	role: any;
 	breadcrumb:any;
-	constructor(private route: ActivatedRoute, private authService: AuthService, public toastr: ToastsManager) {
+	constructor(private route: ActivatedRoute, private authService: AuthService, public toastr: ToastrService) {
 		this.route.params.subscribe(params => (this.user_id = params.user_id));
 		localStorage.getItem('role') && (this.role = localStorage.getItem('role'));
 		this.breadcrumb = [{ link: this.role==2 ? ['/researcher/dashboard'] : ['/provider/dashboard'] , title: 'Home' }, { link: this.role==2 ? ['/researcher/patients'] : ['/provider/patients'] , title: 'Patients' }, { title: 'Patient Details',class:'active' }]
@@ -27,7 +27,7 @@ export class PatientDetailsComponent implements OnInit {
 	// get Provider Data
 	getUserDeatail() {
 		const input = { user_type: 4, user_id: this.user_id };
-		this.authService.getUserDetail(input).then(
+		this.authService.getUserDetail(input).subscribe(
 			result => {
 				this.data = result;
 				console.log(this.data);
@@ -46,13 +46,13 @@ export class PatientDetailsComponent implements OnInit {
 	}
 
 	resetPassword(email) {
-		this.authService.forgot_password({email:email}).then(
+		this.authService.forgot_password({email:email}).subscribe(
 			result => {
 				this.data = result;
 				if (this.data.status === 'success') {
-					this.toastr.success('A link has been sent to email '+email, null, { showCloseButton: true });
+					this.toastr.success('A link has been sent to email '+email);
 				} else {
-					this.toastr.error('Error in sending reset password link', null, { showCloseButton: true });
+					this.toastr.error('Error in sending reset password link');
 					console.log(this.data);
 				}
 			},
@@ -62,13 +62,13 @@ export class PatientDetailsComponent implements OnInit {
 		);
 	}
 	generateAccessCode(email) {
-		this.authService.generate_access_code({email:email}).then(
+		this.authService.generate_access_code({email:email}).subscribe(
 			result => {
 				this.data = result;
 				if (this.data.status === 'success') {
-					this.toastr.success('Generated access code is ' +this.data.access_code , null, { showCloseButton: true });
+					this.toastr.success('Generated access code is ' +this.data.access_code );
 				} else {
-					this.toastr.error('Error in sending reset password link', null, { showCloseButton: true });
+					this.toastr.error('Error in sending reset password link');
 					console.log(this.data);
 				}
 			},
@@ -80,14 +80,14 @@ export class PatientDetailsComponent implements OnInit {
 
 	changeActiveStatus(user_id,status) {
 		status = ( status == 0) ? 1 : 0;
-		this.authService.change_active_status({user_id:user_id,status:status}).then(
+		this.authService.change_active_status({user_id:user_id,status:status}).subscribe(
 			result => {
 				this.data = result;
 				if (this.data.status === 'success') {
-					this.toastr.success('Patient updated successfully.', null, { showCloseButton: true });
+					this.toastr.success('Patient updated successfully.');
 					this.patient_detail.is_active = status;
 				} else {
-					this.toastr.error('Error in change status', null, { showCloseButton: true });
+					this.toastr.error('Error in change status');
 					console.log(this.data);
 				}
 			},

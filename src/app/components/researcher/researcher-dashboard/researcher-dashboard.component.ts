@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../service/auth.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class ResearcherDashboardComponent implements OnInit {
 		symptoms: ''
 	}
 	elevated_users: any = [];
-	constructor(private authService: AuthService, private toastr: ToastsManager) { }
+	constructor(private authService: AuthService, private toastr: ToastrService) { }
 
 	ngOnInit() {
 		localStorage.getItem('role') && (this.role = localStorage.getItem('role'));
@@ -52,7 +52,7 @@ export class ResearcherDashboardComponent implements OnInit {
 	 * @desc Get list of all patients having elevated symptoms, and mail not sent to them yet.
 	 */
 	getElevatedPatients() {
-		this.authService.getElevatedPatients().then(
+		this.authService.getElevatedPatients().subscribe(
 			response => {
 				const result = response;
 				console.log(response);
@@ -82,7 +82,7 @@ export class ResearcherDashboardComponent implements OnInit {
 			this.toastr.error("No patients selected from list..");
 			return false;
 		}
-		this.authService.elevatedSymptomsSendMail({ week_ids: data }).then(
+		this.authService.elevatedSymptomsSendMail({ week_ids: data }).subscribe(
 			response => {
 				const result = response;
 				console.log(response);

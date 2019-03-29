@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 	@Input() link;
 	maClicked:boolean =false;
 	data:any;
-	constructor(private router:Router,private authService: AuthService,public toastr: ToastsManager) {
+	constructor(private router:Router,private authService: AuthService,public toastr: ToastrService) {
 	}
 	toggleDropdown(): void {
 		this.maClicked = !this.maClicked;
@@ -25,14 +25,14 @@ export class HeaderComponent implements OnInit {
 	}
 
 	logout() {
-		this.authService.logout().then(
+		this.authService.logout().subscribe(
 			result => {
 				this.data = result;
 				if (this.data.status === 'success') {
 					localStorage.removeItem('token');
 					localStorage.clear();
 					this.router.navigate(['/home']).then(() => {
-						this.toastr.success(this.data.msg, null, { showCloseButton: true });
+						this.toastr.success(this.data.msg);
 					});
 				}
 			},

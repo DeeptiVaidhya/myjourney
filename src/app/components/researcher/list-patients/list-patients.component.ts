@@ -23,7 +23,7 @@ export class ListPatientsComponent implements OnInit {
 
 	// get Provider Data
 	getPatients() {
-		this.authService.getUser(4,this.role == 2).then(
+		this.authService.getUser(4,this.role == 2).subscribe(
 			result => {
 				this.data = result;
 				console.log(this.data);

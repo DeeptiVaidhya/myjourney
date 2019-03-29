@@ -22,7 +22,7 @@ export class ListProvidersComponent implements OnInit {
 
 	// Save Provider Data
 	getProviders() {
-		this.authService.getUser(3).then(
+		this.authService.getUser(3).subscribe(
 			result => {
 				this.data = result;
 				console.log(this.data);

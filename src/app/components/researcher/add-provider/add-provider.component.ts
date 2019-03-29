@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../service/auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AddProviderComponent implements OnInit {
 	is_unique_email_msg = '';
 	breadcrumb = [{ link: '/researcher/dashboard', title: 'Home' }, { link: '/researcher/providers', title: 'Providers' }, { title: 'Add Provider',class:'active' }];
 
-	constructor(private router: Router, private authService: AuthService, public toastr: ToastsManager) { }
+	constructor(private router: Router, private authService: AuthService, public toastr: ToastrService) { }
 
 	ngOnInit() {
 		// form validations
@@ -45,7 +45,7 @@ export class AddProviderComponent implements OnInit {
 	isEmailUnique(email) {
 		if (this.addProviderForm.controls['email'].valid) {
 			const email_info = { 'current_email': email };
-			this.authService.isEmailUnique(email_info).then(
+			this.authService.isEmailUnique(email_info).subscribe(
 				response => {
 					const result = response;
 					if (result['status'] === 'success') {
@@ -70,15 +70,15 @@ export class AddProviderComponent implements OnInit {
 		if (this.addProviderForm.valid && this.is_unique_email) {
 			let inputs = this.addProviderForm.value;
 			inputs.user_type = 3;
-			this.authService.addUser(inputs).then(
+			this.authService.addUser(inputs).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
 						this.router.navigate(['researcher/providers']).then(() => {
-							this.toastr.success(this.data.msg, null, { showCloseButton: true });
+							this.toastr.success(this.data.msg);
 						});
 					} else {
-						this.toastr.error(this.data.msg, null, { showCloseButton: true });
+						this.toastr.error(this.data.msg);
 						console.log(this.data);
 					}
 				},

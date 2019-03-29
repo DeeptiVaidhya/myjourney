@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { QuestionnaireService } from '../../service/questionnaire.service';
 
@@ -27,7 +27,7 @@ export class DecisionMakingComponent implements OnInit {
 
 	constructor(
 		public questionnaireService: QuestionnaireService,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 		private router: Router
 	) {}
 
@@ -119,7 +119,7 @@ export class DecisionMakingComponent implements OnInit {
 						this.modal.show();
 						this.flagSelectionChanged = !1;
 						this.getCPS();
-						this.toastr.success(this.data.msg, null, { showCloseButton: true });
+						this.toastr.success(this.data.msg);
 					});
 				} else {
 					this.toastr.error(this.data.msg);

@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../../service/data.service';
+import { AuthService } from './../../../service/auth.service';
+
 
 @Component({
 	selector: 'app-understanding-breast-cancer',
@@ -13,10 +15,16 @@ export class UnderstandingBreastCancerComponent implements OnInit, OnDestroy {
 	];
 	@ViewChild('res0') res0: ElementRef;
 	@ViewChild('res1') res1: ElementRef;
-
-	constructor(private dataService: DataService) {}
+	Response:any;
+	pageContent:any;
+	constructor(
+		private dataService: DataService,
+		private authService: AuthService,
+		) {
+		}
 
 	ngOnInit() {
+		
 		this.dataService.currentMessage.subscribe(param => {
 			// console.log(param);
 			let obj: any = param;

@@ -1,8 +1,8 @@
 import { AmChartsService } from '@amcharts/amcharts3-angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import 'assets/js/gauge.js';
-import 'assets/js/serial.js';
+import '../../../assets/js/gauge.js';
+import '../../../assets/js/serial.js';
 import { AuthService } from '../../service/auth.service';
 
 
@@ -74,7 +74,7 @@ export class ReportComponent implements OnInit {
 	 * @desc Get list of all patients having elevated symptoms, and mail not sent to them yet.
 	 */
 	getPatientReport() {
-		this.authService.get_patient_report(this.user_id).then(
+		this.authService.get_patient_report(this.user_id).subscribe(
 			response => {
 				const result = response;
 				console.log(response);

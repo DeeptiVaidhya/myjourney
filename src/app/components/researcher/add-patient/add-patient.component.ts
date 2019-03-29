@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 //import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 //import { CONSTANTS } from '../../config/constants';
 import { AuthService } from '../../../service/auth.service';
 
@@ -27,7 +27,7 @@ export class AddPatientComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private authService: AuthService,
-		public toastr: ToastsManager
+		public toastr: ToastrService
 	) { 
 		this.minDate = new Date();
 	}
@@ -77,7 +77,7 @@ export class AddPatientComponent implements OnInit {
 	isEmailUnique(email) {
 		if (this.addPatientForm.controls['email'].valid) {
 			const email_info = { current_email: email };
-			this.authService.isEmailUnique(email_info).then(
+			this.authService.isEmailUnique(email_info).subscribe(
 				response => {
 					this.is_unique_email = response['status'] !== 'success';
 					this.is_unique_email_msg = !this.is_unique_email ? 'This Email Id is already taken.' : '';
@@ -95,7 +95,7 @@ export class AddPatientComponent implements OnInit {
 	 */
 	isSubjectIdUnique(subjectId) {
 		if (this.addPatientForm.controls['subject_id'].valid) {
-			this.authService.isSubjectIdUnique({ current_subject_id: subjectId }).then(
+			this.authService.isSubjectIdUnique({ current_subject_id: subjectId }).subscribe(
 				response => {
 					this.is_unique_subject_id = response['status'] !== 'success';
 					this.is_unique_subject_id_msg = !this.is_unique_subject_id ? 'This Subject Id is already taken.' : '';
@@ -109,7 +109,7 @@ export class AddPatientComponent implements OnInit {
 
 	// Get Provider Data
 	getProviders() {
-		this.authService.getUser(3).then(
+		this.authService.getUser(3).subscribe(
 			result => {
 				this.data = result;
 				console.log(this.data);
@@ -125,7 +125,7 @@ export class AddPatientComponent implements OnInit {
 
 	// Get Cancer Data
 	getCancerList() {
-		this.authService.getCancerList().then(
+		this.authService.getCancerList().subscribe(
 			result => {
 				this.data = result;
 				console.log(this.data);
@@ -144,15 +144,15 @@ export class AddPatientComponent implements OnInit {
 			let inputs = this.addPatientForm.value;
 			inputs.user_type = 4;
 			//inputs.genomic_report = this.genomic_report_detail;
-			this.authService.addUser(inputs).then(
+			this.authService.addUser(inputs).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
 						this.router.navigate(['researcher/patients']).then(() => {
-							this.toastr.success(this.data.msg, null, { showCloseButton: true });
+							this.toastr.success(this.data.msg);
 						});
 					} else {
-						this.toastr.error(this.data.msg, null, { showCloseButton: true });
+						this.toastr.error(this.data.msg);
 						console.log(this.data);
 					}
 				},

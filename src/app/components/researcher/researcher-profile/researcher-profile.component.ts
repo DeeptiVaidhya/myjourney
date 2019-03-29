@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../service/auth.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class ResearcherProfileComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
-		public toastr: ToastsManager
+		public toastr: ToastrService
 	) { }
 
 
@@ -88,7 +88,7 @@ export class ResearcherProfileComponent implements OnInit {
 			const password_info = {
 				password: password,
 			};
-			this.authService.isCurrentPassword(password_info).then(
+			this.authService.isCurrentPassword(password_info).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
@@ -115,7 +115,7 @@ export class ResearcherProfileComponent implements OnInit {
 			const password_info = {
 				password: password,
 			};
-			this.authService.isPreviousPassword(password_info).then(
+			this.authService.isPreviousPassword(password_info).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
@@ -145,7 +145,7 @@ export class ResearcherProfileComponent implements OnInit {
 				'previous_email': this.save_user_data['email'],
 				'current_email': email
 			};
-			this.authService.isEmailUnique(email_info).then(
+			this.authService.isEmailUnique(email_info).subscribe(
 				response => {
 					const result = response;
 					if (result['status'] === 'success') {
@@ -164,7 +164,7 @@ export class ResearcherProfileComponent implements OnInit {
 	}
 
 	getUserProfile() {
-		this.authService.get_profile().then(
+		this.authService.get_profile().subscribe(
 			response => {
 				this.data = response;
 				if (this.data.status === 'success') {
@@ -183,14 +183,14 @@ export class ResearcherProfileComponent implements OnInit {
 		if (this.profileForm.valid && this.is_unique_email && this.is_current_password && this.is_previous_password) {
 			this.profileForm.value['previous_username'] = this.save_user_data['username'];
 			this.profileForm.value['previous_email'] = this.save_user_data['email'];
-			this.authService.update_profile(this.profileForm.value).then(
+			this.authService.update_profile(this.profileForm.value).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
-						this.toastr.success(this.data.msg, null, { showCloseButton: true });
+						this.toastr.success(this.data.msg);
 						this.getUserProfile();
 					} else {
-						this.toastr.error(this.data.msg, null, { showCloseButton: true });
+						this.toastr.error(this.data.msg);
 					}
 				},
 				err => {

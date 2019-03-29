@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ContactUsComponent implements OnInit {
 	public form: FormGroup;
 	breadcrumb = [{ link: '/', title: 'Home' }, { link: '/Contact us',class:'active' }];
 
-	constructor(private router: Router, private authService: AuthService, public toastr: ToastsManager) { }
+	constructor(private router: Router, private authService: AuthService, public toastr: ToastrService) { }
 
 	ngOnInit() {
 		// form validations
@@ -50,15 +50,15 @@ export class ContactUsComponent implements OnInit {
 	// Send Contactus data
 	send() {
 		if (this.form.valid) {
-			this.authService.contact_us(this.form.value).then(
+			this.authService.contact_us(this.form.value).subscribe(
 				result => {
 					const response = result;
 					if (response['status'] === 'success') {
 						this.router.navigate(['/home']).then(() => {
-							this.toastr.success(response['msg'], null, { showCloseButton: true });
+							this.toastr.success(response['msg']);
 						});
 					} else {
-						this.toastr.error(response['msg'], null, { showCloseButton: true });
+						this.toastr.error(response['msg']);
 					}
 				},
 				err => {

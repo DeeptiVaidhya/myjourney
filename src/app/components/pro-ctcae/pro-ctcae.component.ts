@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { QuestionnaireService } from '../../service/questionnaire.service';
 // import { ModalDirective } from 'ngx-bootstrap/modal';
 
@@ -20,7 +20,7 @@ export class ProCtcaeComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 		public questionnaireService: QuestionnaireService
 	) { }
 	/**
@@ -70,16 +70,16 @@ export class ProCtcaeComponent implements OnInit {
 				this.data = response;
 				if (this.data.status === 'success') {
 					this.router.navigate(['/patient/dashboard/promis']).then(() => {
-						this.toastr.success(this.data.msg, null, { showCloseButton: true });
+						this.toastr.success(this.data.msg);
 					});
 					// if (this.current_week === '1' || this.current_week === '8') {
 					// 	this.router.navigate(['/patient/dashboard/ies']).then(() => {
-					// 		this.toastr.success(this.data.msg, null, { showCloseButton: true });
+					// 		this.toastr.success(this.data.msg);
 					// 	});
 					// } else {
 
 					// 	this.router.navigate(['/patient/dashboard']).then(() => {
-					// 	this.toastr.success('Weekly questionnaire is completed successfully.', null, { showCloseButton: true });
+					// 	this.toastr.success('Weekly questionnaire is completed successfully.');
 					// 	});
 					// }
 				} else {

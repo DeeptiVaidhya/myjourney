@@ -1,0 +1,44 @@
+.main-accordion.panel-group .panel + .panel {
+    margin-top: 30px;
+}
+.icon-left {
+    text-align: center;
+}
+.icon-left img{
+    padding-top: 4px;
+}
+.section-list{
+	list-style: none;
+	padding: 0;
+	margin-top: 10px;
+}
+.section-list li{
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #f8f9fa;
+	color: #ce10bf;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+.section-list li:last-child{
+	margin-bottom: 0;
+}
+@media (max-width: 575px){
+	.icon-left {
+		padding-left: 10px;
+		width: 45px
+	}
+	.icon-right {
+		padding-left: 0;
+		width: auto;
+		float: right;
+		padding-right: 10px;
+	}
+	.icon-right i{
+		font-size:18px;
+	}
+	.section-list li{
+		font-size: 16px;
+		padding: 15px;
+	}
+}

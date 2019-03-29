@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class ChangePasswordComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 		private route: ActivatedRoute,
 		private router: Router,
 	) {
@@ -77,12 +77,12 @@ export class ChangePasswordComponent implements OnInit {
 	checkCode() {
 		if (this.code !== undefined) {
 			const data = { code: this.code };
-			this.authService.reset_password_code(data).then(
+			this.authService.reset_password_code(data).subscribe(
 				result => {
 					const response = result;
 					if (response['status'] === 'error') {
 						this.router.navigate(['/home']).then(() => {
-							this.toastr.success(response['msg'] || 'Change password link has been expired', null, { showCloseButton: true });
+							this.toastr.success(response['msg'] || 'Change password link has been expired');
 						});
 					}
 				},
@@ -107,13 +107,13 @@ export class ChangePasswordComponent implements OnInit {
 		if (this.form.valid) {
 			const input = this.form.value;
 			input.code = this.code;
-			this.authService.change_password(input).then(
+			this.authService.change_password(input).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
 						this.is_success = true;
 					} else {
-						this.toastr.error(this.data.msg, null, { showCloseButton: true });
+						this.toastr.error(this.data.msg);
 						console.log(this.data);
 					}
 				},

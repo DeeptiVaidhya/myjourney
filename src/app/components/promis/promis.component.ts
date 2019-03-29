@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { QuestionnaireService } from '../../service/questionnaire.service';
 
@@ -27,7 +27,7 @@ export class PromisComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 		public questionnaireService: QuestionnaireService,
 		private elRef: ElementRef
 	) { }
@@ -57,11 +57,11 @@ export class PromisComponent implements OnInit {
 					else {
 						if (this.current_week === '1' || this.current_week === '8') {
 							this.router.navigate(['/patient/dashboard/ies']).then(() => {
-								this.toastr.success(response['msg'], null, { showCloseButton: true });
+								this.toastr.success(response['msg']);
 							});
 						} else {
 							this.router.navigate(['/patient/dashboard']).then(() => {
-								this.toastr.success(response['msg'], null, { showCloseButton: true });
+								this.toastr.success(response['msg']);
 							});
 						}
 					}
@@ -121,7 +121,7 @@ export class PromisComponent implements OnInit {
 						this.modal.hide();
 						if (this.current_week === '1' || this.current_week === '8') {
 							this.router.navigate(['/patient/dashboard/ies']).then(() => {
-								this.toastr.success(response['msg'], null, { showCloseButton: true });
+								this.toastr.success(response['msg']);
 							});
 						} else {
 							if (!this.isShown) {

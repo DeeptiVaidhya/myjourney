@@ -1,26 +1,28 @@
 // Add node module
 import { AgmCoreModule } from '@agm/core';
 import { AmChartsModule } from '@amcharts/amcharts3-angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
-import { MomentModule } from 'angular2-moment';
-import { FileUploadModule } from 'ng2-file-upload';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 // Add Bootstrap module
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
+// import { MomentModule } from 'angular2-moment';
+// import { FileUploadModule } from 'ng2-file-upload';
+// import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 // Add Routes
 import { CONST_ROUTING } from './app.routing';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AchievementsandeventsComponent } from './components/achievementsandevents/achievementsandevents.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { BreastCancerTreatmentComponent } from './components/chapter-1/breast-cancer/breast-cancer-treatment/breast-cancer-treatment.component';
@@ -44,6 +46,7 @@ import { StayingActiveComponent } from './components/chapter-5/staying-active/st
 import { LifeAfterCancerComponent } from './components/chapter-6/life-after-cancer/life-after-cancer.component';
 import { CareAfterCancerComponent } from './components/chapter-7/care-after-cancer/care-after-cancer.component';
 import { WrappingUpComponent } from './components/chapter-8/wrapping-up/wrapping-up.component';
+import { ChaptersComponent } from './components/chapters/chapters.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DecisionMakingComponent } from './components/decision-making/decision-making.component';
@@ -56,6 +59,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { IesComponent } from './components/ies/ies.component';
 import { InnerPageHeaderComponent } from './components/inner-page-header/inner-page-header.component';
+import { MyfavoritesComponent } from './components/myfavorites/myfavorites.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProCtcaeComponent } from './components/pro-ctcae/pro-ctcae.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -76,109 +80,116 @@ import { PatientGuard } from './guards/patient.guard';
 import { ProviderGuard } from './guards/provider.guard';
 // Add middleware
 import { ResearcherGuard } from './guards/researcher.guard';
+import { TokenInterceptor } from './interceptor/token.interceptor';
 // Add Pipe
 import { QtoptPipe } from './pipe/qtopt.pipe';
 import { SplitPipe } from './pipe/split.pipe';
 // Add Service
 import { AuthService } from './service/auth.service';
 import { DataService } from './service/data.service';
-import { GoogleAnalyticsEventsService } from './service/google-analytics-events.service';
+import { HelperService } from './service/helper.service';
 import { QuestionnaireService } from './service/questionnaire.service';
 
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    DashboardComponent,
-    // PrecisionOncologyComponent,
-    //GenomicTestingResultsComponent,
-    //MedicalDecisionsComponent,
-    //PhysicalSideEffectsComponent,
-    //NonPhysicalSideEffectsComponent,
-    //QualityOfLifeComponent,
-    ResoursesComponent,
-    PageNotFoundComponent,
-    FactG7Component,
-    ProCtcaeComponent,
-    PromisComponent,
-    DecisionMakingComponent,
-    QtoptPipe,
-    IesComponent,
-    AddPatientComponent,
-    AddProviderComponent,
-    ListPatientsComponent,
-    ListProvidersComponent,
-    PatientDetailsComponent,
-    ResearcherDashboardComponent,
-    ProfileComponent,
-    AboutUsComponent,
-    FaqComponent,
-    ContactUsComponent,
-    ResearcherProfileComponent,
-    SplitPipe,
-    ReportComponent,
-    TermsConditionsComponent,
-    EditPatientComponent,
-    QuestionnaireWithConcernComponent,
-    ChangePasswordComponent,
-    InnerPageHeaderComponent,
-    ForgotPasswordComponent,
-    UnderstandingBreastCancerComponent,
-    EatWellFeelWellComponent,
-    HealthyMindComponent,
-    HealthyAtAnyAgeComponent,
-    StayingActiveComponent,
-    CareAfterCancerComponent,
-    LifeAfterCancerComponent,
-    WrappingUpComponent,
-    WhatIsBreastCancerComponent,
-    WhoGetsBreastCancerComponent,
-    WhatDoesnotCauseBreastCancerComponent,
-    BreastCancerTreatmentComponent,
-    WhoTreatsBreastCancerComponent,
-    SecondCancerComponent,
-    BreastCancerScreeningComponent,
-    CervicalCancerScreeningComponent,
-    ColorectalCancerScreeningComponent,
-    LungCancerScreeningComponent,
-    SkinCancerScreeningComponent,
-    PreventSecondCancerComponent,
-    SunProtectionComponent,
-    BreadcrumbComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    CONST_ROUTING,
-    CollapseModule.forRoot(),
-    AccordionModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    ModalModule.forRoot(),
-    AmChartsModule,
-    FileUploadModule,
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyByUvWAEZcrVWERyl2q1q3dECxFLuQVqWI' }),
-    Ng4LoadingSpinnerModule.forRoot(),
-    HttpModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ToastModule.forRoot(),
-    HttpClientModule,
-    MomentModule,
-    NgIdleKeepaliveModule.forRoot(),
-  ],
-  providers: [
-    HttpClientModule,
-    ResearcherGuard,
-    PatientGuard,
-    ProviderGuard,
-    AuthService,
-	QuestionnaireService,
-	DataService,
-    GoogleAnalyticsEventsService,
-  ],
-  bootstrap: [AppComponent],
+	declarations: [
+		AppComponent,
+		HomeComponent,
+		HeaderComponent,
+		FooterComponent,
+		DashboardComponent,
+		ResoursesComponent,
+		PageNotFoundComponent,
+		FactG7Component,
+		ProCtcaeComponent,
+		PromisComponent,
+		DecisionMakingComponent,
+		QtoptPipe,
+		IesComponent,
+		AddPatientComponent,
+		AddProviderComponent,
+		ListPatientsComponent,
+		ListProvidersComponent,
+		PatientDetailsComponent,
+		ResearcherDashboardComponent,
+		ProfileComponent,
+		AboutUsComponent,
+		FaqComponent,
+		ContactUsComponent,
+		ResearcherProfileComponent,
+		SplitPipe,
+		ReportComponent,
+		TermsConditionsComponent,
+		EditPatientComponent,
+		QuestionnaireWithConcernComponent,
+		ChangePasswordComponent,
+		InnerPageHeaderComponent,
+		ForgotPasswordComponent,
+		UnderstandingBreastCancerComponent,
+		EatWellFeelWellComponent,
+		HealthyMindComponent,
+		HealthyAtAnyAgeComponent,
+		StayingActiveComponent,
+		CareAfterCancerComponent,
+		LifeAfterCancerComponent,
+		WrappingUpComponent,
+		WhatIsBreastCancerComponent,
+		WhoGetsBreastCancerComponent,
+		WhatDoesnotCauseBreastCancerComponent,
+		BreastCancerTreatmentComponent,
+		WhoTreatsBreastCancerComponent,
+		SecondCancerComponent,
+		BreastCancerScreeningComponent,
+		CervicalCancerScreeningComponent,
+		ColorectalCancerScreeningComponent,
+		LungCancerScreeningComponent,
+		SkinCancerScreeningComponent,
+		PreventSecondCancerComponent,
+		SunProtectionComponent,
+		BreadcrumbComponent,
+		ChaptersComponent,
+		MyfavoritesComponent,
+		AchievementsandeventsComponent,
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		CONST_ROUTING,
+		CollapseModule.forRoot(),
+		AccordionModule.forRoot(),
+		BsDropdownModule.forRoot(),
+		BsDatepickerModule.forRoot(),
+		ModalModule.forRoot(),
+		AmChartsModule,
+		// FileUploadModule,
+		AgmCoreModule.forRoot({ apiKey: 'AIzaSyByUvWAEZcrVWERyl2q1q3dECxFLuQVqWI' }),
+		Ng4LoadingSpinnerModule.forRoot(),
+		HttpModule,
+		FormsModule,
+		ReactiveFormsModule,
+		ToastrModule.forRoot({
+			preventDuplicates:true,
+			enableHtml:true,
+		}),
+		HttpClientModule,
+		// MomentModule,
+		NgIdleKeepaliveModule.forRoot(),
+	],
+	providers: [
+		HttpClientModule,
+		ResearcherGuard,
+		PatientGuard,
+		ProviderGuard,
+		AuthService,
+		HelperService,
+		QuestionnaireService,
+		DataService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: TokenInterceptor,
+			multi: true,
+		},
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

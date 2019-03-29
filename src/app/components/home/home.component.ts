@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
 		private router: Router,
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
-		public toastr: ToastsManager
+		public toastr: ToastrService
 	) {}
 
 	ngOnInit() {
@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 
 	signIn() {
 		if (this.loginForm.valid) {
-			this.authService.login(this.loginForm.value).then(
+			this.authService.login(this.loginForm.value).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
@@ -121,10 +121,10 @@ export class HomeComponent implements OnInit {
 								break;
 						}
 						this.router.navigate([path]).then(() => {
-							this.toastr.success(this.data.msg, null, { showCloseButton: true });
+							this.toastr.success(this.data.msg);
 						});
 					} else {
-						this.toastr.error(this.data.msg, null, { showCloseButton: true });
+						this.toastr.error(this.data.msg);
 					}
 				},
 				err => {}

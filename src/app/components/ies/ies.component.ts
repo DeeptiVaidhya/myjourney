@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { QuestionnaireService } from '../../service/questionnaire.service';
 
@@ -22,7 +22,7 @@ export class IesComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 		public questionnaireService: QuestionnaireService,
 	) { }
 
@@ -76,7 +76,7 @@ export class IesComponent implements OnInit {
 						this.isShown = true;
 					}
 					// this.router.navigate(['/patient/dashboard']).then(() => {
-					// 	this.toastr.success(this.data.msg, null, { showCloseButton: true });
+					// 	this.toastr.success(this.data.msg);
 					// });
 				} else {
 					this.toastr.error(this.data.msg);

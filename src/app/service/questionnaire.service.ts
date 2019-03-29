@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Headers, Http } from '@angular/http';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { CONSTANTS } from '../config/constants';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { HelperService } from './helper.service';
 
 @Injectable()
 export class QuestionnaireService {
-	constructor(private http: Http, private spinnerService: Ng4LoadingSpinnerService) { }
+	constructor(private http: Http, private spinnerService: Ng4LoadingSpinnerService,public helperService:HelperService) { }
 
 	/**
 	 * @desc Used to add headers for each API call, if a user is logged in then add token header also
@@ -20,6 +22,15 @@ export class QuestionnaireService {
 		isLoggedIn && headers.append('Token', localStorage.getItem('token'));
 		return headers;
 	}
+
+	chapterDetails(data): Observable<any> {
+		return this.helperService.makeHttpRequest('educational/chapter-details', 'post', data,true);
+	}
+
+	updateFavorite(data): Observable<any> {
+		return this.helperService.makeHttpRequest('educational/update-favorite', 'post', data,true);
+	}
+
 
 	/**
 	 * @desc Common Success Callback function used from all API calls

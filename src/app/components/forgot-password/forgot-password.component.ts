@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class ForgotPasswordComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 		private router: Router) { }
 
 	ngOnInit() {
@@ -42,7 +42,7 @@ export class ForgotPasswordComponent implements OnInit {
 	isEmailUnique(email) {
 		if (this.form.controls['email'].valid) {
 			const email_info = { current_email: email };
-			this.authService.isEmailUnique(email_info).then(
+			this.authService.isEmailUnique(email_info).subscribe(
 				response => {
 					this.is_unique_email = response['status'] == 'success';
 					this.is_unique_email_msg = !this.is_unique_email ? 'This Email address does not exist in system..' : '';
@@ -58,14 +58,10 @@ export class ForgotPasswordComponent implements OnInit {
 
 	forgotPassword() {
 		if (this.form.valid && this.is_unique_email) {
-			this.authService.forgot_password(this.form.value).then(
+			this.authService.forgot_password(this.form.value).subscribe(
 				result => {
 					const response = result;
-					if (response['status'] !== 'error') {
-						this.is_success = true;
-					} else {
-						this.is_success = false;
-					}
+					this.is_success = response['status'] !== 'error'
 				},
 				err => {
 					console.log(err);

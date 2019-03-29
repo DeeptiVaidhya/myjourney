@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { CONSTANTS } from './config/constants';
 import { AuthService } from './service/auth.service';
 
@@ -38,11 +38,11 @@ export class AppComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private authService: AuthService,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 		private idle: Idle,
 		vRef: ViewContainerRef
 	) {
-		this.toastr.setRootViewContainerRef(vRef);
+		// this.toastr.setRootViewContainerRef(vRef);
 
 		// sets an idle timeout of 5 seconds, for testing purposes.
 		idle.setIdle(CONSTANTS.SESSION_TIMEOUT);
@@ -62,9 +62,7 @@ export class AppComponent implements OnInit {
 			localStorage.clear();
 			this.timedOut = true;
 			this.router.navigate(['/home']).then(() => {
-				this.toastr.error('Your session has been expired. Please log in to continue.', null, {
-					showCloseButton: true,
-				});
+				this.toastr.error('Your session has been expired. Please log in to continue.');
 			});
 		});
 	}
@@ -109,7 +107,7 @@ export class AppComponent implements OnInit {
 				return;
 			}
 
-			this.authService.check_login().then(response => {
+			this.authService.check_login().subscribe(response => {
 				if (response.hasOwnProperty('status') && response['status'] == 'INVALID_TOKEN') {
 					console.log('Token Expired');
 					this.isLoggedIn = false;

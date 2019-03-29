@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { CONSTANTS } from '../../../config/constants';
+// import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../service/auth.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { AuthService } from '../../../service/auth.service';
 })
 export class EditPatientComponent implements OnInit {
 	data: any;
-	uploader: FileUploader;
+	// uploader: FileUploader;
 	patient_detail: any = [];
 	save_patient_data: any = [];
 	user_id: any;
@@ -39,7 +38,7 @@ export class EditPatientComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private authService: AuthService,
-		public toastr: ToastsManager,
+		public toastr: ToastrService,
 	) {
 		this.minDate = new Date();
 		this.route.params.subscribe(params => {
@@ -51,10 +50,10 @@ export class EditPatientComponent implements OnInit {
 
 	ngOnInit() {
 		// Intialize uploader
-		this.uploader = new FileUploader({
-			url: CONSTANTS.API_ENDPOINT + 'user/upload_document',
-			headers: [{ name: 'Authorization', value: 'Basic ' + CONSTANTS.AUTH }],
-		});
+		// this.uploader = new FileUploader({
+		// 	url: CONSTANTS.API_ENDPOINT + 'user/upload-document',
+		// 	headers: [{ name: 'Authorization', value: 'Basic ' + CONSTANTS.AUTH }],
+		// });
 
 		this.editPatientForm = new FormGroup(
 			{
@@ -97,7 +96,7 @@ export class EditPatientComponent implements OnInit {
 	// get User Data
 	getUserDetail() {
 		const input = { user_type: 4, user_id: this.user_id };
-		this.authService.getUserDetail(input).then(
+		this.authService.getUserDetail(input).subscribe(
 			result => {
 				this.data = result;
 				if (this.data.status === 'success') {
@@ -118,7 +117,7 @@ export class EditPatientComponent implements OnInit {
 
 	// Get Provider Data
 	getProviders() {
-		this.authService.getUser(3).then(
+		this.authService.getUser(3).subscribe(
 			result => {
 				this.data = result;
 				if (this.data.status === 'success') {
@@ -136,7 +135,7 @@ export class EditPatientComponent implements OnInit {
 
 	// Get Cancer Data
 	getCancerList() {
-		this.authService.getCancerList().then(
+		this.authService.getCancerList().subscribe(
 			result => {
 				this.data = result;
 				//console.log(this.data);
@@ -156,7 +155,7 @@ export class EditPatientComponent implements OnInit {
 	isEmailUnique(email) {
 		if (this.editPatientForm.controls['email'].valid) {
 			const email_info = { current_email: email, previous_email: this.save_patient_data['email'] };
-			this.authService.isEmailUnique(email_info).then(
+			this.authService.isEmailUnique(email_info).subscribe(
 				response => {
 					this.is_unique_email = response['status'] !== 'success';
 					this.is_unique_email_msg = !this.is_unique_email ? 'This Email Id is already taken.' : '';
@@ -178,7 +177,7 @@ export class EditPatientComponent implements OnInit {
 				current_subject_id: subjectId,
 				previous_subject_id: this.save_patient_data['subject_id'],
 			};
-			this.authService.isSubjectIdUnique(subject_info).then(
+			this.authService.isSubjectIdUnique(subject_info).subscribe(
 				response => {
 					const result = response;
 					this.is_unique_subject_id = result['status'] !== 'success';
@@ -225,15 +224,15 @@ export class EditPatientComponent implements OnInit {
 			// inputs.genomic_test_start_date = this.datePipe.transform(inputs.genomic_test_start_date, 'MM-dd-yyyy');
 			// inputs.genomic_report = this.genomic_report_detail;
 			console.log(inputs);
-			this.authService.updateUser(inputs).then(
+			this.authService.updateUser(inputs).subscribe(
 				result => {
 					this.data = result;
 					if (this.data.status === 'success') {
 						this.getUserDetail();
-						this.toastr.success(this.data.msg, null, { showCloseButton: true });
+						this.toastr.success(this.data.msg);
 						window.scrollTo(0, 0);
 					} else {
-						this.toastr.error(this.data.msg, null, { showCloseButton: true });
+						this.toastr.error(this.data.msg);
 						console.log(this.data);
 					}
 				},
@@ -259,9 +258,9 @@ export class EditPatientComponent implements OnInit {
 	// 				};
 	// 				this.patient_detail['genomic_profile_report'] = null;
 	// 				this.patient_detail['genomic_profile_report_name'] = null;
-	// 				this.toastr.success(this.data.msg, null, { showCloseButton: true });
+	// 				this.toastr.success(this.data.msg);
 	// 			} else {
-	// 				this.toastr.error(this.data.msg, null, { showCloseButton: true });
+	// 				this.toastr.error(this.data.msg);
 	// 			}
 	// 		},
 	// 		err => {
