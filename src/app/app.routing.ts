@@ -5,22 +5,16 @@ import { ChangePasswordComponent } from "./components/change-password/change-pas
 import { ChaptersComponent } from "./components/chapters/chapters.component";
 import { ContactUsComponent } from "./components/contact-us/contact-us.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { DecisionMakingComponent } from "./components/decision-making/decision-making.component";
 // import { DecisionMakingComponent } from './decision-making/decision-making.component';
 import { FactG7Component } from "./components/fact-g7/fact-g7.component";
 import { FaqComponent } from "./components/faq/faq.component";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
 import { HomeComponent } from "./components/home/home.component";
-import { IesComponent } from "./components/ies/ies.component";
 import { MyfavoritesComponent } from "./components/myfavorites/myfavorites.component";
 // import { MedicalDecisionsComponent } from './medical-decisions/medical-decisions.component';
 // import { NonPhysicalSideEffectsComponent } from './non-physical-side-effects/non-physical-side-effects.component';
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-// import { PhysicalSideEffectsComponent } from './physical-side-effects/physical-side-effects.component';
-// import { PrecisionOncologyComponent } from './precision-oncology/precision-oncology.component';
-import { ProCtcaeComponent } from "./components/pro-ctcae/pro-ctcae.component";
 import { ProfileComponent } from "./components/profile/profile.component";
-import { PromisComponent } from "./components/promis/promis.component";
 // import { QualityOfLifeComponent } from './quality-of-life/quality-of-life.component';
 import { ReportComponent } from "./components/report/report.component";
 import { AddPatientComponent } from "./components/researcher/add-patient/add-patient.component";
@@ -72,14 +66,12 @@ const MAINMENU_ROUTES: Routes = [
 	// 	canActivate: [PatientGuard]
 	// },
 	{
-		path:
-			"achivmenets",
+		path: "achivmenets",
 		component: AchievementsandeventsComponent,
 		canActivate: [PatientGuard]
 	},
 	{
-		path:
-			"favorite",
+		path: "patient/my-favorite",
 		component: MyfavoritesComponent,
 		canActivate: [PatientGuard]
 	},
@@ -181,38 +173,32 @@ const MAINMENU_ROUTES: Routes = [
 	// 	canActivate: [PatientGuard]
 	// },
 
-	// { path: 'patient/dashboard/precision-oncology', component: PrecisionOncologyComponent, canActivate: [PatientGuard] },
-	// { path: 'patient/dashboard/genomic-testing-results', component: GenomicTestingResultsComponent, canActivate: [PatientGuard] },
-	// { path: 'patient/dashboard/medical-decisions', component: MedicalDecisionsComponent, canActivate: [PatientGuard] },
-	// { path: 'patient/dashboard/physical-side-effects', component: PhysicalSideEffectsComponent, canActivate: [PatientGuard] },
-	// { path: 'patient/dashboard/non-physical-side-effects', component: NonPhysicalSideEffectsComponent, canActivate: [PatientGuard] },
-	// { path: 'patient/dashboard/quality-of-life', component: QualityOfLifeComponent, canActivate: [PatientGuard] },
 	// Questionnaire
-	{
-		path: "patient/dashboard/pro-ctcae",
-		component: ProCtcaeComponent,
-		canActivate: [PatientGuard]
-	},
-	{
-		path: "patient/dashboard/promis",
-		component: PromisComponent,
-		canActivate: [PatientGuard]
-	},
+	// {
+	// 	path: "patient/dashboard/pro-ctcae",
+	// 	component: ProCtcaeComponent,
+	// 	canActivate: [PatientGuard]
+	// },
+	// {
+	// 	path: "patient/dashboard/promis",
+	// 	component: PromisComponent,
+	// 	canActivate: [PatientGuard]
+	// },
 	{
 		path: "patient/dashboard/fact-g7",
 		component: FactG7Component,
 		canActivate: [PatientGuard]
 	},
-	{
-		path: "patient/dashboard/decision-making",
-		component: DecisionMakingComponent,
-		canActivate: [PatientGuard]
-	},
-	{
-		path: "patient/dashboard/ies",
-		component: IesComponent,
-		canActivate: [PatientGuard]
-	},
+	// {
+	// 	path: "patient/dashboard/decision-making",
+	// 	component: DecisionMakingComponent,
+	// 	canActivate: [PatientGuard]
+	// },
+	// {
+	// 	path: "patient/dashboard/ies",
+	// 	component: IesComponent,
+	// 	canActivate: [PatientGuard]
+	// },
 	{
 		path: "patient/dashboard/report",
 		component: ReportComponent,

@@ -39,13 +39,6 @@ import { PreventSecondCancerComponent } from './components/chapter-1/wellness/pr
 import { SecondCancerComponent } from './components/chapter-1/wellness/second-cancer/second-cancer.component';
 import { SkinCancerScreeningComponent } from './components/chapter-1/wellness/skin-cancer-screening/skin-cancer-screening.component';
 import { SunProtectionComponent } from './components/chapter-1/wellness/sun-protection/sun-protection.component';
-import { EatWellFeelWellComponent } from './components/chapter-2/eat-well-feel-well/eat-well-feel-well.component';
-import { HealthyMindComponent } from './components/chapter-3/healthy-mind/healthy-mind.component';
-import { HealthyAtAnyAgeComponent } from './components/chapter-4/healthy-at-any-age/healthy-at-any-age.component';
-import { StayingActiveComponent } from './components/chapter-5/staying-active/staying-active.component';
-import { LifeAfterCancerComponent } from './components/chapter-6/life-after-cancer/life-after-cancer.component';
-import { CareAfterCancerComponent } from './components/chapter-7/care-after-cancer/care-after-cancer.component';
-import { WrappingUpComponent } from './components/chapter-8/wrapping-up/wrapping-up.component';
 import { ChaptersComponent } from './components/chapters/chapters.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -126,13 +119,13 @@ import { QuestionnaireService } from './service/questionnaire.service';
 		InnerPageHeaderComponent,
 		ForgotPasswordComponent,
 		UnderstandingBreastCancerComponent,
-		EatWellFeelWellComponent,
-		HealthyMindComponent,
-		HealthyAtAnyAgeComponent,
-		StayingActiveComponent,
-		CareAfterCancerComponent,
-		LifeAfterCancerComponent,
-		WrappingUpComponent,
+		// EatWellFeelWellComponent,
+		// HealthyMindComponent,
+		// HealthyAtAnyAgeComponent,
+		// StayingActiveComponent,
+		// CareAfterCancerComponent,
+		// LifeAfterCancerComponent,
+		// WrappingUpComponent,
 		WhatIsBreastCancerComponent,
 		WhoGetsBreastCancerComponent,
 		WhatDoesnotCauseBreastCancerComponent,

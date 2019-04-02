@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../service/data.service';
 import { QuestionnaireService } from '../../service/questionnaire.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { QuestionnaireService } from '../../service/questionnaire.service';
 	templateUrl: './chapters.component.html',
 	styleUrls: ['./chapters.component.css'],
 })
-export class ChaptersComponent implements OnInit {
+export class ChaptersComponent implements OnInit,AfterViewInit,OnDestroy {
 	slug: string = '';
 	topic: string = '';
 	is_sub_topic: boolean = false;
@@ -17,7 +18,22 @@ export class ChaptersComponent implements OnInit {
 	breadcrumb = [
 		{ link: '/patient/dashboard', title: 'Home' },
 	];
-	constructor(public route: ActivatedRoute,public questService:QuestionnaireService, public toastr:ToastrService) {
+	chapterLink:any;
+
+	// breadcrumb = [
+	// 	{ link: '/patient/dashboard', title: 'Home' },
+	// 	{ title: 'Understanding breast cancer', link: '/patient/dashboard/understanding-breast-cancer' },
+	// 	{ title: 'Breast Cancer & HT Education',params:{scrollTo:'#res0'} },
+	// 	{ title: 'Types of treatment for breast cancer', class: 'active' },
+	// ];
+	// constructor(private router:Router,private dataService:DataService) {}
+	// goToElem(obj) {
+	// 	this.dataService.changeMessage(obj);
+	// 	this.router.navigate(['/patient/dashboard/understanding-breast-cancer']);	
+	// }
+
+
+	constructor(public route: ActivatedRoute,public questService:QuestionnaireService, public toastr:ToastrService,private router:Router,private dataService:DataService) {
 		this.route.params.subscribe(param => {
 			this.slug = param.sub_topic ? param.sub_topic :(param.chapter ? param.chapter : '');
 			this.topic=param.topic && !param.sub_topic ? param.topic : '';
@@ -29,13 +45,75 @@ export class ChaptersComponent implements OnInit {
 					this.pageContent = response['data'];
 					this.is_added_favorite = response['is_added_favorite'];
 					console.log(response);
+					let obj:any;
+					let bread = this.pageContent['breadcrumb'];
+					if(bread && bread.length){
+						if(bread[0]['type']=='CONTENT'){
+							obj = {link: '/patient/dashboard/'+bread[0]['slug'], title: bread[0]['content_name'] };
+							this.breadcrumb.push(obj);
+							this.chapterLink=obj.link;
+						}
+						if(bread[1]['type']=='TOPIC'){
+							obj = {params:{scrollTo:bread[1]['slug']}, title: bread[1]['content_name'] };
+							this.breadcrumb.push(obj);
+						}
+					}
+					obj = {link: '', title: this.pageContent.content_name,'class': 'active' };
+					this.breadcrumb.push(obj);
+
+					if(!this.is_sub_topic){
+						this.dataService.currentMessage.subscribe(param => {
+							// console.log(param);
+							let obj: any = param;
+							if (obj && obj['scrollTo']) {
+								// switch (obj.scrollTo) {
+								// 	case '#res0':
+								// 		this.res0['isOpen'] = true;
+								// 		break;
+								// 	case '#res1':
+								// 		this.res1['isOpen'] = true;
+								// 		break;
+								// }
+								console.log(document.querySelector('#topic--'+obj.scrollTo))
+								setTimeout(() => {
+									let el = document.querySelector('#topic--'+obj.scrollTo);
+									if (el) {
+										el.scrollIntoView(true);
+										// now account for fixed header
+										let scrolledY = window.scrollY;
+										if (scrolledY) {
+											window.scrollTo({
+												top: scrolledY - document.querySelectorAll('nav')[0].clientHeight,
+												left: 0,
+												behavior: 'smooth',
+											});
+										}
+									}
+								}, 10);
+								// this.dataService.changeMessage(null);
+							}
+						});
+					}
 				}
 			});
 		});
 	}
-
-	ngOnInit() {
+	ngOnInit(){}
+	ngAfterViewInit() {
 		
+		
+	}
+
+	ngOnDestroy() {
+		this.dataService.changeMessage(null);
+	}
+
+	goToElem(obj) {
+		console.log(obj);
+		console.log(this.chapterLink);
+		this.router.navigate([this.chapterLink]).then(()=>{
+			this.dataService.changeMessage(obj);
+		});	//'/patient/dashboard/understanding-breast-cancer'
 	}
 
 	favorite(contentId){

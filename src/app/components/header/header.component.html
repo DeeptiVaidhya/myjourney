@@ -24,15 +24,19 @@
                 <li (click)="isCollapsed = !isCollapsed" *ngIf="isLoggedIn" routerLinkActive="tab-active">
                     <a routerLink="{{ link.dashboard }}">Home</a>
                 </li>
+                <li *ngIf="role=='3'" routerLinkActive="tab-active" role="menuitem" (click)="isCollapsed = !isCollapsed">
+                    <a class="dropdown-item" routerLink="patient/my-favorite">My Favorite</a>
+                </li>
                 <!-- <li (click)="isCollapsed = !isCollapsed" *ngIf="isLoggedIn" routerLinkActive="tab-active"><a href="#">My account</a></li> -->
                 <li class="dropdown-li" dropdown container="body" *ngIf="isLoggedIn" [class.tab-active]="(this.maIsOpen || this.maClicked)" (isOpenChange)="toggleDropdown()">
                     <a dropdownToggle class="dropdownToggle" href="javascript:void(0)">My account</a>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
-                        <li *ngIf="role=='4'" routerLinkActive="tab-active" role="menuitem" (click)="isCollapsed = !isCollapsed">
+                        <!-- <li *ngIf="role=='3'" routerLinkActive="tab-active" role="menuitem" (click)="isCollapsed = !isCollapsed">
                             <a class="dropdown-item" routerLink="my-account/my-reports">My Reports
 								<span class="badge">5</span>
 							</a>
-                        </li>
+                        </li> -->
+
                         <li routerLinkActive="tab-active" role="menuitem" (click)="isCollapsed = !isCollapsed">
                             <a class="dropdown-item" routerLink="{{ link.profile }}">My Account Details</a>
                         </li>

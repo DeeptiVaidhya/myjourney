@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+    <app-breadcrumb [breadcrumb]="breadcrumb" (onClickTitle)="goToElem($event)"></app-breadcrumb>
     <!--back_link="/patient/dashboard" back_title="Dashboard"-->
     <div class="container">
         <div class="row">
@@ -58,9 +58,9 @@
                 <div class="row" *ngFor="let topic of pageContent?.topic; let i = index">
                     <div class="col-xs-12">
                         <accordion class="main-accordion" [closeOthers]="true">
-                            <accordion-group #res0 id="res{{i}}">
+                            <accordion-group id="topic--{{topic?.slug}}">
                                 <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Breast Cancer & HT Education ">
-                                    <span class="col-xs-10 h6"><span class="onco-article c-pink sec-icon m-r-15"></span>{{ topic?.title }}</span>
+                                    <span class="col-xs-10 h6 d-flex"><span class="onco-article c-pink sec-icon m-r-15"></span>{{ topic?.title }}</span>
                                     <span class="col-xs-2 text-right h6">
 										<i [ngClass]="res0?.isOpen ? 'onco-minus ' : 'onco-plus '" class="more-less"></i>
 									</span>
@@ -78,54 +78,7 @@
 
                                 </div>
                             </accordion-group>
-                            <!-- <accordion-group #res1 id="res1">
-                                <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="How does precision oncology work?">
-                                    <span class="col-xs-10 h6"><span class="onco-article c-pink sec-icon m-r-15"></span>Wellness and Prevention</span>
-                                    <span class="col-xs-2 text-right h6">
-										<i [ngClass]="res1?.isOpen ? 'onco-minus ' : 'onco-plus '" class="more-less"></i>
-									</span>
-                                </div>
-                                <div class="accordion-inner">
 
-                                    <p class="content-p">So why are you here? Earlier some of you discussed why you are interested in this program and what you hope to gain by participating in it. Each of you share a common disease, but probably are different in terms of
-                                        your experience with treatment, medical visits, family support, and other factors that help us manage a chronic illness. In this group, we will talk about some of these commonalities and differences and try to generate
-                                        a better understanding of what you are going through. </p>
-                                    <p class="content-p">In addition, we know that changing unhealthy lifestyle behaviors is an extremely important factor in managing a chronic illness. Throughout the next seven meetings, we will provide you with some tools that will hopefully
-                                        bolster your physical and mental health.
-                                    </p>
-
-                                    <div class="text-center content-inner-img">
-                                        <img src="assets/images/ch-1/Wellness-and-Prevention.jpg" class="img-responsive w-100" alt="Wellness and Prevention" />
-                                    </div>
-
-                                    <p class="h9">Credit: AARP</p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/second-cancer"><strong>Second cancers after breast cancer</strong></a>
-                                    </p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/breast-cancer-screening"><strong>Screening for breast cancer</strong></a>
-                                    </p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/cervical-cancer-screening"><strong>Screening for cervical cancer</strong></a>
-                                    </p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/colorectal-cancer-screening"><strong>Screening for colorectal cancer</strong></a>
-                                    </p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/lung-cancer-screening"><strong>Screening for lung cancer</strong></a>
-                                    </p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/skin-cancer-screening"><strong>Screening for skin cancer</strong></a>
-                                    </p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/prevent-second-cancer"><strong>Ways to prevent second cancers</strong></a>
-                                    </p>
-                                    <p class="h8 p-b-10">
-                                        <a routerLink="/patient/dashboard/understanding-breast-cancer/wellness/sun-protection"><strong>Sun protection</strong></a>
-                                    </p>
-
-                                </div>
-                            </accordion-group> -->
                         </accordion>
                     </div>
 

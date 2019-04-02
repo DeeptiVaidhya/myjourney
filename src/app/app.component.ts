@@ -82,13 +82,13 @@ export class AppComponent implements OnInit {
 					profile: 'researcher/profile',
 				};
 				break;
+			// case '3':
+			// 	this.link = {
+			// 		dashboard: 'provider/dashboard',
+			// 		profile: 'provider/profile',
+			// 	};
+			// 	break;
 			case '3':
-				this.link = {
-					dashboard: 'provider/dashboard',
-					profile: 'provider/profile',
-				};
-				break;
-			case '4':
 				this.link = {
 					dashboard: 'patient/dashboard',
 					profile: 'patient/profile',

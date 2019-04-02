@@ -23,6 +23,8 @@
 .section-list li:last-child{
 	margin-bottom: 0;
 }
+
+
 @media (max-width: 575px){
 	.icon-left {
 		padding-left: 10px;

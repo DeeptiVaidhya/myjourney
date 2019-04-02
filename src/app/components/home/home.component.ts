@@ -87,10 +87,10 @@ export class HomeComponent implements OnInit {
 				case '2':
 					path = '/researcher/dashboard';
 					break;
+				// case '3':
+				// 	path = '/provider/dashboard';
+				// 	break;
 				case '3':
-					path = '/provider/dashboard';
-					break;
-				case '4':
 					path = '/patient/dashboard';
 					break;
 			}
@@ -113,10 +113,10 @@ export class HomeComponent implements OnInit {
 							case '2':
 								path = '/researcher/dashboard';
 								break;
+							// case '3':
+							// 	path = '/provider/dashboard';
+							// 	break;
 							case '3':
-								path = '/provider/dashboard';
-								break;
-							case '4':
 								path = '/patient/dashboard';
 								break;
 						}

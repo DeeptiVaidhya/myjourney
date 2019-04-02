@@ -210,11 +210,11 @@
                 <p class="content-p">Genomic Profiling is a laboratory method that is used to learn about all the genes in a person or in a specific cell type, and the way those genes interact with each other and with the environment.</p>
             </div>
         </div> -->
-        <div class="row genomic-profiling ">
+        <div class="row genomic-profiling">
             <div class="col-xs-6 col-sm-4 col-md-4 text-center" *ngFor="let chapter of pageContent">
                 <a [routerLink]="chapter.slug" title="chapter.content_name" class="gaes-cls">
                     <img src="{{ chapter.image }}" alt="{{ chapter.content_name }}">
-                    <span class="c-pink h6">{{ chapter.content_name }}</span>
+                    <h6 class="c-pink">{{ chapter.content_name }}</h6>
                 </a>
             </div>
             <!-- <div class="col-xs-6 col-sm-4 col-md-4">

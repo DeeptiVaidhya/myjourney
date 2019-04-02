@@ -141,6 +141,11 @@
     width: 100%;
     cursor: pointer;
 }
+.genomic-profiling h6 {
+    min-height: 130px;
+    padding: 20px 30px;
+    text-align: center;
+}
 
 .genomic-profiling span {
     padding: 0 38px 70px 38px;
@@ -182,6 +187,11 @@
     font-size: 15px;
     font-weight: bold;
     width: 140px;
+}
+.gaes-cls img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
 }
 
 @media (max-width: 1199px) {
@@ -251,9 +261,6 @@
         font-size: 175px;
         min-height: 200px;
     }
-    .genomic-profiling span {
-        padding: 0 10px 70px 10px;
-    }
     .alert-Complete-btn .btn-violet {
         line-height: 24px;
     }
@@ -267,7 +274,12 @@
         font-size: 16px;
     }
     .gaes-cls img {
-        width: 75%;
+        width: 150px;
+        height: 150px;
+    }
+    .genomic-profiling h6 {
+        min-height: 100px;
+        padding: 15px 0;
     }
 }
 
@@ -291,9 +303,9 @@
     .graph-left .col-xs-12 {
         padding-top: 20px;
     }
-    .genomic-profiling h6 {
+    /*.genomic-profiling h6 {
         padding: 15px 15px;
-    }
+    }*/
     .genomic-profiling a i {
         font-size: 180px;
         display: block;
@@ -317,9 +329,6 @@
     }
     .img-text-bg .text {
         height: auto;
-    }
-    .gaes-cls img {
-        width: 50%;
     }
 }
 
@@ -347,6 +356,7 @@
         padding: 15px 0 30px;
     }
     .gaes-cls img {
-        width: 75%;
+        width: 120px;
+        height: 120px;
     }
 }

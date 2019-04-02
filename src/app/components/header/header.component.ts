@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
 	@Input() link;
 	maClicked:boolean =false;
 	data:any;
+	role:any;
 	constructor(private router:Router,private authService: AuthService,public toastr: ToastrService) {
 	}
 	toggleDropdown(): void {
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.role = localStorage.getItem('role');
 	}
 
 	logout() {

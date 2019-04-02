@@ -55,7 +55,7 @@
 
 @media (max-width: 1024px) {
     .breadcrumb-top {
-        margin-bottom: 30px;
+        margin-bottom: 0;
         padding: 0;
     }
     .breadcrumb-top ul li {
@@ -64,9 +64,6 @@
 }
 
 @media (max-width: 767px) {
-    .breadcrumb-top {
-        margin-bottom: 20px;
-    }
     .breadcrumb-top ul li {
         font-size: 12px;
     }
