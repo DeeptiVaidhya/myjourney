@@ -1,0 +1,43 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="Questionnaire"></app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h4 class="c-pink p-b-20">{{group_title}}</h4>
+                <p class="f-bold p-b-30">{{short_description}}</p>
+            </div>
+            <div class="col-xs-12 symptoms">
+                <div class="questionnaire-tbl">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="35%">&nbsp;</th>
+                                <th *ngFor="let option of options">{{ option.option_label }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let question of questions">
+                                <td class="c-purple">{{ question.question}}</td>
+                                <td *ngFor="let option of options">
+                                    <span class="radio-container">
+										<input type="radio" title="{{option.option_label}}" name="option[{{question.id}}]" value="{{ option.id }}" attr.data-question-id="{{question.id}}" />
+										<span></span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row sumbit-section">
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-violet btn-250 b-r-100" type="button" (click)="save()">Submit</button>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

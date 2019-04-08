@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
 import { ToastrService } from 'ngx-toastr';
@@ -11,9 +11,8 @@ import { AuthService } from './service/auth.service';
 	styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-	title = 'Oncotool';
 	maIsOpen: boolean;
-	role: any;
+	public role: any;
 	link: any;
 
 	public isLoggedIn: Boolean = true;
@@ -40,7 +39,6 @@ export class AppComponent implements OnInit {
 		private authService: AuthService,
 		public toastr: ToastrService,
 		private idle: Idle,
-		vRef: ViewContainerRef
 	) {
 		// this.toastr.setRootViewContainerRef(vRef);
 
@@ -76,12 +74,12 @@ export class AppComponent implements OnInit {
 	checkDashLink() {
 		this.role = localStorage.getItem('role');
 		switch (this.role) {
-			case '2':
-				this.link = {
-					dashboard: 'researcher/dashboard',
-					profile: 'researcher/profile',
-				};
-				break;
+			// case '2':
+			// 	this.link = {
+			// 		dashboard: 'researcher/dashboard',
+			// 		profile: 'researcher/profile',
+			// 	};
+			// 	break;
 			// case '3':
 			// 	this.link = {
 			// 		dashboard: 'provider/dashboard',
@@ -107,24 +105,61 @@ export class AppComponent implements OnInit {
 				return;
 			}
 
-			this.authService.check_login().subscribe(response => {
-				if (response.hasOwnProperty('status') && response['status'] == 'INVALID_TOKEN') {
-					console.log('Token Expired');
-					this.isLoggedIn = false;
-					localStorage.clear(); // forcefully logout and clear localstorage, if token not found
+			// this.authService.check_login().subscribe(response => {
+			// 	if (response.hasOwnProperty('status') && response['status'] == 'INVALID_TOKEN') {
+			// 		console.log('Token Expired');
+			// 		this.isLoggedIn = false;
+			// 		localStorage.clear(); // forcefully logout and clear localstorage, if token not found
 
+			// 		if (
+			// 			!this.pathsWtLogin.some(path => {
+			// 				return this.router.url.indexOf(path) === 0; // current path starts with this path string
+			// 			})
+			// 		) {
+			// 			this.router.navigate(['/home']);
+			// 		}
+			// 	} else {
+			// 		this.isLoggedIn = true;
+			// 		this.reset();
+			// 	}
+			// });
+
+
+			this.authService.checkLogin().subscribe(response => {
+				console.log(response.length && !response[0]);
+				//(response.length && !response[0]) ||
+				if ( (response.length && !response[0]) || (response.hasOwnProperty("status") && response["status"] == "INVALID_TOKEN") ) {
+					console.log("Token Expired");
+					console.log(
+						this.pathsWtLogin.some(path => {
+							console.log(this.router.url.indexOf(path));
+							return this.router.url.indexOf(path) === 0; // current path starts with this path string
+						})
+					);
+					// this.isLoggedIn = false;
+					localStorage.clear(); // forcefully logout and clear localstorage, if token not found
+					this.isLoggedIn = false;
+					this.isHeaderHidden = false;
 					if (
 						!this.pathsWtLogin.some(path => {
 							return this.router.url.indexOf(path) === 0; // current path starts with this path string
 						})
 					) {
-						this.router.navigate(['/home']);
+						this.router.navigate(["/home"]);
+						// .then(() => {
+						// 	this.toastr.error(
+						// 		"Your session has been expired. Please log in to continue."
+						// 	);
+						// });
 					}
 				} else {
 					this.isLoggedIn = true;
 					this.reset();
 				}
 			});
+
+
+
 
 			this.checkDashLink();
 			this.maIsOpen = this.router.url.indexOf('/my-account') === 0;

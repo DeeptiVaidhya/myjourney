@@ -362,6 +362,7 @@ body {
 
 .content-inner-img img {
     margin: 0 auto;
+    width: 100%;
 }
 
 .img-center,
@@ -447,7 +448,8 @@ h6 {
 .f-semi-bold {
     font-family: 'Montserrat-SemiBold';
 }
-.c-pointer{
+
+.c-pointer {
     cursor: pointer;
 }
 
@@ -741,6 +743,10 @@ a:active {
 
 .m-r-15 {
     margin-right: 15px;
+}
+
+.d-flex {
+    display: flex;
 }
 
 .bg-light-green {
@@ -1113,6 +1119,7 @@ form.signin-form .col-md-3 {
 
 .content-p {
     padding-bottom: 15px;
+    word-break: break-all;
 }
 
 .content-right-bg {
@@ -1500,7 +1507,7 @@ form.signin-form .col-md-3 {
         height: 40px;
     }
     .main-accordion .panel-heading {
-        padding: 0px 10px;
+        padding: 5px 10px;
     }
     .main-accordion .panel-body {
         padding: 4px 10px;
@@ -1606,6 +1613,9 @@ form.signin-form .col-md-3 {
     }
     .what-is-oncotool {
         padding-top: 0;
+    }
+    app-breadcrumb {
+        margin-bottom: 25px;
     }
 }
 

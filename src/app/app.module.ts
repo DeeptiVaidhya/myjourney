@@ -23,7 +23,6 @@ import { AppComponent } from './app.component';
 import { CONST_ROUTING } from './app.routing';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AchievementsandeventsComponent } from './components/achievementsandevents/achievementsandevents.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { BreastCancerTreatmentComponent } from './components/chapter-1/breast-cancer/breast-cancer-treatment/breast-cancer-treatment.component';
 import { WhatDoesnotCauseBreastCancerComponent } from './components/chapter-1/breast-cancer/what-doesnot-cause-breast-cancer/what-doesnot-cause-breast-cancer.component';
@@ -42,46 +41,29 @@ import { SunProtectionComponent } from './components/chapter-1/wellness/sun-prot
 import { ChaptersComponent } from './components/chapters/chapters.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DecisionMakingComponent } from './components/decision-making/decision-making.component';
-import { FactG7Component } from './components/fact-g7/fact-g7.component';
 import { FaqComponent } from './components/faq/faq.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { HeaderComponent } from './components/header/header.component';
 // Add Component
 import { HomeComponent } from './components/home/home.component';
-import { IesComponent } from './components/ies/ies.component';
-import { InnerPageHeaderComponent } from './components/inner-page-header/inner-page-header.component';
 import { MyfavoritesComponent } from './components/myfavorites/myfavorites.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ProCtcaeComponent } from './components/pro-ctcae/pro-ctcae.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { PromisComponent } from './components/promis/promis.component';
-import { QuestionnaireWithConcernComponent } from './components/questionnaire-with-concern/questionnaire-with-concern.component';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { ReportComponent } from './components/report/report.component';
-import { AddPatientComponent } from './components/researcher/add-patient/add-patient.component';
-import { AddProviderComponent } from './components/researcher/add-provider/add-provider.component';
-import { EditPatientComponent } from './components/researcher/edit-patient/edit-patient.component';
-import { ListPatientsComponent } from './components/researcher/list-patients/list-patients.component';
-import { ListProvidersComponent } from './components/researcher/list-providers/list-providers.component';
-import { PatientDetailsComponent } from './components/researcher/patient-details/patient-details.component';
-import { ResearcherDashboardComponent } from './components/researcher/researcher-dashboard/researcher-dashboard.component';
-import { ResearcherProfileComponent } from './components/researcher/researcher-profile/researcher-profile.component';
 import { ResoursesComponent } from './components/resourses/resourses.component';
+import { BreadcrumbComponent } from './components/sub-components/breadcrumb/breadcrumb.component';
+import { FooterComponent } from './components/sub-components/footer/footer.component';
+import { HeaderComponent } from './components/sub-components/header/header.component';
+import { InnerPageHeaderComponent } from './components/sub-components/inner-page-header/inner-page-header.component';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 import { PatientGuard } from './guards/patient.guard';
-import { ProviderGuard } from './guards/provider.guard';
-// Add middleware
-import { ResearcherGuard } from './guards/researcher.guard';
 import { TokenInterceptor } from './interceptor/token.interceptor';
-// Add Pipe
-import { QtoptPipe } from './pipe/qtopt.pipe';
-import { SplitPipe } from './pipe/split.pipe';
 // Add Service
 import { AuthService } from './service/auth.service';
 import { DataService } from './service/data.service';
 import { HelperService } from './service/helper.service';
 import { QuestionnaireService } from './service/questionnaire.service';
+
 
 
 @NgModule({
@@ -93,28 +75,12 @@ import { QuestionnaireService } from './service/questionnaire.service';
 		DashboardComponent,
 		ResoursesComponent,
 		PageNotFoundComponent,
-		FactG7Component,
-		ProCtcaeComponent,
-		PromisComponent,
-		DecisionMakingComponent,
-		QtoptPipe,
-		IesComponent,
-		AddPatientComponent,
-		AddProviderComponent,
-		ListPatientsComponent,
-		ListProvidersComponent,
-		PatientDetailsComponent,
-		ResearcherDashboardComponent,
 		ProfileComponent,
 		AboutUsComponent,
 		FaqComponent,
 		ContactUsComponent,
-		ResearcherProfileComponent,
-		SplitPipe,
 		ReportComponent,
 		TermsConditionsComponent,
-		EditPatientComponent,
-		QuestionnaireWithConcernComponent,
 		ChangePasswordComponent,
 		InnerPageHeaderComponent,
 		ForgotPasswordComponent,
@@ -143,6 +109,7 @@ import { QuestionnaireService } from './service/questionnaire.service';
 		ChaptersComponent,
 		MyfavoritesComponent,
 		AchievementsandeventsComponent,
+		QuestionnaireComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -170,9 +137,7 @@ import { QuestionnaireService } from './service/questionnaire.service';
 	],
 	providers: [
 		HttpClientModule,
-		ResearcherGuard,
 		PatientGuard,
-		ProviderGuard,
 		AuthService,
 		HelperService,
 		QuestionnaireService,

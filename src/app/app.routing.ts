@@ -6,7 +6,6 @@ import { ChaptersComponent } from "./components/chapters/chapters.component";
 import { ContactUsComponent } from "./components/contact-us/contact-us.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 // import { DecisionMakingComponent } from './decision-making/decision-making.component';
-import { FactG7Component } from "./components/fact-g7/fact-g7.component";
 import { FaqComponent } from "./components/faq/faq.component";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -15,23 +14,14 @@ import { MyfavoritesComponent } from "./components/myfavorites/myfavorites.compo
 // import { NonPhysicalSideEffectsComponent } from './non-physical-side-effects/non-physical-side-effects.component';
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { ProfileComponent } from "./components/profile/profile.component";
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 // import { QualityOfLifeComponent } from './quality-of-life/quality-of-life.component';
 import { ReportComponent } from "./components/report/report.component";
-import { AddPatientComponent } from "./components/researcher/add-patient/add-patient.component";
-import { AddProviderComponent } from "./components/researcher/add-provider/add-provider.component";
-import { EditPatientComponent } from "./components/researcher/edit-patient/edit-patient.component";
-import { ListPatientsComponent } from "./components/researcher/list-patients/list-patients.component";
-import { ListProvidersComponent } from "./components/researcher/list-providers/list-providers.component";
-import { PatientDetailsComponent } from "./components/researcher/patient-details/patient-details.component";
-import { ResearcherDashboardComponent } from "./components/researcher/researcher-dashboard/researcher-dashboard.component";
-import { ResearcherProfileComponent } from "./components/researcher/researcher-profile/researcher-profile.component";
 import { ResoursesComponent } from "./components/resourses/resourses.component";
 import { TermsConditionsComponent } from "./components/terms-conditions/terms-conditions.component";
 // import { GenomicTestingResultsComponent } from './genomic-testing-results/genomic-testing-results.component';
 import { PatientGuard } from "./guards/patient.guard";
-import { ProviderGuard } from "./guards/provider.guard";
-// Import guard
-import { ResearcherGuard } from "./guards/researcher.guard";
+
 
 const MAINMENU_ROUTES: Routes = [
 	{ path: "", redirectTo: "home", pathMatch: "full" },
@@ -184,11 +174,7 @@ const MAINMENU_ROUTES: Routes = [
 	// 	component: PromisComponent,
 	// 	canActivate: [PatientGuard]
 	// },
-	{
-		path: "patient/dashboard/fact-g7",
-		component: FactG7Component,
-		canActivate: [PatientGuard]
-	},
+	
 	// {
 	// 	path: "patient/dashboard/decision-making",
 	// 	component: DecisionMakingComponent,
@@ -202,6 +188,11 @@ const MAINMENU_ROUTES: Routes = [
 	{
 		path: "patient/dashboard/report",
 		component: ReportComponent,
+		canActivate: [PatientGuard]
+	},
+	{
+		path: "questionnaire/:type",
+		component: QuestionnaireComponent,
 		canActivate: [PatientGuard]
 	},
 	{
@@ -221,93 +212,9 @@ const MAINMENU_ROUTES: Routes = [
 		canActivate: [PatientGuard]
 	},
 
-	
-	// {
-	// 	path: "patient/dashboard/:chapter/:topic",
-	// 	component: ChaptersComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-
-	// {
-	// 	path: "patient/dashboard/:chapter/:topic/:sub_topic",
-	// 	component: ChaptersComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-
 
 	// Researcher Routes
-	{
-		path: "researcher/dashboard",
-		component: ResearcherDashboardComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/profile",
-		component: ResearcherProfileComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/add-patient",
-		component: AddPatientComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/patients",
-		component: ListPatientsComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/patient-details/:user_id",
-		component: PatientDetailsComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/add-provider",
-		component: AddProviderComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/providers",
-		component: ListProvidersComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/edit-patient/:user_id",
-		component: EditPatientComponent,
-		canActivate: [ResearcherGuard]
-	},
-	{
-		path: "researcher/patient-report/:user_id",
-		component: ReportComponent,
-		canActivate: [ResearcherGuard]
-	},
-
-	// Provider Routes
-	{
-		path: "provider/dashboard",
-		component: ResearcherDashboardComponent,
-		canActivate: [ProviderGuard]
-	},
-	{
-		path: "provider/profile",
-		component: ResearcherProfileComponent,
-		canActivate: [ProviderGuard]
-	},
-	{
-		path: "provider/patients",
-		component: ListPatientsComponent,
-		canActivate: [ProviderGuard]
-	},
-	{
-		path: "provider/patient-details/:user_id",
-		component: PatientDetailsComponent,
-		canActivate: [ProviderGuard]
-	},
-	{
-		path: "provider/patient-report/:user_id",
-		component: ReportComponent,
-		canActivate: [ProviderGuard]
-	},
+	
 	// Common Routes
 	{ path: "create-password/:code", component: ChangePasswordComponent },
 	{ path: "reset-password/:code", component: ChangePasswordComponent },

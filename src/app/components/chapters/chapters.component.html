@@ -22,35 +22,30 @@
             <div class="col-md-7 col-sm-12 col-xs-12">
                 <h4 class="c-pink p-b-20">{{ pageContent?.first_paragraph }}</h4>
                 <ng-container *ngFor="let detail of pageContent?.content_details">
-                    <p class="content-p" *ngIf="detail?.text" [innerHtml]="detail?.text">
-                    </p>
-
-                    <div class="text-center content-p content-inner-img" *ngIf="detail?.image" [innerHtml]="detail?.image">
-                        <!-- <img class="img-responsive w-100" src="assets/images/ch-1/Understanding-Breast-Cancer.jpg" alt="Understanding Breast Cancer" /> -->
-
-                    </div>
+                    <p class="content-p" *ngIf="detail?.text" [innerHtml]="detail?.text"></p>
+                    <div class="text-center content-p content-inner-img" *ngIf="detail?.image" [innerHtml]="detail?.image"></div>
                     <p class="content-p h9" *ngIf="detail?.credit">Credit: {{ detail?.credit }}</p>
                     <div class="row section" *ngIf="detail?.resource_data">
-                        <div _ngcontent-c4="" class="col-xs-12">
-                            <div _ngcontent-c4="" class="section-content">
-                                <span _ngcontent-c4="" class="onco-video c-pink sec-icon"></span>
-                                <div _ngcontent-c4="" class="sec-desc">
-                                    <p _ngcontent-c4="" class="h8">{{ detail?.resource_data?.title }}</p>
-                                    <p _ngcontent-c4="" class="h9">{{ detail?.resource_data?.description }}</p>
+                        <div class="col-xs-12">
+                            <div class="section-content">
+                                <span class="onco-video c-pink sec-icon"></span>
+                                <div class="sec-desc">
+                                    <p class="h8">{{ detail?.resource_data?.title }}</p>
+                                    <p class="h9">{{ detail?.resource_data?.description }}</p>
                                 </div>
-                                <a _ngcontent-c4="" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Play Video" href="{{ detail?.resource_data?.link }}" target="_blank" title="Fatigue" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+                                <a class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Play Video" href="{{ detail?.resource_data?.link }}" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
                             </div>
                         </div>
                     </div>
                     <!-- <div class="row section">
-									<div _ngcontent-c4="" class="col-xs-12">
-										<div _ngcontent-c4="" class="section-content">
-											<span _ngcontent-c4="" class="onco-video c-pink sec-icon"></span>
-											<div _ngcontent-c4="" class="sec-desc">
-												<p _ngcontent-c4="" class="h8">What are the stages of Cancer?</p>
-												<p _ngcontent-c4="" class="h9">Please take a moment and watch this brief 5 minute video with Dr. Jay Harness. He explains the different stages of breast cancer. </p>
+									<div class="col-xs-12">
+										<div class="section-content">
+											<span class="onco-video c-pink sec-icon"></span>
+											<div class="sec-desc">
+												<p class="h8">What are the stages of Cancer?</p>
+												<p class="h9">Please take a moment and watch this brief 5 minute video with Dr. Jay Harness. He explains the different stages of breast cancer. </p>
 											</div>
-											<a _ngcontent-c4="" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Play Video" href="https://www.youtube.com/watch?v=6m8DRVWTLjI" target="_blank" title="Fatigue">Play Video</a>
+											<a class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Play Video" href="https://www.youtube.com/watch?v=6m8DRVWTLjI" target="_blank" title="Fatigue">Play Video</a>
 										</div>
 									</div>
 								</div> -->
@@ -68,8 +63,7 @@
                                 <div class="accordion-inner">
                                     <ng-container *ngFor="let description of topic?.description">
                                         <p class="content-p" *ngIf="description?.text" [innerHtml]="description?.text"></p>
-                                        <div class="text-center content-p content-inner-img" *ngIf="description?.image" [innerHtml]="description?.image">
-                                        </div>
+                                        <div class="text-center content-p content-inner-img" *ngIf="description?.image" [innerHtml]="description?.image"></div>
                                         <p class="content-p h9" *ngIf="description?.credit">Credit: {{ description?.credit }}</p>
                                     </ng-container>
                                     <p class="h8 p-b-10" *ngFor="let sub_topic of topic?.sub_topic">
@@ -172,4 +166,4 @@
 
     </div>
 </div>
-<app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>
+<app-breadcrumb [breadcrumb]="breadcrumb" (onClickTitle)="goToElem($event)" isFooter="!1"></app-breadcrumb>

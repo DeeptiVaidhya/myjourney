@@ -14,10 +14,6 @@ export class TokenInterceptor implements HttpInterceptor {
 		};
 		// console.log(this.helper.isAuthenticated(),this.helper.getToken());
 		this.helper.isAuthenticated() && (obj['Token'] = this.helper.getToken() || '');
-		/*.subscribe(token => {
-				obj['Token'] = token; // should be 'Henri'
-			})*/;
-		// console.log(obj);
 		request = request.clone({
 			setHeaders: obj,
 		});

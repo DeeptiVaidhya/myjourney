@@ -362,6 +362,7 @@ body {
 
 .content-inner-img img {
     margin: 0 auto;
+    width: 100%;
 }
 
 .img-center,
@@ -447,7 +448,8 @@ h6 {
 .f-semi-bold {
     font-family: 'Montserrat-SemiBold';
 }
-.c-pointer{
+
+.c-pointer {
     cursor: pointer;
 }
 
@@ -742,9 +744,11 @@ a:active {
 .m-r-15 {
     margin-right: 15px;
 }
-.d-flex{
+
+.d-flex {
     display: flex;
 }
+
 .bg-light-green {
     background-color: #38ccd1;
 }

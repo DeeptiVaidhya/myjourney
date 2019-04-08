@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../service/data.service';
@@ -9,7 +9,7 @@ import { QuestionnaireService } from '../../service/questionnaire.service';
 	templateUrl: './chapters.component.html',
 	styleUrls: ['./chapters.component.css'],
 })
-export class ChaptersComponent implements OnInit,AfterViewInit,OnDestroy {
+export class ChaptersComponent implements OnInit,OnDestroy {
 	slug: string = '';
 	topic: string = '';
 	is_sub_topic: boolean = false;
@@ -20,17 +20,6 @@ export class ChaptersComponent implements OnInit,AfterViewInit,OnDestroy {
 	];
 	chapterLink:any;
 
-	// breadcrumb = [
-	// 	{ link: '/patient/dashboard', title: 'Home' },
-	// 	{ title: 'Understanding breast cancer', link: '/patient/dashboard/understanding-breast-cancer' },
-	// 	{ title: 'Breast Cancer & HT Education',params:{scrollTo:'#res0'} },
-	// 	{ title: 'Types of treatment for breast cancer', class: 'active' },
-	// ];
-	// constructor(private router:Router,private dataService:DataService) {}
-	// goToElem(obj) {
-	// 	this.dataService.changeMessage(obj);
-	// 	this.router.navigate(['/patient/dashboard/understanding-breast-cancer']);	
-	// }
 
 
 	constructor(public route: ActivatedRoute,public questService:QuestionnaireService, public toastr:ToastrService,private router:Router,private dataService:DataService) {
@@ -39,7 +28,7 @@ export class ChaptersComponent implements OnInit,AfterViewInit,OnDestroy {
 			this.topic=param.topic && !param.sub_topic ? param.topic : '';
 			this.is_sub_topic=!!param.sub_topic;
 			// this.slug = param.chapter ? param.chapter : '';
-			this.questService.chapterDetails({type:'slug',value:this.slug, is_sub_topic: !!param.sub_topic}).subscribe((response)=>{
+			this.questService.chapterDetails({type:'slug',value:this.slug, is_sub_topic: !!param.sub_topic,'arm':localStorage.getItem('arm')}).subscribe((response)=>{
 				if(response['status'] == "success")
 				{
 					this.pageContent = response['data'];
@@ -66,14 +55,6 @@ export class ChaptersComponent implements OnInit,AfterViewInit,OnDestroy {
 							// console.log(param);
 							let obj: any = param;
 							if (obj && obj['scrollTo']) {
-								// switch (obj.scrollTo) {
-								// 	case '#res0':
-								// 		this.res0['isOpen'] = true;
-								// 		break;
-								// 	case '#res1':
-								// 		this.res1['isOpen'] = true;
-								// 		break;
-								// }
 								console.log(document.querySelector('#topic--'+obj.scrollTo))
 								setTimeout(() => {
 									let el = document.querySelector('#topic--'+obj.scrollTo);
@@ -99,10 +80,7 @@ export class ChaptersComponent implements OnInit,AfterViewInit,OnDestroy {
 		});
 	}
 	ngOnInit(){}
-	ngAfterViewInit() {
-		
-		
-	}
+
 
 	ngOnDestroy() {
 		this.dataService.changeMessage(null);

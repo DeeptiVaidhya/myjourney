@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../service/auth.service';
@@ -69,7 +69,6 @@ export class HomeComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private formBuilder: FormBuilder,
 		private authService: AuthService,
 		public toastr: ToastrService
 	) {}
@@ -84,9 +83,9 @@ export class HomeComponent implements OnInit {
 			const role = localStorage.getItem('role');
 			let path = '/patient/dashboard';
 			switch (role) {
-				case '2':
-					path = '/researcher/dashboard';
-					break;
+				// case '2':
+				// 	path = '/researcher/dashboard';
+				// 	break;
 				// case '3':
 				// 	path = '/provider/dashboard';
 				// 	break;
@@ -110,9 +109,9 @@ export class HomeComponent implements OnInit {
 						localStorage.setItem('username', this.data.username);
 						let path = '/patient/dashboard';
 						switch (this.data.role) {
-							case '2':
-								path = '/researcher/dashboard';
-								break;
+							// case '2':
+							// 	path = '/researcher/dashboard';
+							// 	break;
 							// case '3':
 							// 	path = '/provider/dashboard';
 							// 	break;
