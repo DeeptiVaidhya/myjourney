@@ -1,15 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../service/data.service';
 import { QuestionnaireService } from '../../service/questionnaire.service';
-
 @Component({
 	selector: 'app-chapters',
 	templateUrl: './chapters.component.html',
 	styleUrls: ['./chapters.component.css'],
 })
-export class ChaptersComponent implements OnInit,OnDestroy {
+export class ChaptersComponent implements OnDestroy {
 	slug: string = '';
 	topic: string = '';
 	is_sub_topic: boolean = false;
@@ -51,37 +50,39 @@ export class ChaptersComponent implements OnInit,OnDestroy {
 					this.breadcrumb.push(obj);
 
 					if(!this.is_sub_topic){
-						this.dataService.currentMessage.subscribe(param => {
-							// console.log(param);
-							let obj: any = param;
-							if (obj && obj['scrollTo']) {
-								console.log(document.querySelector('#topic--'+obj.scrollTo))
-								setTimeout(() => {
-									let el = document.querySelector('#topic--'+obj.scrollTo);
-									if (el) {
-										el.scrollIntoView(true);
-										// now account for fixed header
-										let scrolledY = window.scrollY;
-										if (scrolledY) {
-											window.scrollTo({
-												top: scrolledY - document.querySelectorAll('nav')[0].clientHeight,
-												left: 0,
-												behavior: 'smooth',
-											});
-										}
-									}
-								}, 10);
-								// this.dataService.changeMessage(null);
-							}
-						});
+						this.navigateToElem();
 					}
 				}
 			});
 		});
 	}
-	ngOnInit(){}
-
-
+	
+	
+	navigateToElem(){
+		this.dataService.currentMessage.subscribe(param => {
+			// console.log(param);
+			let obj: any = param;
+			if (obj && obj['scrollTo']) {
+				console.log(document.querySelector('#topic--'+obj.scrollTo))
+				setTimeout(() => {
+					let el = document.querySelector('#topic--'+obj.scrollTo);
+					if (el) {
+						el.scrollIntoView(true);
+						// now account for fixed header
+						let scrolledY = window.scrollY;
+						if (scrolledY) {
+							window.scrollTo({
+								top: scrolledY - document.querySelectorAll('nav')[0].clientHeight,
+								left: 0,
+								behavior: 'smooth',
+							});
+						}
+					}
+				}, 10);
+				// this.dataService.changeMessage(null);
+			}
+		});
+	}
 	ngOnDestroy() {
 		this.dataService.changeMessage(null);
 	}

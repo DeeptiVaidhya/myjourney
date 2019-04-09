@@ -63,6 +63,7 @@ import { AuthService } from './service/auth.service';
 import { DataService } from './service/data.service';
 import { HelperService } from './service/helper.service';
 import { QuestionnaireService } from './service/questionnaire.service';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 
 
@@ -110,6 +111,7 @@ import { QuestionnaireService } from './service/questionnaire.service';
 		MyfavoritesComponent,
 		AchievementsandeventsComponent,
 		QuestionnaireComponent,
+		SafeHtmlPipe,
 	],
 	imports: [
 		BrowserModule,

@@ -7,8 +7,8 @@
                     <div class="col-xs-12">
                         <h3>
                             {{pageContent?.content_name}}
-                            <i class="c-pointer {{is_added_favorite?'onco-minus-like':'onco-add-like'}}" *ngIf="!!is_sub_topic" (click)="favorite(pageContent?.id)"></i>
-                        </h3>
+							<i class="c-pointer {{is_added_favorite?'onco-minus-like':'onco-add-like'}}" *ngIf="!!is_sub_topic" (click)="favorite(pageContent?.id)"></i>
+						</h3>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="col-md-7 col-sm-12 col-xs-12">
                 <h4 class="c-pink p-b-20">{{ pageContent?.first_paragraph }}</h4>
                 <ng-container *ngFor="let detail of pageContent?.content_details">
-                    <p class="content-p" *ngIf="detail?.text" [innerHtml]="detail?.text"></p>
+                    <p class="content-p cont-tbl" *ngIf="detail?.text" [innerHtml]="detail?.text | safeHtml"></p>
                     <div class="text-center content-p content-inner-img" *ngIf="detail?.image" [innerHtml]="detail?.image"></div>
                     <p class="content-p h9" *ngIf="detail?.credit">Credit: {{ detail?.credit }}</p>
                     <div class="row section" *ngIf="detail?.resource_data">
@@ -33,7 +33,7 @@
                                     <p class="h8">{{ detail?.resource_data?.title }}</p>
                                     <p class="h9">{{ detail?.resource_data?.description }}</p>
                                 </div>
-                                <a class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Play Video" href="{{ detail?.resource_data?.link }}" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+                                <a class="btn btn-violet btn-block sec-button" href="{{ detail?.resource_data?.link }}" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
 												<p class="h8">What are the stages of Cancer?</p>
 												<p class="h9">Please take a moment and watch this brief 5 minute video with Dr. Jay Harness. He explains the different stages of breast cancer. </p>
 											</div>
-											<a class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Play Video" href="https://www.youtube.com/watch?v=6m8DRVWTLjI" target="_blank" title="Fatigue">Play Video</a>
+											<a class="btn btn-violet btn-block sec-button" data-ga-action="Play Video" href="https://www.youtube.com/watch?v=6m8DRVWTLjI" target="_blank" title="Fatigue">Play Video</a>
 										</div>
 									</div>
 								</div> -->
@@ -54,7 +54,7 @@
                     <div class="col-xs-12">
                         <accordion class="main-accordion" [closeOthers]="true">
                             <accordion-group id="topic--{{topic?.slug}}">
-                                <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic" data-ga-title="Breast Cancer & HT Education ">
+                                <div accordion-heading class="row clearfix">
                                     <span class="col-xs-10 h6 d-flex"><span class="onco-article c-pink sec-icon m-r-15"></span>{{ topic?.title }}</span>
                                     <span class="col-xs-2 text-right h6">
 										<i [ngClass]="res0?.isOpen ? 'onco-minus ' : 'onco-plus '" class="more-less"></i>
@@ -80,7 +80,7 @@
                 <div class="row" *ngIf="!!is_sub_topic">
                     <div class="col-xs-12 well">
                         <strong (click)="favorite(pageContent?.id)">
-							<i class="{{is_added_favorite?'onco-minus-like':'onco-add-like'}}" (click)="favorite(pageContent?.id)"></i>
+							<i class="{{is_added_favorite?'onco-minus-like':'onco-add-like'}}"></i>
 							{{is_added_favorite?'Remove from':'Add to'}} favorites
 						</strong>
                     </div>
@@ -98,25 +98,22 @@
                     <div class="content-right-inner" *ngFor="let reading of pageContent?.side_resources?.reading">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="{{ reading.link }}" target="_blank" title="{{ reading.title }}" class="gaes-cls" data-ga-action="Useful resources - Read More">{{ reading.title }}</a>
+                                <a href="{{ reading.link }}" target="_blank" title="{{ reading.title }}">{{ reading.title }}</a>
                             </p>
-
                         </div>
                         <div class="col-xs-2">
                             <span class="onco-article c-pink sec-icon"></span>
                         </div>
                     </div>
-
                 </div>
                 <div class="content-right-bg m-b-40" *ngIf="pageContent?.side_resources?.video != '' && pageContent?.side_resources?.video">
                     <div class="col-xs-12">
                         <div class="h6">Video for this section</div>
                     </div>
-
                     <div class="content-right-inner" *ngFor="let video of pageContent?.side_resources?.video">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a class="gaes-cls" data-ga-action="Useful resources - View Video" href="{{ video.link }}" target="_blank" title="Precision Oncology in Practice">{{ video.title }}</a>
+                                <a href="{{ video.link }}" target="_blank">{{ video.title }}</a>
                             </p>
                         </div>
                         <div class="col-xs-2">
@@ -132,15 +129,13 @@
                     <div class="content-right-inner" *ngFor="let audio of pageContent?.side_resources?.audio">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="{{  audio.link }}" target="_blank" title="Precision Medicine in Cancer Treatment" class="gaes-cls" data-ga-action="Useful resources - Read More">{{ audio.link }}</a>
+                                <a href="{{  audio.link }}" target="_blank">{{ audio.link }}</a>
                             </p>
-
                         </div>
                         <div class="col-xs-2">
                             <span class="onco-audio c-pink sec-icon"></span>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="content-right-bg" *ngIf="pageContent?.side_resources?.website != '' && pageContent?.side_resources?.website">
@@ -150,9 +145,8 @@
                     <div class="content-right-inner" *ngFor="let web of pageContent?.side_resources?.website">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="{{ web.link }}" target="_blank" title="Precision Medicine in Cancer Treatment" class="gaes-cls" data-ga-action="Useful resources - Read More">{{ web.title }}</a>
+                                <a href="{{ web.link }}" target="_blank" title="{{ web.title }}">{{ web.title }}</a>
                             </p>
-
                         </div>
                         <div class="col-xs-2">
                             <span class="onco-resource c-pink sec-icon"></span>
