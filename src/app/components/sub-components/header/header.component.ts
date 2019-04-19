@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
 			}
 		);
 	}
+
 	scroll(el) {
 		// if not home page, then first to to Home then scroll down
 		if (this.router.url !== '/home') {

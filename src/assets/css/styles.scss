@@ -453,6 +453,8 @@ h6 {
     cursor: pointer;
 }
 
+
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -632,7 +634,7 @@ a:active {
 .btn-violet:focus {
     color: #fff;
     background-color: #c51ab8;
-    box-shadow: 0px 5px #c51ab8;
+    // box-shadow: 0px 5px #c51ab8;
 }
 
 .btn-gray:hover,
@@ -1119,7 +1121,7 @@ form.signin-form .col-md-3 {
 
 .content-p {
     padding-bottom: 15px;
-    word-break: break-all;
+    // word-break: break-all;
 }
 
 .content-right-bg {
@@ -1258,7 +1260,7 @@ form.signin-form .col-md-3 {
 .content-right-inner .col-xs-10,
 .content-right-bg .col-xs-12 {
     padding-left: 0;
-    padding-right: 0;
+    // padding-right: 0;
 }
 
 
@@ -1393,18 +1395,26 @@ form.signin-form .col-md-3 {
 
 
 /*end researcher*/
-
-.cont-tbl thead tr {
-    background: #f8f9fb;
+.cont-tbl table {
+	min-height: .01%;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
 }
 
-.cont-tbl thead tr th {
+.cont-tbl thead tr,.cont-tbl tbody tr:first-child {
+	background: #f8f9fb;
+}
+
+.cont-tbl thead tr th, .cont-tbl tbody tr:first-child td {
     padding: 15px 10px;
     color: #d42dc2;
-    font-size: 24px;
+    font-size: 20px;
     font-family: 'Montserrat-Light';
     text-align: center;
-    font-weight: normal;
+	font-weight: normal;
+	opacity: 0.9; /* Added this*/
 }
 
 .cont-tbl tbody tr td {

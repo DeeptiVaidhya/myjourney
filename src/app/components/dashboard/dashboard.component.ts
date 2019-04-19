@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
 	arm: string='';
 	user_detail: any = [];
 	pageContent:any;
+	currentWeek:any
 	// is_questionnaire_completed = false;
 	// total_questionnaire: number = 8;// total questionnaires.
 	incompleted_questionnaire: number = 2;// default all questionnaires are not completed.
@@ -46,23 +47,8 @@ export class DashboardComponent implements OnInit {
 					this.pageContent = response['chapters'];
 				}
 				this.arm = response['arm'];
-				// if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('total_q')) {
-				// 	if (!(response['data']['week_number'] == 1 || response['data']['week_number'] == 8)) {
-				// 		this.total_questionnaire = 7;
-				// 		this.incompleted_questionnaire = 7;
-				// 	}
-				// 	this.completed_questionnaire = response['data'].total_q;
-				// 	this.incompleted_questionnaire = this.total_questionnaire - this.completed_questionnaire;
-				// 	// this.callingChart();
-				// 	if (response['data']['current_questionnaire'].hasOwnProperty('questionnaires_id')) {
-				// 		if ((response['data']['current_questionnaire']['questionnaires_id'] == 3 && (response['data']['week_number'] == 1 || response['data']['week_number'] == 8)) || response['data']['current_questionnaire']['questionnaires_id'] != 3) {
-				// 			this.questionnaire_link = this.questionnaire_links[response['data']['current_questionnaire']['questionnaires_id']];
-				// 		}
-				// 	}
-				// }
-				// this.all_week_status = response['data'].hasOwnProperty('week_status') && response['data'].week_status;
 				this.user_detail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
-				// this.is_questionnaire_completed = response['data'].hasOwnProperty('is_questionnaire_completed') && response['data'].is_questionnaire_completed == true;
+				this.currentWeek = response['data'].week_number;
 			},
 			err => {
 				console.log(err);
