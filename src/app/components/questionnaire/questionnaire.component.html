@@ -21,10 +21,11 @@
                             <tr *ngFor="let question of questions">
                                 <td class="c-purple">{{ question.question}}</td>
                                 <td *ngFor="let option of options">
-                                    <span class="radio-container">
-										<input type="radio" title="{{option.option_label}}" name="option[{{question.id}}]" value="{{ option.id }}" attr.data-question-id="{{question.id}}" />
+                                    <span class="radio-container" >
+										<input type="radio" title="{{option.option_label}}" name="option[{{question.id}}]" value="{{ option.id }}" attr.data-question-id="{{question.id}}" attr.group-id="{{option.question_groups_id}}"  [checked]="question?.answer_option_id == option?.id ? 'checked': ''"
+                                        />
 										<span></span>
-                                    </span>
+                                    </span>   
                                 </td>
                             </tr>
                         </tbody>

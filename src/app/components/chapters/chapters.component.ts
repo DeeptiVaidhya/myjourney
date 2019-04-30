@@ -1,6 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { VgAPI } from 'videogular2/core';
 import { DataService } from '../../service/data.service';
 import { QuestionnaireService } from '../../service/questionnaire.service';
 @Component({
@@ -9,8 +11,11 @@ import { QuestionnaireService } from '../../service/questionnaire.service';
 	styleUrls: ['./chapters.component.css'],
 })
 export class ChaptersComponent implements OnDestroy {
+	modalRef: BsModalRef;
 	slug: string = '';
 	topic: string = '';
+	api:VgAPI;
+	currentSrc:any;
 	is_sub_topic: boolean = false;
 	is_added_favorite: boolean = false;
 	pageContent:any;
@@ -19,9 +24,12 @@ export class ChaptersComponent implements OnDestroy {
 	];
 	chapterLink:any;
 
-
-
-	constructor(public route: ActivatedRoute,public questService:QuestionnaireService, public toastr:ToastrService,private router:Router,private dataService:DataService) {
+	constructor(
+		public route: ActivatedRoute,
+		public questService:QuestionnaireService, 
+		public toastr:ToastrService,private router:Router,
+		private dataService:DataService,
+		public modalService: BsModalService) {
 		this.route.params.subscribe(param => {
 			this.slug = param.sub_topic ? param.sub_topic :(param.chapter ? param.chapter : '');
 			this.topic=param.topic && !param.sub_topic ? param.topic : '';
@@ -79,7 +87,7 @@ export class ChaptersComponent implements OnDestroy {
 						}
 					}
 				}, 10);
-				// this.dataService.changeMessage(null);
+				
 			}
 		});
 	}
@@ -94,6 +102,23 @@ export class ChaptersComponent implements OnDestroy {
 			this.dataService.changeMessage(obj);
 		});	//'/patient/dashboard/understanding-breast-cancer'
 	}
+
+	openModal(template: TemplateRef<any>, link:any) {
+		this.currentSrc  = link;
+		this.modalRef = this.modalService.show(template, { class: "modal-lg" });
+	  }
+
+
+	//   onPlayerReady(api:VgAPI) {
+	// 	this.api = api;
+	// // console.log(this.api);
+	// 	this.api
+	// 		.getDefaultMedia()
+	// 		.subscriptions.loadedMetadata.subscribe(this.playVideo.bind(this));
+	// }
+	// playVideo() {
+	// 	this.api.play();
+	// }
 
 	favorite(contentId){
 		if(contentId && this.is_sub_topic){

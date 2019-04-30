@@ -56,7 +56,7 @@ const MAINMENU_ROUTES: Routes = [
 	// 	canActivate: [PatientGuard]
 	// },
 	{
-		path: "achivmenets",
+		path: "achievements",
 		component: AchievementsandeventsComponent,
 		canActivate: [PatientGuard]
 	},

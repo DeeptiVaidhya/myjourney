@@ -13,12 +13,14 @@ export class QuestionnaireComponent implements OnInit {
 	data: any;
 	options = [];
 	questions:any;
+	answer: any;
 	group_title:any;
 	short_description:any;
 	total_question_groups = 0;
 	page_number = 1;
 	type:string = '';
 	symptom_percentage = 0;
+	weekInfoId:any;
 	question_count = 0;
 	breadcrumb = [{ link: '/', title: 'Home' }, { title: 'Questionnaire', class:'active' }];
 
@@ -45,12 +47,14 @@ export class QuestionnaireComponent implements OnInit {
 	 * @desc Get Pro-Ctcae Questionnaire for each patient depending on cancer type.
 	 */
 	getQuestionnaire() {
+		
 		this.questionnaireService.get_questionnaire({ type: this.type.toUpperCase() }).subscribe(
 			Response => {
 				if (Response['status'] == 'success') {
 					this.questions = Response['questions'];
 					this.options = Response['options'];
 					this.group_title = Response['group_title'];
+					this.weekInfoId = Response['week_info']['id'];
 					this.short_description = Response['short_description'];
 				}else{
 					this.toastr.error(Response['msg']);
@@ -67,11 +71,13 @@ export class QuestionnaireComponent implements OnInit {
 			option_ids = document.querySelectorAll("input[name^='option[']:checked");
 		for (let i = 0, opt = option_ids, len = opt.length; i < len; i++) {
 			const question_id = opt[i].getAttribute('data-question-id');
+			const group_id = opt[i].getAttribute('group-id');
 			const values = opt[i]['value'];
-			data.push({ options_id : values, questions_id : question_id});
+			const response = opt[i].getAttribute('title');
+			data.push({ options_id : values, questions_id : question_id, options_question_groups_id:group_id, week_info_id: this.weekInfoId, response: response});
 			
 		}
-		
+	
 		this.questionnaireService.save_questionnaire(data).subscribe(
 			Response => {
 				if (Response['status'] == 'success') {

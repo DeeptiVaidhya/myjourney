@@ -38,7 +38,7 @@ export class QuestionnaireService {
 	 */
 
 	get_questionnaire(data) {
-		return this.helperService.makeHttpRequest('questionnaire/get-questionnaire', 'post', data,true);
+		return this.helperService.makeHttpRequest('questionnaire/questionnaire', 'post', data,true);
 	}
 
 	/**
@@ -46,7 +46,7 @@ export class QuestionnaireService {
 	 * @desc Function is used to save questionnaire answer given by user.
 	 */
 	save_questionnaire(data) {
-		return this.helperService.makeHttpRequest('questionnaire/questionnaire/answer', 'post', data,true);
+		return this.helperService.makeHttpRequest('questionnaire/save-answer', 'post', data,true);
 	}
 
 	/**
