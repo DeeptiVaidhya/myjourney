@@ -1,7 +1,9 @@
 import { Component, OnDestroy, TemplateRef } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import 'rxjs/add/observable/interval';
 import { VgAPI } from 'videogular2/core';
 import { DataService } from '../../service/data.service';
 import { QuestionnaireService } from '../../service/questionnaire.service';
@@ -11,19 +13,28 @@ import { QuestionnaireService } from '../../service/questionnaire.service';
 	styleUrls: ['./chapters.component.css'],
 })
 export class ChaptersComponent implements OnDestroy {
-	modalRef: BsModalRef;
+	profileForm: FormGroup;
+	videoRef: BsModalRef;
+	questionRef: BsModalRef;
 	slug: string = '';
 	topic: string = '';
 	api:VgAPI;
+	player: YT.Player;
+	ytEvent:any;
 	currentSrc:any;
 	is_sub_topic: boolean = false;
 	is_added_favorite: boolean = false;
 	pageContent:any;
+	time:number;
+	isCompleted:boolean = true;
+	completed:any;
 	breadcrumb = [
 		{ link: '/patient/dashboard', title: 'Home' },
 	];
 	chapterLink:any;
-
+	playerVars = {
+		cc_lang_pref: 'en'
+	  };
 	constructor(
 		public route: ActivatedRoute,
 		public questService:QuestionnaireService, 
@@ -63,6 +74,7 @@ export class ChaptersComponent implements OnDestroy {
 				}
 			});
 		});
+		
 	}
 	
 	
@@ -104,21 +116,43 @@ export class ChaptersComponent implements OnDestroy {
 	}
 
 	openModal(template: TemplateRef<any>, link:any) {
-		this.currentSrc  = link;
-		this.modalRef = this.modalService.show(template, { class: "modal-lg" });
+		this.currentSrc = link.split('v=')[1];
+		this.videoRef = this.modalService.show(template, { class: "modal-lg" });
+	
+	  }
+	openQuestionModal(template: TemplateRef<any>) {
+		this.videoRef.hide();
+		this.questionRef = this.modalService.show(template, { class: "modal-lg" });
+		this.questService.getResourceQuestion().subscribe(Response => {
+			if (Response['status'] == 'success') {
+				
+			}else{
+					
+			}
+		});
 	  }
 
+	onStateChange(event) {
+		
+		this.ytEvent = event.data;
+	  }
 
-	//   onPlayerReady(api:VgAPI) {
-	// 	this.api = api;
-	// // console.log(this.api);
-	// 	this.api
-	// 		.getDefaultMedia()
-	// 		.subscriptions.loadedMetadata.subscribe(this.playVideo.bind(this));
-	// }
-	// playVideo() {
-	// 	this.api.play();
-	// }
+	savePlayer(player) {
+
+		this.time = Math.floor(player.getDuration()/2);
+		this.player = player;
+		this.makeVideoCompleted();
+	  }
+	  
+	playVideo() {
+		this.player.playVideo();
+	  }
+
+	makeVideoCompleted(){
+		setTimeout(() => {
+			this.isCompleted = false;
+		}, this.time*1000);
+	}
 
 	favorite(contentId){
 		if(contentId && this.is_sub_topic){
@@ -133,5 +167,4 @@ export class ChaptersComponent implements OnDestroy {
 			this.toastr.error('Invalid content or not a sub topic.');
 		}
 	}
-	
 }

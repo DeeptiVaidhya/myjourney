@@ -57,7 +57,9 @@ export class QuestionnaireComponent implements OnInit {
 					this.weekInfoId = Response['week_info']['id'];
 					this.short_description = Response['short_description'];
 				}else{
-					this.toastr.error(Response['msg']);
+					
+						this.toastr.error(Response['msg']);
+						this.router.navigate(["/patient/dashboard"]);
 				}
 			}
 		);
@@ -87,7 +89,7 @@ export class QuestionnaireComponent implements OnInit {
 						this.toastr.success(Response['msg']);
 					});
 				} else {
-					this.toastr.error(Response['msg']);
+						this.toastr.error(Response['msg']);
 				}
 			}
 		);

@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
 	// questionnaire_links = { 1: 'fact-g7', 2: 'pro-ctcae', 3: 'ies', 4: 'promis' };
 	all_week_status = '';
 	routeData:any;
+	is_enable_questionnire:any;
 	routlink:any = 'understanding-breast-cancer';
 	constructor(
 		private AmCharts: AmChartsService,
@@ -49,6 +50,8 @@ export class DashboardComponent implements OnInit {
 				this.arm = response['arm'];
 				this.user_detail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
 				this.currentWeek = response['data'].week_number;
+				this.is_enable_questionnire = response['data'].enable_questionnire;
+				
 			},
 			err => {
 				console.log(err);

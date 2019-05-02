@@ -22,7 +22,7 @@
                             "src/favicon.ico",
                             "src/assets"
                         ],
-                        "styles": ["node_modules/bootstrap/dist/css/bootstrap.min.css", "src/assets/css/styles.scss"],
+                        "styles": ["node_modules/videogular2/fonts/videogular.css","node_modules/bootstrap/dist/css/bootstrap.min.css", "src/assets/css/styles.scss"],
                         "scripts": ["src/assets/js/amcharts.js"]
                     },
                     "configurations": {

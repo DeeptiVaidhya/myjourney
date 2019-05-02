@@ -8,8 +8,8 @@ export class QuestionnaireService {
 	constructor(public helperService:HelperService) { }
 
 	/**
-	 * 
-	 * @param data 
+	 *
+	 * @param data
 	 * Get Chapter/Sub-topic details
 	 */
 	chapterDetails(data): Observable<any> {
@@ -17,8 +17,8 @@ export class QuestionnaireService {
 	}
 
 	/**
-	 * 
-	 * @param data 
+	 *
+	 * @param data
 	 * Toggle favorite for a sub topic and a user
 	 */
 	updateFavorite(data): Observable<any> {
@@ -33,7 +33,7 @@ export class QuestionnaireService {
 	}
 
 	/**
-	 * @param type 
+	 * @param type
 	 * @desc Function is used to get questionnaire accroding to type like FACT_G7,PRO-CTCAE etc.
 	 */
 
@@ -42,7 +42,7 @@ export class QuestionnaireService {
 	}
 
 	/**
-	 * @param data 
+	 * @param data
 	 * @desc Function is used to save questionnaire answer given by user.
 	 */
 	save_questionnaire(data) {
@@ -62,6 +62,20 @@ export class QuestionnaireService {
 	getFavoriteSubTopic()
 	{
 		return this.helperService.makeHttpRequest('educational/my-favorite', 'get', {},true);
+	}
+
+	/**
+	* @desc Function is used to get resourses data
+	 */
+	get_resources() {
+		return this.helperService.makeHttpRequest('educational/resources', 'get', {},true);
+	}
+
+	/**
+	* @desc Function is used to get resourses data
+	 */
+	getResourceQuestion() {
+		return this.helperService.makeHttpRequest('educational/resources', 'get', {},true);
 	}
 
 }

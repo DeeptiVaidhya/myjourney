@@ -31,8 +31,10 @@
         "ng4-loading-spinner": "^1.2.3",
         "ngx-bootstrap": "^3.3.0",
         "ngx-toastr": "^9.1.1",
+        "ngx-youtube-player": "^7.1.1",
         "rxjs": "^6.0.0",
         "rxjs-compat": "^6.4.0",
+        "videogular2": "^6.4.0",
         "zone.js": "^0.8.26"
     },
     "devDependencies": {
