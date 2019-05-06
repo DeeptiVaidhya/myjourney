@@ -39,8 +39,9 @@ export class QuestionnaireComponent implements OnInit {
 			this.type = param['type'] == 'case-cancer' ? 'CASE_CANCER' : param['type'];
 			// this.question = [];
 			console.log(this.type);
+			this.getQuestionnaire();
 		});
-		this.getQuestionnaire();
+		
 	}
 
 	/**

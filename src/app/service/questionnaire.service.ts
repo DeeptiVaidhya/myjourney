@@ -78,4 +78,11 @@ export class QuestionnaireService {
 		return this.helperService.makeHttpRequest('educational/resources', 'get', {},true);
 	}
 
+		/**
+	* @desc Function is used to get bluejeans Session
+	 */
+	blueJeansSession() {
+		return this.helperService.makeHttpRequest('educational/bluejeans_session', 'get', {},true);
+	}
+
 }

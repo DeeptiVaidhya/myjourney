@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
 	routeData:any;
 	is_enable_questionnire:any;
 	routlink:any = 'understanding-breast-cancer';
+	bluejeansDetails: any;
 	constructor(
 		private AmCharts: AmChartsService,
 		private questService: QuestionnaireService,
@@ -39,7 +40,26 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		this.callingChart();
 		localStorage.getItem('username') && (this.username = localStorage.getItem('username'));
+		this.patient_weekly_questionnaire();
+		this.blueJeansSession();
+	}
 
+	blueJeansSession(){
+		this.questService.blueJeansSession().subscribe(
+			result => {
+				if(result['status'] == "success"){
+				this.bluejeansDetails = result['data'];	
+				}
+				
+			},
+			err => {
+				console.log(err);
+			}
+		)
+	}
+
+    patient_weekly_questionnaire(){
+		
 		this.questService.patients_weekly_questionnaire().subscribe(
 			result => {
 				console.log(result)
@@ -57,8 +77,8 @@ export class DashboardComponent implements OnInit {
 				console.log(err);
 			}
 		);
-	}
 
+	}
 	callingChart() {
 		this.chart = this.AmCharts.makeChart('chartdiv', {
 			type: 'pie',

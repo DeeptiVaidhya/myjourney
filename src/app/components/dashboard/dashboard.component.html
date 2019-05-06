@@ -77,19 +77,19 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-12 scheduled-session">
+                <div class="col-md-12 scheduled-session" *ngFor="let session of bluejeansDetails">
 
                     <div class="row">
                         <div class="col-md-6 col-sm-6 m-t-10">
-                            <h4 class="c-pink">Join a scheduled session</h4>
-                            <p><strong>Date:</strong> Mon April 16, 2016</p>
-                            <p><strong>Time:</strong> 2:00pm EST</p>
-                            <p><strong>Topic:</strong> In vitae erat cursus urna pharetra tristique</p>
-                            <button class="btn btn-gray m-t-10">Join</button>
+                            <h4 class="c-pink">Join a Bluejeans Session</h4>
+                            <p><strong>Date:</strong>&nbsp;{{session?.session_date | date:'fullDate' }}</p>
+                            <p><strong>Time:</strong>&nbsp;{{ session?.session_time}}{{session?.session_time_am_pm}} EST</p>
+                            <p><strong>Topic:</strong>&nbsp;{{session?.session_topic}}</p>
+                            <a href="{{session?.session_url}}" target="_blank" class="btn btn-gray m-t-10">Join</a>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div>
-                                <img src="assets/images/video_bg.jpg" alt="video bg" width="100%">
+                                <img src="assets/images/bluejeans_session.jpg" alt="video bg" width="100%">
                             </div>
                         </div>
                     </div>

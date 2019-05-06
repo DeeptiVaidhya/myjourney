@@ -59,8 +59,15 @@ export class ChaptersComponent implements OnDestroy {
 							obj = {link: '/patient/dashboard/'+bread[0]['slug'], title: bread[0]['content_name'] };
 							this.breadcrumb.push(obj);
 							this.chapterLink=obj.link;
+						} else if (bread[1]['type']=='CONTENT'){
+							obj = {link: '/patient/dashboard/'+bread[1]['slug'], title: bread[1]['content_name'] };
+							this.breadcrumb.push(obj);
+							this.chapterLink=obj.link;
 						}
-						if(bread[1]['type']=='TOPIC'){
+						if(bread[0]['type']=='TOPIC'){
+							obj = {params:{scrollTo:bread[0]['slug']}, title: bread[0]['content_name'] };
+							this.breadcrumb.push(obj);
+						} else if(bread[1]['type']=='TOPIC'){
 							obj = {params:{scrollTo:bread[1]['slug']}, title: bread[1]['content_name'] };
 							this.breadcrumb.push(obj);
 						}
@@ -133,12 +140,10 @@ export class ChaptersComponent implements OnDestroy {
 	  }
 
 	onStateChange(event) {
-		
 		this.ytEvent = event.data;
 	  }
 
 	savePlayer(player) {
-
 		this.time = Math.floor(player.getDuration()/2);
 		this.player = player;
 		this.makeVideoCompleted();
