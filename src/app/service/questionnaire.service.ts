@@ -74,8 +74,8 @@ export class QuestionnaireService {
 	/**
 	* @desc Function is used to get resourses data
 	 */
-	getResourceQuestion() {
-		return this.helperService.makeHttpRequest('educational/resources', 'get', {},true);
+	getResourceQuestion(data) {
+		return this.helperService.makeHttpRequest('questionnaire/resourse-question', 'post', data,true);
 	}
 
 		/**
@@ -83,6 +83,13 @@ export class QuestionnaireService {
 	 */
 	blueJeansSession() {
 		return this.helperService.makeHttpRequest('educational/bluejeans_session', 'get', {},true);
+	}
+
+		/**
+	* @desc Function is used to get bluejeans Session
+	 */
+	submitResourceQuestionResponse(data) {
+		return this.helperService.makeHttpRequest('questionnaire/resourse-question-response', 'post', data,true);
 	}
 
 }

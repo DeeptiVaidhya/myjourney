@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
 	arm: string='';
 	user_detail: any = [];
 	pageContent:any;
-	currentWeek:any
+	currentWeek:any;
+	weekly_quotes:any;
 	// is_questionnaire_completed = false;
 	// total_questionnaire: number = 8;// total questionnaires.
 	incompleted_questionnaire: number = 2;// default all questionnaires are not completed.
@@ -71,6 +72,8 @@ export class DashboardComponent implements OnInit {
 				this.user_detail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
 				this.currentWeek = response['data'].week_number;
 				this.is_enable_questionnire = response['data'].enable_questionnire;
+				if(Object.keys(response['quotes']).length)
+					this.weekly_quotes = response['quotes'];
 				
 			},
 			err => {

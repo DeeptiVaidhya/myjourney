@@ -34,7 +34,7 @@
                                     <p class="h8">{{ detail?.resource_data?.title }}</p>
                                     <p class="h9">{{ detail?.resource_data?.description }}</p>
                                 </div>
-                                <a class="btn btn-violet btn-block sec-button" (click)="openModal(videoModal, detail?.resource_data?.link)"  target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+                                <a class="btn btn-violet btn-block sec-button" (click)="openModal(videoModal, detail?.resource_data?.link, detail?.resource_data?.level)"  target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
                             </div>
                         </div>
                     </div>
@@ -50,6 +50,8 @@
 									</span>
                                 </div>
                                 <div class="accordion-inner">
+									<p class="content-p" *ngIf="topic?.first_paragraph" [innerHtml]="topic?.first_paragraph"></p>
+
                                     <ng-container *ngFor="let description of topic?.description">
                                         <p class="content-p" *ngIf="description?.text" [innerHtml]="description?.text"></p>
                                         <div class="text-center content-p content-inner-img" *ngIf="description?.image" [innerHtml]="description?.image"></div>
@@ -179,19 +181,20 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="text-center">
-					<p class="h8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+					<p class="h8">{{ questions[value-1]?.question }}</p>
 				</div>
-				<form>
+				<form autocomplete="off" [formGroup]="questionnireForm">
 					<div class="form-group">
 						<!-- <label for="name">Name</label> -->
-						<textarea type="text" class="form-control" rows = "6"></textarea>
+						<textarea type="text" class="form-control" formControlName = "response" rows = "6"></textarea>
 					</div>
 					<div class="row">
 						<div class="p-b-20 p-t-40 text-center col-lg-6">
-							<button class="btn btn-gray btn-250">Back</button>
+							<button *ngIf="backButtonFlag" class="btn btn-gray btn-250" (click)="previousQuestion()">Back</button>
 						</div>
 						<div class="p-b-20 p-t-40 text-center col-lg-6">
-							<button class="btn btn-violet btn-250">Next</button>
+							<span class="m-r-15" *ngIf="nextButtonFlag">Skip</span>
+							<button *ngIf="nextButtonFlag" class="btn btn-violet btn-250" (click)="nextQuestion()">Next</button>
 						</div>
 					</div>	
 				</form>
