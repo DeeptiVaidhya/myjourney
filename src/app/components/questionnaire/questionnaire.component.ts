@@ -84,7 +84,10 @@ export class QuestionnaireComponent implements OnInit {
 			Response => {
 				if (Response['status'] == 'success') {
 					let path: any;
-					path = this.type == 'intolerance' ? ['/questionnaire/rumination'] : (this.type == 'rumination' ? ['/questionnaire/promis'] : (this.type == 'promis' ? ['/questionnaire/case-cancer'] : ['/patient/dashboard']));
+					path = this.type == 'intolerance' ? ['/questionnaire/rumination'] : 
+								(this.type == 'rumination' ? ['/questionnaire/promis'] : 
+									(this.type == 'promis' ? ['/questionnaire/fact'] :
+									(this.type == 'fact' ? ['/questionnaire/case-cancer'] : ['/patient/dashboard'])));
 					this.router.navigate(path).then(() => {
 						this.toastr.success(Response['msg']);
 					});

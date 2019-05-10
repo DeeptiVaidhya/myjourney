@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="c-pink p-b-20">{{group_title}}</h4>
-                <p class="f-bold p-b-30">{{short_description}}</p>
+                <h4 class="c-pink p-b-20">{{short_description}}</h4>
+                <h4 class="c-pink p-b-20" *ngIf="!short_description">{{group_title}}</h4>
             </div>
             <div class="col-xs-12 symptoms">
                 <div class="questionnaire-tbl">
