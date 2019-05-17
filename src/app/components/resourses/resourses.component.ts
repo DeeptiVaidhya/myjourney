@@ -8,8 +8,9 @@ import { QuestionnaireService } from '../../service/questionnaire.service';
 	styleUrls: ['./resourses.component.css'],
 })
 export class ResoursesComponent implements OnInit {
-
+	resourceDetail:any;
 	resources_data: any;
+	modalIsShown:boolean=false;
 	constructor( public questionnaireService: QuestionnaireService,public toastr: ToastrService) {}
 	breadcrumb = [{ link: '/', title: 'Home' }, { title: 'Resources',class:'active' }];
 	ngOnInit() {
@@ -26,5 +27,14 @@ export class ResoursesComponent implements OnInit {
 				}
 			}
 		);
+	}
+
+	openModal(resource) {
+		this.modalIsShown = !this.modalIsShown;
+		this.resourceDetail=resource;
+	}
+
+	modalClosed(){
+		this.modalIsShown=false;
 	}
 }

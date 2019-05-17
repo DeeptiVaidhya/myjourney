@@ -11,6 +11,7 @@ export class AchievementsandeventsComponent implements OnInit {
   userDetail:any;
   currentWeek:any;
   totalTimeSpentOnSite:any;
+  totalWatchedAudioVideo:any;
   constructor(
 	  private questService:QuestionnaireService,
 	  private route: Router,
@@ -26,6 +27,7 @@ export class AchievementsandeventsComponent implements OnInit {
 			this.userDetail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
 			this.currentWeek = response['data'].week_number;
 			this.totalTimeSpentOnSite = response['data'].total_time_spent_in_week;
+			this.totalWatchedAudioVideo = response['data'].total_watched_audio_video;
 
 			console.log(this.totalTimeSpentOnSite, this.currentWeek);
 		},

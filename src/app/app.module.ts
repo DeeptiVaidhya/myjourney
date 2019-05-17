@@ -54,6 +54,8 @@ import { AuthService } from './service/auth.service';
 import { DataService } from './service/data.service';
 import { HelperService } from './service/helper.service';
 import { QuestionnaireService } from './service/questionnaire.service';
+import { MyReflectionsComponent } from './components/my-reflections/my-reflections.component';
+import { InquiryMoodModalComponent } from './components/sub-components/inquiry-mood-modal/inquiry-mood-modal.component';
 
 
 
@@ -82,6 +84,8 @@ import { QuestionnaireService } from './service/questionnaire.service';
 		AchievementsandeventsComponent,
 		QuestionnaireComponent,
 		SafeHtmlPipe,
+		MyReflectionsComponent,
+		InquiryMoodModalComponent,
 	],
 	imports: [
 		BrowserModule,

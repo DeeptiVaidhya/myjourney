@@ -1,0 +1,54 @@
+<div class="inner-content p-b-50">
+    <app-inner-page-header page_title="My Reflection"></app-inner-page-header>
+    <div class="container">       
+        <div class="row m-t-40">
+            <div class="col-xs-12">
+                <p class="content-p">
+                   <strong> On this page you will find your answers to positions for the mindfullness activites.Exercises are organized by week on this page, even if you have not completed the activity yet. You can re-do any of these activitiesat any time.</strong>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+			<div class="col-xs-12">
+				<accordion class="main-accordion panel-group" [closeOthers]="true">
+					<accordion-group #res1>
+						<div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic">
+							<span class="col-xs-10 h6">"Reflection name"</span>
+							<span class="col-xs-2 text-right h6">
+								<i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+							</span>
+						</div>
+						<div class="accordion-inner">
+							<div class="row">
+								<div class="col-xs-12 p-b-20">
+									<p>During this week, we discuss pleasant events that occurred during our week and focused on key elements of that experience.</p>
+								</div>
+								<div class="col-xs-12">
+									<div class="bg-l-pink">
+										<p class="h8 uppercase f-medium m-0 c-violet ">REFLECTION</p>
+									</div>
+								</div>
+								<div class="col-xs-12 m-b-10">
+									<div class="bg-l-gray">
+										<div class="row">
+											<div class="col-md-8">
+												<p class="h8 m-0 c-pink f-bold">Rediscovering Sexuality After Breast Cancer</p>
+											</div>
+											<div class="col-md-4 text-right">
+												<a href="#" class="h9 f-bold">Back to content</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12">
+									<em class="p-l-r">You completed this exercise on 4/21/19</em>
+								</div>
+							</div>
+
+						</div>
+                    </accordion-group>
+				</accordion>
+			</div>
+		</div>
+	</div>     
+</div>

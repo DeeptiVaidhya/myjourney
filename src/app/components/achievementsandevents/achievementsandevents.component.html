@@ -1,222 +1,221 @@
-
 <div class="inner-content p-b-50">
     <app-inner-page-header>My Achievements & Events</app-inner-page-header>
     <div class="container">
-        <div class="row week-list" [ngClass] = "(currentWeek >= 1 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 1</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-3 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-3 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-3 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Research team will call on Tuesday at 8pm</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 1 && totalTimeSpentOnSite >= 30) ? '' : 'disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 1</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-3 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 1 && totalTimeSpentOnSite >= 30) ? '' : 'disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-3 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 1 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-3 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 1 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Research team will call on Tuesday at 8pm</p>
+                </div>
+            </div>
         </div>
-        <div class="row week-list" [ngClass] = "(currentWeek >= 2 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 2</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 2 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 2</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 2 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 2 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 2 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'list-disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
+                </div>
+            </div>
         </div>
-        <div class="row week-list" [ngClass] = "(currentWeek >= 3 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 3</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 3 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 3</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 3 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 3 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 3 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'list-disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
+                </div>
+            </div>
         </div>
-        <div class="row week-list" [ngClass] = "(currentWeek >= 4 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 4</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 4 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 4</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 4 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 4 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 4 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'list-disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
+                </div>
+            </div>
         </div>
-        <div class="row week-list" [ngClass] = "(currentWeek >= 5 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 5</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 5 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 5</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 5 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 5 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 5 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'list-disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
+                </div>
+            </div>
         </div>
-        <div class="row week-list" [ngClass] = "(currentWeek >= 6 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 6</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 6 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 6</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 6 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 6 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 6 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'list-disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
+                </div>
+            </div>
         </div>
-        <div class="row week-list" [ngClass] = "(currentWeek >= 7 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 7</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 7 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 7</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 7 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 7 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 7 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'list-disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
+                </div>
+            </div>
         </div>
-        <div class="row week-list" [ngClass] = "(currentWeek >= 8 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
-        	<div class="col-xs-12 pl-pr-0">
-        		<div class="week">
-        			<span>Week 8</span>
-        		</div>
-        	</div>
-        	<div class="col-md-5 col-sm-5 pl-pr-0">
-        		<p class="list-heading"><strong>My Achievements</strong></p>
-        		<div class="row">
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-events c-d-blue"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-achievements c-pink"></i>
-        			</div>
-        			<div class="col-md-4 col-sm-4 col-xs-2 icon">
-        				<i class="onco-award c-orange"></i>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-7 col-sm-7 pl-pr-0">
-        		<p class="list-heading"><strong>My Events</strong></p>
-    			<div class="col-xs-12">
-    				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
-    			</div>
-        	</div>
+        <div class="row week-list" [ngClass]="(currentWeek >= 8 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'">
+            <div class="col-xs-12 pl-pr-0">
+                <div class="week">
+                    <span>Week 8</span>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 pl-pr-0">
+                <p class="list-heading"><strong>My Achievements</strong></p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-events c-d-blue" [ngClass]="(currentWeek >= 8 && totalTimeSpentOnSite >= 30) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-achievements c-pink" [ngClass]="(currentWeek >= 8 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 1) ? '' : 'list-disabled'"></i>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-2 icon">
+                        <i class="onco-award c-orange" [ngClass]="(currentWeek >= 8 && totalTimeSpentOnSite >= 30 && totalWatchedAudioVideo >= 3) ? '' : 'list-disabled'"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 pl-pr-0">
+                <p class="list-heading"><strong>My Events</strong></p>
+                <div class="col-xs-12">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitursem justo, tincidunt id gravida non, iaculis non lectus.</p>
+                </div>
+            </div>
         </div>
     </div>
-</div>     
+</div>

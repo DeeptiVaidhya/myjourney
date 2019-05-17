@@ -6,15 +6,15 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <h3>
-                            {{pageContent?.content_name}}
-							<i class="c-pointer {{is_added_favorite?'onco-minus-like':'onco-add-like'}}" *ngIf="!!is_sub_topic" (click)="favorite(pageContent?.id)"></i>
-						</h3>
+                            {{ pageContent?.content_name }}
+                            <i class="c-pointer {{is_added_favorite?'onco-minus-like':'onco-add-like'}}" *ngIf="!!is_sub_topic" (click)="favorite(pageContent?.id)"></i>
+                        </h3>
                     </div>
                 </div>
             </div>
         </div>
-	</div>
-	
+    </div>
+
     <app-breadcrumb [breadcrumb]="breadcrumb" (onClickTitle)="goToElem($event)"></app-breadcrumb>
     <!--back_link="/patient/dashboard" back_title="Dashboard"-->
     <div class="container">
@@ -32,9 +32,13 @@
                                 <span class="onco-video c-pink sec-icon"></span>
                                 <div class="sec-desc">
                                     <p class="h8">{{ detail?.resource_data?.title }}</p>
+                                    <p class="h9" *ngIf="detail?.resource_data?.is_completed"><i class="glyphicon glyphicon-ok"></i><b><em>video watched</em></b></p>
                                     <p class="h9">{{ detail?.resource_data?.description }}</p>
                                 </div>
-                                <a class="btn btn-violet btn-block sec-button" (click)="openModal(videoModal, detail?.resource_data?.link, detail?.resource_data?.level)"  target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+                                <a class="btn btn-violet btn-block sec-button" (click)="openModal(detail?.resource_data)"
+									target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+									
+									<!-- ?.link, detail?.resource_data?.level, detail?.resource_data?.id, detail?.resource_data?.is_completed -->
                             </div>
                         </div>
                     </div>
@@ -50,7 +54,7 @@
 									</span>
                                 </div>
                                 <div class="accordion-inner">
-									<p class="content-p" *ngIf="topic?.first_paragraph" [innerHtml]="topic?.first_paragraph"></p>
+                                    <p class="content-p" *ngIf="topic?.first_paragraph" [innerHtml]="topic?.first_paragraph"></p>
 
                                     <ng-container *ngFor="let description of topic?.description">
                                         <p class="content-p" *ngIf="description?.text" [innerHtml]="description?.text"></p>
@@ -104,8 +108,9 @@
                     <div class="content-right-inner" *ngFor="let video of pageContent?.side_resources?.video">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="{{ video.link }}" target="_blank">{{ video.title }}</a>
-                            </p>
+                                <a (click)="openModal(video)" target="_blank">{{ video.title }}</a>
+							</p>
+							<p class="h9" *ngIf="video?.is_completed"><i class="glyphicon glyphicon-ok"></i><b><em>video watched</em></b></p>
                         </div>
                         <div class="col-xs-2">
                             <span class="onco-video c-pink sec-icon"></span>
@@ -148,59 +153,9 @@
         </div>
 
         <!-- end content-right -->
-		
+
     </div>
 </div>
-<ng-template #videoModal>
-	<div class="modal-header">
-		
-		<button type="button" class="close pull-right" aria-label="Close" (click)="videoRef.hide()">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<youtube-player width="100%" height="500"
-          [videoId]="currentSrc"
-          (ready)="savePlayer($event)"
-          (change)="onStateChange($event)"
-          [playerVars]="playerVars">
-        </youtube-player>
-		<div class="p-b-20 p-t-40 text-center">
-			<button [disabled]="isCompleted" class="btn btn-violet btn-250" (click)="openQuestionModal(excerciseModal)">Done</button>
-		</div>
-	</div>
-</ng-template>
-<ng-template #excerciseModal>
-	<div class="modal-header">
-		
-		<button type="button" class="close pull-right" aria-label="Close" (click)="questionRef.hide()">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="text-center">
-					<p class="h8">{{ questions[value-1]?.question }}</p>
-				</div>
-				<form autocomplete="off" [formGroup]="questionnireForm">
-					<div class="form-group">
-						<!-- <label for="name">Name</label> -->
-						<textarea type="text" class="form-control" formControlName = "response" rows = "6"></textarea>
-					</div>
-					<div class="row">
-						<div class="p-b-20 p-t-40 text-center col-lg-6">
-							<button *ngIf="backButtonFlag" class="btn btn-gray btn-250" (click)="previousQuestion()">Back</button>
-						</div>
-						<div class="p-b-20 p-t-40 text-center col-lg-6">
-							<span class="m-r-15" *ngIf="nextButtonFlag">Skip</span>
-							<button *ngIf="nextButtonFlag" class="btn btn-violet btn-250" (click)="nextQuestion()">Next</button>
-						</div>
-					</div>	
-				</form>
-				
-			</div>	
-		</div>	
-	</div>
-</ng-template>
+
+<app-inquiry-mood-modal [contentId]="pageContent?.id" [resourceDetail]="resourceDetail" *ngIf="!!modalIsShown" [modalIsShown]="modalIsShown" (onCloseModal)="modalClosed()"></app-inquiry-mood-modal>
 <app-breadcrumb [breadcrumb]="breadcrumb" (onClickTitle)="goToElem($event)" isFooter="!1"></app-breadcrumb>

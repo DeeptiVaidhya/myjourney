@@ -10,6 +10,7 @@ import { FaqComponent } from "./components/faq/faq.component";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
 import { HomeComponent } from "./components/home/home.component";
 import { MyfavoritesComponent } from "./components/myfavorites/myfavorites.component";
+import { MyReflectionsComponent } from "./components/my-reflections/my-reflections.component";
 // import { MedicalDecisionsComponent } from './medical-decisions/medical-decisions.component';
 // import { NonPhysicalSideEffectsComponent } from './non-physical-side-effects/non-physical-side-effects.component';
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -63,6 +64,11 @@ const MAINMENU_ROUTES: Routes = [
 	{
 		path: "patient/my-favorite",
 		component: MyfavoritesComponent,
+		canActivate: [PatientGuard]
+	},
+	{
+		path: "my-reflections",
+		component: MyReflectionsComponent,
 		canActivate: [PatientGuard]
 	},
 	// {
@@ -174,7 +180,7 @@ const MAINMENU_ROUTES: Routes = [
 	// 	component: PromisComponent,
 	// 	canActivate: [PatientGuard]
 	// },
-	
+
 	// {
 	// 	path: "patient/dashboard/decision-making",
 	// 	component: DecisionMakingComponent,
@@ -214,7 +220,7 @@ const MAINMENU_ROUTES: Routes = [
 
 
 	// Researcher Routes
-	
+
 	// Common Routes
 	{ path: "create-password/:code", component: ChangePasswordComponent },
 	{ path: "reset-password/:code", component: ChangePasswordComponent },

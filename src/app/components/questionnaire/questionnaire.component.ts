@@ -76,7 +76,7 @@ export class QuestionnaireComponent implements OnInit {
 			const group_id = opt[i].getAttribute('group-id');
 			const values = opt[i]['value'];
 			const response = opt[i].getAttribute('title');
-			data.push({ options_id: values, questions_id: question_id, options_question_groups_id: group_id, week_info_id: this.weekInfoId, response: response });
+			data.push({ options_id: values, questions_id: question_id, question_groups_id: group_id, week_info_id: this.weekInfoId, response: response });
 
 		}
 

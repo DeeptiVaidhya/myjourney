@@ -1,17 +1,18 @@
-.well{
-	background-color: #f8f9fa;
-	border: none;
-	box-shadow: none;
-	color: #ce10bf;
-	padding: 15px;
-	cursor: pointer;
+.well {
+    background-color: #f8f9fa;
+    border: none;
+    box-shadow: none;
+    color: #ce10bf;
+    padding: 15px;
+    cursor: pointer;
+}
 
+.well i {
+    font-size: 30px;
+    vertical-align: middle;
+    margin-right: 8px;
 }
-.well i{
-	font-size: 30px;
-	vertical-align: middle;
-	margin-right: 8px;
-}
-.d-flex{
-	display: flex;
+
+.d-flex {
+    display: flex;
 }

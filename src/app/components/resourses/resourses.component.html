@@ -36,9 +36,10 @@
 											<span class="onco-article c-pink sec-icon"></span>
 											<div class="sec-desc">
 												<p class="h8">{{resource?.title}}</p>
+												<p class="h9" *ngIf="resource?.is_completed"><i class="glyphicon glyphicon-ok"></i><b><em>video watched</em></b></p>
 												<p class="h9">{{resource?.description}}</p>
 											</div>
-											<a href="{{resource?.link}}" target="_blank"
+											<a (click)="openModal(resource)" target="_blank"
 												class="btn btn-violet btn-block sec-button gaes-cls"
 												data-ga-action="Read More"
 												title="Precision Medicine in Cancer Treatment">{{resource?.type}}</a>
@@ -53,4 +54,5 @@
 		</div>
 	</div>
 </div>
+<app-inquiry-mood-modal [contentId]="" [resourceDetail]="resourceDetail" *ngIf="!!modalIsShown" [modalIsShown]="modalIsShown" (onCloseModal)="modalClosed()"></app-inquiry-mood-modal>
 <app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

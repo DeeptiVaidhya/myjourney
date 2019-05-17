@@ -78,18 +78,26 @@ export class QuestionnaireService {
 		return this.helperService.makeHttpRequest('questionnaire/resourse-question', 'post', data,true);
 	}
 
-		/**
+	/**
 	* @desc Function is used to get bluejeans Session
 	 */
 	blueJeansSession() {
 		return this.helperService.makeHttpRequest('educational/bluejeans-session', 'get', {},true);
 	}
 
-		/**
+	/**
 	* @desc Function is used to get bluejeans Session
-	 */
+	*/
 	submitResourceQuestionResponse(data) {
 		return this.helperService.makeHttpRequest('questionnaire/resourse-question-response', 'post', data,true);
+	}
+
+	/**
+	 * @param data
+	 * @desc Function is used to get reflection data .
+	 */
+	get_reflectionData() {
+		return this.helperService.makeHttpRequest('questionnaire/reflectionData', 'get', {},true);
 	}
 
 }
