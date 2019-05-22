@@ -1,33 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionnaireService } from '../../service/questionnaire.service';
 import { ToastrService } from 'ngx-toastr';
+import { QuestionnaireService } from '../../service/questionnaire.service';
 
 @Component({
-  selector: 'app-my-reflections',
-  templateUrl: './my-reflections.component.html',
-  styleUrls: ['./my-reflections.component.css']
+	selector: 'app-my-reflections',
+	templateUrl: './my-reflections.component.html',
+	styleUrls: ['./my-reflections.component.css']
 })
 export class MyReflectionsComponent implements OnInit {
+	moodOption = new Array<any>(
+		{ title: 'Great', src: "assets/images/emoji-happy.png" },
+		{ title: 'Good', src: "assets/images/emoji-blushing.png" },
+		{ title: 'Neutral', src: "assets/images/emoji-speechless.png" },
+		{ title: 'Average', src: "assets/images/emoji-smirk.png" },
+		{ title: 'Bad', src: "assets/images/emoji-sad.png" });
+	reflection_data: any;
+	constructor(public questionnaireService: QuestionnaireService, public toastr: ToastrService) { }
 
-  reflection_data: any;
-  constructor( public questionnaireService: QuestionnaireService,public toastr: ToastrService) {}
+	ngOnInit() {
+		this.reflectionData();
+	}
 
-  ngOnInit() {
-    this.reflectionData();
-  }
+	reflectionData() {
+		this.questionnaireService.get_resources().subscribe(
+			Response => {
+				console.log(Response);
 
-  reflectionData(){
-    this.questionnaireService.get_reflectionData().subscribe(
-			Response => {	
-        console.log(Response);
-        
 				if (Response['status'] == 'success') {
 					this.reflection_data = Response['data'];
-				}else{
+				} else {
 					this.toastr.error(Response['msg']);
 				}
 			}
 		);
-  }
+	}
 
 }

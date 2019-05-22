@@ -21,9 +21,9 @@
 .breadcrumb-top li:not(:last-child)::after {
     position: absolute;
     content: "\0203A";
-    right: -15px;
+    right: -18px;
     font-size: 28px;
-    top: -3px;
+    top: -2px;
 }
 
 .breadcrumb-top ul li a.active,

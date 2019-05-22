@@ -16,7 +16,8 @@ export class ChaptersComponent implements OnDestroy {
 	is_sub_topic: boolean = false;
 	is_added_favorite: boolean = false;
 	pageContent: any;
-
+	player:any=[];
+	activeIndex:any;
 	breadcrumb = [{ link: "/patient/dashboard", title: "Home" }];
 	chapterLink: any;
 	modalIsShown:boolean=false;
@@ -159,12 +160,21 @@ export class ChaptersComponent implements OnDestroy {
 			this.toastr.error("Invalid content or not a sub topic.");
 		}
 	}
-	openModal(resource) {
+	openModal(resource,index) {
+		this.activeIndex=index;
 		this.modalIsShown = !this.modalIsShown;
 		this.resourceDetail=resource;
 	}
 
 	modalClosed(){
 		this.modalIsShown=false;
+	}
+
+	videoTimeUpdated(is_completed){
+		console.log(is_completed);
+		if(!this.player[this.activeIndex]){
+			this.player[this.activeIndex]={};
+		}
+		this.player[this.activeIndex]['is_completed']=true;
 	}
 }

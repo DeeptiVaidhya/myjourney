@@ -92,12 +92,4 @@ export class QuestionnaireService {
 		return this.helperService.makeHttpRequest('questionnaire/resourse-question-response', 'post', data,true);
 	}
 
-	/**
-	 * @param data
-	 * @desc Function is used to get reflection data .
-	 */
-	get_reflectionData() {
-		return this.helperService.makeHttpRequest('questionnaire/reflectionData', 'get', {},true);
-	}
-
 }

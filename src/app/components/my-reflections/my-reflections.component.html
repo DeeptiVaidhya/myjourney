@@ -10,10 +10,10 @@
         </div>
         <div class="row">
 			<div class="col-xs-12">
-				<accordion class="main-accordion panel-group" [closeOthers]="true">
+				<accordion class="main-accordion panel-group" [closeOthers]="true" *ngFor = "let  data of reflection_data; let i = index">
 					<accordion-group #res1>
 						<div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic">
-							<span class="col-xs-10 h6">"Reflection name"</span>
+							<span class="col-xs-10 h6">Week {{ i+1 }}: {{ data?.reflection_title }}</span>
 							<span class="col-xs-2 text-right h6">
 								<i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
 							</span>
@@ -21,30 +21,73 @@
 						<div class="accordion-inner">
 							<div class="row">
 								<div class="col-xs-12 p-b-20">
-									<p>During this week, we discuss pleasant events that occurred during our week and focused on key elements of that experience.</p>
-								</div>
-								<div class="col-xs-12">
-									<div class="bg-l-pink">
-										<p class="h8 uppercase f-medium m-0 c-violet ">REFLECTION</p>
-									</div>
-								</div>
-								<div class="col-xs-12 m-b-10">
-									<div class="bg-l-gray">
-										<div class="row">
-											<div class="col-md-8">
-												<p class="h8 m-0 c-pink f-bold">Rediscovering Sexuality After Breast Cancer</p>
-											</div>
-											<div class="col-md-4 text-right">
-												<a href="#" class="h9 f-bold">Back to content</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-xs-12">
-									<em class="p-l-r">You completed this exercise on 4/21/19</em>
+									<p>{{ data?.reflection_description }}</p>
 								</div>
 							</div>
-
+							<ng-container *ngFor = 'let resource of data?.resources'>
+								<div class="row p-b-30" *ngIf = "resource?.exercise_type == 'inquiry' || resource?.exercise_type == 'mood'">
+									<ng-container *ngIf ="resource.is_completed">
+										<div class="col-xs-12">
+											<div class="bg-l-pink">
+												<p class="h8 uppercase f-medium m-0 c-violet">{{ resource?.exercise_type == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
+											</div>
+										</div>
+										<div class="col-xs-12 m-b-10">
+											<div class="bg-l-gray">
+												<div class="row">
+													<div class="col-md-8">
+														<p class="h8 m-0 c-pink f-bold">{{ resource?.title }}</p>
+													</div>
+													<div class="col-md-4 text-right">
+														<a href="#" class="h9 f-bold">Back to content</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<p class="p-l-r"><em>You have completed this exercise on {{ resource?.completion_date | date : 'shortDate'}}</em></p>
+										</div>
+										<div class="col-xs-12 m-b-10">
+											<div class="row" *ngFor = "let questions of resource?.questions">
+												<div class="col-md-8 m-t-10">
+													<p class="f-18 m-0 f-bold p-l-r">{{ questions?.short_question }}</p>
+												</div>
+												<div class="col-xs-12 m-t-10" *ngIf = "resource?.exercise_type == 'inquiry'">
+													<p class="p-l-r"><em>{{ questions?.response }}</em></p>
+													<p class="p-l-r"><em>{{ (questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count) ? 'Skipped' : '' }}</em></p>
+												</div>
+												<div class="col-xs-12 m-t-1" *ngIf = "resource?.exercise_type == 'mood'">
+												<p class="p-l-r"><em>{{ (questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count) ? 'Skipped' : '' }}</em></p>
+												<img src="{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.src }}" class="m-r-15 m-t-40 m-b-30 p-l-r">
+												<span>{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.title }}</span>
+												</div>
+											</div>
+										</div>
+									</ng-container>
+									<ng-container *ngIf ="!resource.is_completed">
+										<div class="col-xs-12">
+											<div class="bg-l-pink">
+												<p class="h8 uppercase f-medium m-0 c-violet">{{ resource?.exercise_type == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
+											</div>
+										</div>
+										<div class="col-xs-12 m-b-10">
+											<div class="bg-l-gray">
+												<div class="row">
+													<div class="col-md-8">
+														<p class="h8 m-0 c-pink f-bold">{{ resource?.title }}</p>
+													</div>
+													<div class="col-md-4 text-right">
+														<a href="#" class="h9 f-bold">Back to content</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<p class="p-l-r"><em>It looks like you have not completed any questions for this exercise yet.Click on the exercise if you would like to answer them now.</em></p>
+										</div>
+									</ng-container>
+								</div>
+							</ng-container>
 						</div>
                     </accordion-group>
 				</accordion>

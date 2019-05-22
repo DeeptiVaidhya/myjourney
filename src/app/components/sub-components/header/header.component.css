@@ -124,6 +124,18 @@
 
 
 /*start @media*/
+@media (max-width: 991px){
+    #navbar ul li a::after {
+        content: "|";
+        color: #cacaca;
+        position: absolute;
+        padding: 0 8px;
+    }
+    .nav>li>a {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
 
 @media (max-width: 767px) {
     #navbar ul li a::after {
@@ -137,6 +149,7 @@
     .navbar-default .header li a {
         padding: 15px 20px;
         font-family: 'Montserrat-SemiBold';
+        font-size: 14px;
     }
     .tab-active.open .dropdownToggle {
         background: #553a81 !important;
@@ -156,3 +169,4 @@
         margin-right: 0;
     }
 }
+

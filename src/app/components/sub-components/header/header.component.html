@@ -23,9 +23,9 @@
                 <li (click)="isCollapsed = !isCollapsed" *ngIf="isLoggedIn" routerLinkActive="tab-active">
                     <a routerLink="{{ link.dashboard }}">Home</a>
 				</li>
-				<!-- <li *ngIf="isLoggedIn" (click)="isCollapsed = !isCollapsed" routerLinkActive="tab-active">
+				<li *ngIf="isLoggedIn" (click)="isCollapsed = !isCollapsed" routerLinkActive="tab-active">
                     <a routerLink="my-reflections">My Reflections</a>
-                </li> -->
+                </li>
                 <li *ngIf="role=='3' && isLoggedIn" routerLinkActive="tab-active" role="menuitem" (click)="isCollapsed = !isCollapsed">
                     <a class="dropdown-item" routerLink="patient/my-favorite">My Favorites</a>
                 </li>

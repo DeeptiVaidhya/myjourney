@@ -215,8 +215,9 @@
 @media (max-width: 991px) {
     .complete-notification .btn-violet {
         white-space: normal;
-        font-size: 16px;
+        font-size: 14px;
         padding: 12px 0;
+        height: auto;
     }
     .complete-notification p.h7 {
         margin: 0;
@@ -330,16 +331,15 @@
     .img-text-bg .text {
         height: auto;
     }
+    .complete-notification .btn-violet {
+        padding: auto;
+    }
 }
 
 @media (max-width: 500px) {
     .complete-notification p.h7 {
         margin: 4px 0;
         font-size: 16px;
-    }
-    .complete-notification .btn-violet {
-        font-size: 18px;
-        padding: auto;
     }
     .complete-notification .alert-icon {
         width: 70px;
@@ -358,5 +358,8 @@
     .gaes-cls img {
         width: 120px;
         height: 120px;
+    }
+    .genomic-profiling h6 {
+        font-size: 16px;
     }
 }

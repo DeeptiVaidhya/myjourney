@@ -52,7 +52,7 @@
 		</youtube-player>
 		<div class="p-b-20 p-t-40 text-center">
 			<button [disabled]="isCompleted && !video_completed" class="btn btn-violet btn-250"
-				(click)="openQuestionModal((level  == 'mood' || level  == 'inquiry') ? excerciseModal :  closeModal(videoRef))">Done</button>
+				(click)="openQuestionModal((level  == 'mood' || level  == 'inquiry')?excerciseModal:closeModal(videoRef))">Done</button>
 		</div>
 	</div>
 </ng-template>
@@ -78,7 +78,7 @@
 							<div class="text-center">
 								<ng-container *ngFor="let mood of moodOption; let i=index">
 									<img src="{{ mood }}" class="m-r-15 m-t-40 m-b-30"
-										[ngClass]="(selected == i+1 || (questions[value]?.user_response?.pre_rating == 0 ? questions[value]?.user_response?.post_rating : questions[value]?.user_response?.pre_rating) == i+1) ? 'emoji-select' : ''"
+										[ngClass]="(selected == moodOption.length-i || (questions[value]?.user_response?.pre_rating == 0 ? questions[value]?.user_response?.post_rating : questions[value]?.user_response?.pre_rating) == moodOption.length-i) ? 'emoji-select' : ''"
 										alt="thinking icon" attr.data-qhoid="{{ questions[value]?.user_response?.id }}"
 										name="mood"
 										(click)="rateMood(moodOption.length-i, ratingType ? videoModal : postMessage)">

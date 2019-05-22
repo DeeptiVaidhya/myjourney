@@ -60,6 +60,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	@ViewChild('videoModal') videoModal; 
 	@ViewChild('excerciseModal') excerciseModal; 
 	@Output() onCloseModal = new EventEmitter();
+	@Output() onVideoUpdated = new EventEmitter();
 
 	constructor(
 		
@@ -119,7 +120,9 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	openQuestionModal(template: TemplateRef<any>, ratingType?: any) {
 		this.videoRef.hide();
 		this.ratingType = ratingType;
-		this.questService
+		if(this.level == 'mood' || this.level == 'inquiry')
+		{	
+			this.questService
 			.getResourceQuestion({
 				exercise_type: this.level.toUpperCase(),
 				resource_id: this.resourceId
@@ -135,6 +138,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 					this.toastr.error(Response["msg"] || "Server error");
 				}
 			});
+		}
 	}
 
 	onStateChange(event) {
@@ -178,7 +182,16 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 		if (this.level == 'inquiry')
 			option_ids = document.querySelector("textarea").getAttribute('data-qhoid');
 		else if (this.level == 'mood')
-			option_ids = this.questions[this.value].user_response ? document.querySelector("img[name='mood'].emoji-select").getAttribute('data-qhoid') : null;
+		{
+		console.log(this.questions[this.value].user_response);
+			let qhoid=null;
+			if(document.querySelector("img[name='mood'].emoji-select")){
+				qhoid = document.querySelector("img[name='mood'].emoji-select").getAttribute('data-qhoid');
+			} else if(document.querySelector("img[name='mood']")){
+				qhoid = document.querySelector("img[name='mood']").getAttribute('data-qhoid');
+			}
+			option_ids = this.questions[this.value].user_response ? qhoid : null;
+		}
 		this.qhoid = option_ids;
 		this.questionnireForm.value.question_id = this.questions[this.value].id;
 		this.questionnireForm.value.exercise_type = this.level;
@@ -269,6 +282,8 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	closeModal(template:BsModalRef){
 		template.hide();
 		console.log('modal closed');
+		!this.isCompleted && this.onVideoUpdated.emit(true);
+
 		this.onCloseModal.emit('closed');
 	}
 }
