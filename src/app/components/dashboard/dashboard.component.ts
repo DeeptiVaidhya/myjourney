@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
 	pageContent:any;
 	currentWeek:any;
 	weekly_quotes:any;
+	currentWeekInfo:any;
 	// is_questionnaire_completed = false;
 	// total_questionnaire: number = 8;// total questionnaires.
 	incompleted_questionnaire: number = 2;// default all questionnaires are not completed.
@@ -68,13 +69,15 @@ export class DashboardComponent implements OnInit {
 				if (response.hasOwnProperty('chapters')) {
 					this.pageContent = response['chapters'];
 				}
-				this.arm = response['arm'];
+				this.arm = response['arm'] ? response['arm'] : "";
 				this.user_detail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
+				this.currentWeekInfo = response['data'].hasOwnProperty('week_info') && response['data'].week_info;
+				
 				this.currentWeek = response['data'].week_number;
 				this.is_enable_questionnire = response['data'].enable_questionnire;
 				if(Object.keys(response['quotes']).length)
 					this.weekly_quotes = response['quotes'];
-				
+					// console.log(this.currentWeek);
 			},
 			err => {
 				console.log(err);
@@ -103,5 +106,16 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 
+	viewAllAchivement()
+	{
+
+		if(this.currentWeek > 0)
+		{
+			this.router.navigate(['/achievements']);
+		}else{
+			this.toastr.error("Week not started yet");
+		}
+
+	}
 
 }

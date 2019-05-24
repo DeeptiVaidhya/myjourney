@@ -35,6 +35,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	totalTime: any;
 	selected: any;
 	prePostRating: any;
+	resourseType:any;
 	dynamic: any = 0;
 	max: any;
 	moodOption = new Array<any>(
@@ -43,6 +44,12 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 		"assets/images/emoji-speechless.png",
 		"assets/images/emoji-smirk.png",
 		"assets/images/emoji-sad.png");
+	moodTitle = new Array<any>(
+		"Great",
+		"",
+		"Neutral",
+		"",
+		"Bad");
 	timer: any;
 	qhoid: any;
 	backButtonFlag: any;
@@ -111,9 +118,12 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	) {
 		this.level = this.resourceDetail.level;
 		this.video_completed = this.resourceDetail.is_completed;
-		this.currentSrc = this.resourceDetail.link.split("v=")[1];
+		this.resourseType = this.resourceDetail.type;
+		if(this.resourseType == 'VIDEO')
+			this.currentSrc = this.resourceDetail.link.split("v=")[1];
+		else if(this.resourseType == 'AUDIO')
+			this.currentSrc = this.resourceDetail.link
 		this.resourceId = this.resourceDetail.id;
-
 		this.videoRef = this.modalService.show(template, { class: "modal-lg" });
 	}
 

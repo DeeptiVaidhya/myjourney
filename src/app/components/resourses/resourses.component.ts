@@ -35,6 +35,7 @@ export class ResoursesComponent implements OnInit {
 
 	
 	openModal(resource,index) {
+		console.log(resource);
 		this.activeIndex=index;
 		this.modalIsShown = !this.modalIsShown;
 		this.resourceDetail=resource;

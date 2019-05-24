@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row p-b-20">
             <!-- <div class="col-md-12 complete-notification" *ngIf="(all_week_status=='' ? (is_questionnaire_completed ? is_questionnaire_completed : incompleted_questionnaire!=0): false)"> -->
-            <div class="col-md-12 complete-notification" *ngIf = "currentWeek == 4 || is_enable_questionnire == '1'">
+            <div class="col-md-12 complete-notification" *ngIf = "(currentWeek == 4 || is_enable_questionnire == '1')&& currentWeek >0">
 
                 <div class="col-xs-12 well">
                     <div class="alert-icon">
@@ -39,7 +39,7 @@
                 <div class="img-text-bg text-center" *ngIf="arm=='INTERVENTION'">
                     <div class="text">
 						<div *ngIf="weekly_quotes?.quote">
-							<p class="h8">{{ weekly_quotes?.quote }}</p>
+							<p class="h8"><em>{{ weekly_quotes?.quote }}</em></p>
 							<p class="h8 c-violet f-regular">- {{ weekly_quotes?.author }}</p>
 						</div>
 						<p *ngIf="!weekly_quotes?.quote" class="h8">No inspirational quote defined</p>
@@ -56,26 +56,48 @@
                 <!-- end image -->
             </div>
             <div class="col-md-7 col-sm-6 col-xs-12 v-middle">
-                <div class="achievements-bg">
-                    <h6>My Achievements & Events</h6>
-                    <div class="row">
-                        <div class="col-xs-4 icon">
-                            <i class="onco-events c-d-blue"></i>
-                            <p><strong>Maecenas</strong></p>
-                        </div>
-                        <div class="col-xs-4 icon">
-                            <i class="onco-achievements c-pink"></i>
-                            <p><strong>Lorem</strong></p>
-                        </div>
-                        <div class="col-xs-4 icon disabled">
-                            <i class="onco-award"></i>
-                            <p><strong>Phasellus</strong></p>
-                        </div>
-                        <div class="col-xs-12 text-right">
-                            <a routerLink = "/achievements" href="javascript:void(0)" class="f-medium">View all</a>
-                        </div>
-                    </div>
-                </div>
+				<ng-container *ngFor = "let weekInfo of currentWeekInfo; let i=index">
+					<div class="achievements-bg" *ngIf="currentWeek == weekInfo?.week_number" [ngClass] = "currentWeek>0 ? (currentWeek == weekInfo?.week_number ? disabled : '') : ''">
+						<h6>My Achievements & Events</h6>
+						<div class="row">
+							<div class="col-xs-4 icon">
+								<i class="onco-events c-d-blue" [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 30) ? '' : 'disabled') : ''"></i>
+								<p><strong>Level 1</strong></p>
+							</div>
+							<div class="col-xs-4 icon">
+								<i class="onco-achievements c-pink" [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 30 && weekInfo?.total_watched_video_audio >= 1) ? '' : 'disabled') : ''"></i>
+								<p><strong>Level 2</strong></p>
+							</div>
+							<div class="col-xs-4 icon">
+								<i class="onco-award" [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 30 && weekInfo?.total_watched_video_audio >= 3) ? '' : 'disabled'): ''"></i>
+								<p><strong>Level 3</strong></p>
+							</div>
+							<div class="col-xs-12 text-right">
+								<a (click) ="viewAllAchivement()" href="javascript:void(0)" class="f-medium">View all</a>
+							</div>
+						</div>
+					</div>
+				</ng-container>
+				<div class="achievements-bg disabled" *ngIf="!(currentWeekInfo && currentWeekInfo.length) || currentWeek<0 ">
+						<h6>My Achievements & Events</h6>
+						<div class="row">
+							<div class="col-xs-4 icon">
+								<i class="onco-events c-d-blue disabled"></i>
+								<p><strong>Level 1</strong></p>
+							</div>
+							<div class="col-xs-4 icon">
+								<i class="onco-achievements c-pink disabled"></i>
+								<p><strong>Level 2</strong></p>
+							</div>
+							<div class="col-xs-4 icon">
+								<i class="onco-award disabled"></i>
+								<p><strong>Level 3</strong></p>
+							</div>
+							<div class="col-xs-12 text-right">
+								<a (click) ="viewAllAchivement()" href="javascript:void(0)" class="f-medium">View all</a>
+							</div>
+						</div>
+					</div>
             </div>
         </div>
         <div class="row">
@@ -84,7 +106,7 @@
 
                     <div class="row">
                         <div class="col-md-6 col-sm-6 m-t-10 ">
-                            <h4 class="c-pink">Join weekly discussion</h4>
+                            <h4 class="c-pink">Join the weekly group</h4>
                             <p><strong>Date:</strong>&nbsp;{{session?.session_date | date:'fullDate' }}</p>
                             <p><strong>Time:</strong>&nbsp;{{(session?.session_date +" "+ session?.session_time) | date:'H:mm'}}&nbsp;{{session?.session_time_am_pm}} </p>
                             <p><strong>Topic:</strong>&nbsp;{{session?.session_topic}}</p>
@@ -99,9 +121,9 @@
                 </div>
             </div>
         </div>
-        <div class="row genomic-profiling">
+        <div class="row chapters">
             <div class="col-xs-6 col-sm-4 col-md-4 text-center" *ngFor="let chapter of pageContent">
-                <a [routerLink]="chapter.slug" title="chapter.content_name" class="gaes-cls">
+                <a [routerLink]="user_detail?.is_week_started ? chapter.slug : '/patient/dashboard'" title="chapter.content_name" class="chapter-links">
                     <img src="{{ chapter.image }}" alt="{{ chapter.content_name }}">
                     <h6 class="c-pink">{{ chapter.content_name }}</h6>
                 </a>

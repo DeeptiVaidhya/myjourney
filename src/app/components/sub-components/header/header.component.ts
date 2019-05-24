@@ -11,6 +11,7 @@ import { AuthService } from '../../../service/auth.service';
 export class HeaderComponent implements OnInit {
 	public isCollapsed: boolean = true;
 	@Input() isLoggedIn;
+	@Input() isWeekStart;
 	@Input() maIsOpen;
 	@Input() link;
 	@Input('role') role;

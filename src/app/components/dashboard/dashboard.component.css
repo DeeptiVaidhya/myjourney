@@ -129,25 +129,25 @@
     padding-left: 30px;
 }
 
-.genomic-profiling a i {
+.chapters a i {
     font-size: 220px;
     display: block;
     min-height: 250px;
 }
 
-.genomic-profiling a {
+.chapters a {
     text-decoration: none;
     float: left;
     width: 100%;
     cursor: pointer;
 }
-.genomic-profiling h6 {
+.chapters h6 {
     min-height: 130px;
     padding: 20px 30px;
     text-align: center;
 }
 
-.genomic-profiling span {
+.chapters span {
     padding: 0 38px 70px 38px;
     width: 100%;
     display: inline-block;
@@ -188,7 +188,7 @@
     font-weight: bold;
     width: 140px;
 }
-.gaes-cls img {
+.chapter-links img {
     width: 220px;
     height: 220px;
     border-radius: 50%;
@@ -258,7 +258,7 @@
     .things-to-link {
         padding-left: 20px;
     }
-    .genomic-profiling a i {
+    .chapters a i {
         font-size: 175px;
         min-height: 200px;
     }
@@ -274,11 +274,11 @@
     .img-text-bg .text .h8{
         font-size: 16px;
     }
-    .gaes-cls img {
+    .chapter-links img {
         width: 150px;
         height: 150px;
     }
-    .genomic-profiling h6 {
+    .chapters h6 {
         min-height: 100px;
         padding: 15px 0;
     }
@@ -304,10 +304,10 @@
     .graph-left .col-xs-12 {
         padding-top: 20px;
     }
-    /*.genomic-profiling h6 {
+    /*.chapters h6 {
         padding: 15px 15px;
     }*/
-    .genomic-profiling a i {
+    .chapters a i {
         font-size: 180px;
         display: block;
         min-height: 135px;
@@ -347,19 +347,19 @@
     .complete-notification .onco-alert {
         font-size: 40px;
     }
-    .genomic-profiling a i {
+    .chapters a i {
         font-size: 120px;
         display: block;
         min-height: 120px;
     }
-    .genomic-profiling span {
+    .chapters span {
         padding: 15px 0 30px;
     }
-    .gaes-cls img {
+    .chapter-links img {
         width: 120px;
         height: 120px;
     }
-    .genomic-profiling h6 {
+    .chapters h6 {
         font-size: 16px;
     }
 }
