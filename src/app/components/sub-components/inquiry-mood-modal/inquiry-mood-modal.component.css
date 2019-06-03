@@ -8,3 +8,11 @@
 .p-100 {
     padding: 100px;
 }
+
+.modal-header .close {
+    margin-top: -10px;
+    font-size: 40px;
+}
+.modal-header {
+    border-bottom: 0 none;
+}

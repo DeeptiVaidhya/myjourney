@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
 
 	public isLoggedIn: Boolean = true;
 	public isWeekStarted:boolean;
+	public armAllocate:string;
 	// Auto logout variables
 	idleState = 'Not started.';
 	timedOut = false;
@@ -155,6 +156,8 @@ export class AppComponent implements OnInit {
 				} else {
 					this.isLoggedIn = true;
 					this.isWeekStarted = response['is_week_started'];
+					this.armAllocate = response['arm'];
+					localStorage.setItem('arm',this.armAllocate);
 					// console.log(this.isWeekStarted);
 					this.reset();
 				}

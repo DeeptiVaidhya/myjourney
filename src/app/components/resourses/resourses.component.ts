@@ -12,6 +12,7 @@ export class ResoursesComponent implements OnInit {
 	resources_data: any;
 	player:any=[];
 	activeIndex:any;
+	resourceId:any;
 
 	modalIsShown:boolean=false;
 	constructor( public questionnaireService: QuestionnaireService,public toastr: ToastrService) {}
@@ -22,7 +23,7 @@ export class ResoursesComponent implements OnInit {
 
 	getResources(){
 		this.questionnaireService.get_resources().subscribe(
-			Response => {	
+			Response => {
 				if (Response['status'] == 'success') {
 					this.resources_data = Response['data'];
 				}else{
@@ -33,7 +34,7 @@ export class ResoursesComponent implements OnInit {
 	}
 
 
-	
+
 	openModal(resource,index) {
 		console.log(resource);
 		this.activeIndex=index;
@@ -44,11 +45,7 @@ export class ResoursesComponent implements OnInit {
 	modalClosed(){
 		this.modalIsShown=false;
 	}
-	videoTimeUpdated(is_completed){
-		console.log(is_completed);
-		if(!this.player[this.activeIndex]){
-			this.player[this.activeIndex]={};
-		}
-		this.player[this.activeIndex]['is_completed']=true;
+	videoTimeUpdated(resource_id){
+		this.resourceId = resource_id;
 	}
 }

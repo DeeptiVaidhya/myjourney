@@ -35,4 +35,12 @@ export class MyReflectionsComponent implements OnInit {
 		);
 	}
 
+	getRoute(route, route1){
+		let str4 = "/patient/dashboard".concat("/"),
+		str3 = str4.concat(route),
+		str2 = str3.concat("/"),
+		str1 = str2.concat(route1);
+		return str1;
+	}
+
 }

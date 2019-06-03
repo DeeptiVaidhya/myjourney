@@ -92,4 +92,25 @@ export class QuestionnaireService {
 		return this.helperService.makeHttpRequest('questionnaire/resourse-question-response', 'post', data,true);
 	}
 
+	/**
+	* @desc Function is used to add chapter subtopic as visited
+	*/
+	addVisitedChapter(data) {
+		return this.helperService.makeHttpRequest('questionnaire/add-to-visited', 'post', data,true);
+	}
+
+	/**
+	* @desc Function is used to add chapter subtopic as visited
+	*/
+	updateVisitedChapter(data) {
+		return this.helperService.makeHttpRequest('questionnaire/update-visited-chapter-subtopic', 'post', data,true);
+	}
+
+	/**
+	* @desc Function is used to add resource as visited
+	*/
+	addResourceVisited(data) {
+		return this.helperService.makeHttpRequest('questionnaire/add-visited-resource', 'post', data,true);
+	}
+
 }

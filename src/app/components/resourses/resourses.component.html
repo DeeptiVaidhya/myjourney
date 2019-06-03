@@ -1,58 +1,56 @@
 <div class="inner-content p-b-50">
-	<app-inner-page-header page_title="Resources">Resources</app-inner-page-header>
-	<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+    <app-inner-page-header page_title="Resources">Resources</app-inner-page-header>
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 
-	<!-- <app-inner-page-header page_title="Resources" back_link="/home" back_title="Home"></app-inner-page-header> -->
-	<div class="container">
-		<div class="row">
-			<!-- Start content-left -->
-			<div class="col-xs-12">
-				<p class="content-p">
-					<strong>Below are some additional resources that you might find helpful. Please be aware that the
+    <!-- <app-inner-page-header page_title="Resources" back_link="/home" back_title="Home"></app-inner-page-header> -->
+    <div class="container">
+        <div class="row">
+            <!-- Start content-left -->
+            <div class="col-xs-12">
+                <p class="content-p">
+                    <strong>Below are some additional resources that you might find helpful. Please be aware that the
 						links below will take you
 						to external websites and documents</strong>.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<accordion class="main-accordion panel-group" [closeOthers]="true">
-					<accordion-group #res1 *ngFor="let details of resources_data; let i = index;">
-						<div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic">
-							<span class="col-xs-10 h6">{{details?.content_name}}</span>
-							<span class="col-xs-2 text-right h6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <accordion class="main-accordion panel-group" [closeOthers]="true">
+                    <accordion-group #res1 *ngFor="let details of resources_data; let i = index;">
+                        <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic">
+                            <span class="col-xs-10 h6">{{details?.content_name}}</span>
+                            <span class="col-xs-2 text-right h6">
 								<i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
 							</span>
-						</div>
-						<div class="accordion-inner">
-							<div *ngIf="!details?.resources.length">
-								<div class="row">
-									<div class="col-xs-12">No resources available.</div>
-								</div>
-							</div>
-							<div *ngFor="let resource of details?.resources;let i=index;">
-								<div class="row section">
-									<div class="col-xs-12">
-										<div class="section-content">
-											<span class="onco-article c-pink sec-icon"></span>
-											<div class="sec-desc">
-												<p class="h8">{{resource?.title}}</p>
-												<p class="h9" *ngIf="resource?.is_completed || player[i]?.is_completed==true"><i class="glyphicon glyphicon-ok"></i><b><em>video watched</em></b></p>
-												<p class="h9">{{resource?.description}}</p>
-											</div>
-											<a (click)="openModal(resource,i)" target="_blank"
-												class="btn btn-violet btn-block sec-button gaes-cls"
-												data-ga-action="Read More"
-												title="Precision Medicine in Cancer Treatment">{{resource?.type}}</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</accordion-group>
-				</accordion>
-			</div>
-		</div>
-	</div>
+                        </div>
+                        <div class="accordion-inner">
+                            <div *ngIf="!details?.resources.length">
+                                <div class="row">
+                                    <div class="col-xs-12">No resources available.</div>
+                                </div>
+                            </div>
+                            <div *ngFor="let resource of details?.resources;let i=index;">
+                                <div class="row section">
+                                    <div class="col-xs-12">
+                                        <div class="section-content">
+                                            <span class="onco-article c-pink sec-icon"></span>
+                                            <div class="sec-desc">
+                                                <p class="h8">{{resource?.title}}</p>
+                                                <p class="h9" *ngIf="(resource?.is_completed || resource.id==resourceId) && resource?.type == 'VIDEO'"><i class="glyphicon glyphicon-ok"></i><b><em>video watched</em></b></p>
+                                                <p class="h9" *ngIf="(resource?.is_completed || resource.id==resourceId) && resource?.type == 'AUDIO'"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
+                                                <p class="h9">{{resource?.description}}</p>
+                                            </div>
+                                            <a (click)="openModal(resource,i)" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="Precision Medicine in Cancer Treatment">{{resource?.type}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+    </div>
 </div>
-<app-inquiry-mood-modal [contentId]="" [resourceDetail]="resourceDetail" *ngIf="!!modalIsShown" [modalIsShown]="modalIsShown" (onCloseModal)="modalClosed()" (onVideoUpdated)="videoTimeUpdated(is_completed)"></app-inquiry-mood-modal>
+<app-inquiry-mood-modal [contentId]="false" [resourceDetail]="resourceDetail" *ngIf="!!modalIsShown" [modalIsShown]="modalIsShown" (onCloseModal)="modalClosed()" (onVideoUpdated)="videoTimeUpdated(is_completed)"></app-inquiry-mood-modal>
 <app-breadcrumb [breadcrumb]="breadcrumb" isFooter="!1"></app-breadcrumb>

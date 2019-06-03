@@ -5,7 +5,8 @@
 			<div class="row week-list" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'">
 				<div class="col-xs-12 pl-pr-0">
 					<div class="week">
-						<span>Week {{ i+1 }}</span>
+							<span *ngIf="currentWeek != i+1">Week {{ i+1 }}</span>
+						<span *ngIf="currentWeek == i+1">Week {{ i+1 }} (current week)</span>
 					</div>
 				</div>
 				<div class="col-md-5 col-sm-5 pl-pr-0">

@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 	public isCollapsed: boolean = true;
 	@Input() isLoggedIn;
 	@Input() isWeekStart;
+	@Input() arm;
 	@Input() maIsOpen;
 	@Input() link;
 	@Input('role') role;

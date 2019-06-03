@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import "rxjs/add/observable/interval";
@@ -9,19 +9,20 @@ import { QuestionnaireService } from "../../service/questionnaire.service";
 	templateUrl: "./chapters.component.html",
 	styleUrls: ["./chapters.component.css"]
 })
-export class ChaptersComponent implements OnDestroy {
+export class ChaptersComponent implements OnDestroy, OnInit {
 
 	slug: string = "";
 	topic: string = "";
 	is_sub_topic: boolean = false;
 	is_added_favorite: boolean = false;
 	pageContent: any;
+	resourceId:any;
 	player:any=[];
 	activeIndex:any;
 	breadcrumb = [{ link: "/patient/dashboard", title: "Home" }];
 	chapterLink: any;
 	modalIsShown:boolean=false;
-
+	arm:string;
 	resourceDetail:any;
 	constructor(
 		public route: ActivatedRoute,
@@ -39,7 +40,6 @@ export class ChaptersComponent implements OnDestroy {
 					: "";
 			this.topic = param.topic && !param.sub_topic ? param.topic : "";
 			this.is_sub_topic = !!param.sub_topic;
-			// this.slug = param.chapter ? param.chapter : '';
 			this.questService
 				.chapterDetails({
 					type: "slug",
@@ -51,7 +51,10 @@ export class ChaptersComponent implements OnDestroy {
 					if (response["status"] == "success") {
 						this.pageContent = response["data"];
 						this.is_added_favorite = response["is_added_favorite"];
-						console.log(response);
+						if(this.pageContent.id)
+						{
+							this.visitedChapter({contentId:this.pageContent.id, callee_page: this.pageContent.slug});
+						}
 						let obj: any;
 						let bread = this.pageContent["breadcrumb"];
 						if (bread && bread.length) {
@@ -101,7 +104,6 @@ export class ChaptersComponent implements OnDestroy {
 					}
 				});
 		});
-
 	}
 
 	navigateToElem() {
@@ -128,9 +130,24 @@ export class ChaptersComponent implements OnDestroy {
 				}, 10);
 			}
 		});
+
 	}
+
+	ngOnInit() {
+		// console.log(window);
+	}
+
 	ngOnDestroy() {
 		this.dataService.changeMessage(null);
+		this.questService
+				.updateVisitedChapter({
+					content_id: this.pageContent.id,
+				})
+				.subscribe(response => {
+					if (response["status"] == "success") {
+
+					}
+				});
 	}
 
 	goToElem(obj) {
@@ -170,11 +187,24 @@ export class ChaptersComponent implements OnDestroy {
 		this.modalIsShown=false;
 	}
 
-	videoTimeUpdated(is_completed){
-		console.log(is_completed);
-		if(!this.player[this.activeIndex]){
-			this.player[this.activeIndex]={};
-		}
-		this.player[this.activeIndex]['is_completed']=true;
+	videoTimeUpdated(resource_id){
+		this.resourceId = resource_id;
+	}
+
+	visitedChapter(content)
+	{
+		this.questService
+				.addVisitedChapter({
+					content_id: content.contentId,
+					callee_page: content.callee_page
+				})
+				.subscribe(response => {
+					if (response["status"] == "success") {
+						// this.is_added_favorite = !this.is_added_favorite;
+						// this.toastr.success(
+						// 	response["msg"] || "Favorite saved"
+						// );
+					}
+				});
 	}
 }

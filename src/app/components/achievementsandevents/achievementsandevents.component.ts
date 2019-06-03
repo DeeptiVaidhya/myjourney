@@ -24,8 +24,8 @@ export class AchievementsandeventsComponent implements OnInit {
 		result => {
 			
 			const response = result;
-			
 			this.userDetail = response['data'] && response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
+			this.currentWeek = response['data'].week_number;
 			this.weekInfo = response['data'].week_info;
 			// this.totalTimeSpentOnSite = response['data'].total_time_spent_in_week;
 			// this.totalWatchedAudioVideo = response['data'].total_watched_audio_video;

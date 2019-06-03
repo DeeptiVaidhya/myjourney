@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { ToastrService } from 'ngx-toastr';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { ToastrService } from "ngx-toastr";
 import { VgAPI } from "videogular2/core";
-import { QuestionnaireService } from '../../../service/questionnaire.service';
+import { QuestionnaireService } from "../../../service/questionnaire.service";
 
 @Component({
-	selector: 'app-inquiry-mood-modal',
-	templateUrl: './inquiry-mood-modal.component.html',
-	styleUrls: ['./inquiry-mood-modal.component.css']
+	selector: "app-inquiry-mood-modal",
+	templateUrl: "./inquiry-mood-modal.component.html",
+	styleUrls: ["./inquiry-mood-modal.component.css"]
 })
 export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	videoRef: BsModalRef;
@@ -30,12 +30,13 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	resourceId: any;
 	startTimer: any;
 	spentTime: any;
+	pageContentId: any;
 	video_completed: any;
 	ratingType: any;
 	totalTime: any;
 	selected: any;
 	prePostRating: any;
-	resourseType:any;
+	resourseType: any;
 	dynamic: any = 0;
 	max: any;
 	moodOption = new Array<any>(
@@ -43,13 +44,9 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 		"assets/images/emoji-blushing.png",
 		"assets/images/emoji-speechless.png",
 		"assets/images/emoji-smirk.png",
-		"assets/images/emoji-sad.png");
-	moodTitle = new Array<any>(
-		"Great",
-		"",
-		"Neutral",
-		"",
-		"Bad");
+		"assets/images/emoji-sad.png"
+	);
+	moodTitle = new Array<any>("Great", "", "Neutral", "", "Bad");
 	timer: any;
 	qhoid: any;
 	backButtonFlag: any;
@@ -58,27 +55,28 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 		cc_lang_pref: "en"
 	};
 	questionnireForm: FormGroup;
-
-	@Input('contentId') contentId:any='';
-	@Input('resourceDetail') resourceDetail:any;
-	@Input('modalIsShown') modalIsShown:any;
-	@ViewChild('preInfo') preInfo; 
-	@ViewChild('postMessage') postMessage; 
-	@ViewChild('videoModal') videoModal; 
-	@ViewChild('excerciseModal') excerciseModal; 
+	arm: string;
+	@Input("contentId") contentId: any = "";
+	@Input("calleePage") calleePage: any = "";
+	@Input("resourceDetail") resourceDetail: any;
+	@Input("modalIsShown") modalIsShown: any;
+	@ViewChild("preInfo") preInfo;
+	@ViewChild("postMessage") postMessage;
+	@ViewChild("videoModal") videoModal;
+	@ViewChild("excerciseModal") excerciseModal;
 	@Output() onCloseModal = new EventEmitter();
 	@Output() onVideoUpdated = new EventEmitter();
 
 	constructor(
-		
 		//public route: ActivatedRoute,
 		public questService: QuestionnaireService,
 		public toastr: ToastrService,
 		//private router: Router,
 		//private dataService: DataService,
-		
-		private formBuilder: FormBuilder, public modalService: BsModalService) {
 
+		private formBuilder: FormBuilder,
+		public modalService: BsModalService
+	) {
 		this.questionnireForm = this.formBuilder.group({
 			response: [""],
 			question_id: "",
@@ -92,62 +90,87 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 			skip_exercise_pre_rating_count: "",
 			skip_question_post_rating_count: "",
 			qhoid: "",
-			video_completed: ""
+			video_completed: "",
+			callee_page: ""
 		});
 	}
 
 	ngOnInit() {
-		//detail ?.resource_data ?.level == 'mood' ? preInfo : videoModal, detail ?.resource_data
-		// if(this.resourceDetail && this.resourceDetail.level){
-			
-		// }
-		
+		this.arm = localStorage.getItem("arm");
 	}
 
-	ngAfterViewInit(){
+	ngAfterViewInit() {
 		setTimeout(() => {
-
-			if(this.modalIsShown && this.resourceDetail){
-				this.openModal(this.resourceDetail.level=='mood' ? this.preInfo : this.videoModal);
+			// && this.arm == 'INTERVENTION'
+			if (this.modalIsShown && this.resourceDetail) {
+				this.openModal(
+					(this.resourceDetail.level == "mood" && this.arm == 'INTERVENTION')
+						? this.preInfo
+						: this.videoModal
+				);
 			}
-		},1);
+		}, 1);
 	}
 
-	openModal(
-		template: TemplateRef<any>,
-	) {
+	onPlayerReady(api: VgAPI) {
+		this.api = api;
+		this.api.getDefaultMedia().subscriptions.play.subscribe(() => {
+			(this.totalTime = Math.floor(this.api.getDefaultMedia().duration)),
+				(this.time = this.totalTime / 2);
+
+			this.spentTime = Math.floor(this.api.getDefaultMedia().currentTime);
+
+			this.time =
+				this.spentTime > this.time ? 0 : this.time - this.spentTime;
+
+			this.makeVideoCompleted();
+		});
+
+		this.api.getDefaultMedia().subscriptions.pause.subscribe(() => {
+			clearTimeout(this.timer);
+		});
+	}
+
+	openModal(template: TemplateRef<any>) {
+
 		this.level = this.resourceDetail.level;
 		this.video_completed = this.resourceDetail.is_completed;
 		this.resourseType = this.resourceDetail.type;
-		if(this.resourseType == 'VIDEO')
+		this.pageContentId = this.contentId ? this.contentId : this.resourceDetail.chapter_content_id;
+		if (this.resourseType == "VIDEO")
 			this.currentSrc = this.resourceDetail.link.split("v=")[1];
-		else if(this.resourseType == 'AUDIO')
-			this.currentSrc = this.resourceDetail.link
-		this.resourceId = this.resourceDetail.id;
+		else if (this.resourseType == "AUDIO")
+			this.currentSrc = this.resourceDetail.link;
+		this.resourceId =
+			this.resourceDetail.resources_id || this.resourceDetail.id;
+
+		this.addResourceVisited({contentId:this.pageContentId, callee_page: this.calleePage, resource_id: this.resourceId});
 		this.videoRef = this.modalService.show(template, { class: "modal-lg" });
+
 	}
 
 	openQuestionModal(template: TemplateRef<any>, ratingType?: any) {
 		this.videoRef.hide();
 		this.ratingType = ratingType;
-		if(this.level == 'mood' || this.level == 'inquiry')
-		{	
+		if (this.level == "mood" || this.level == "inquiry") {
 			this.questService
-			.getResourceQuestion({
-				exercise_type: this.level.toUpperCase(),
-				resource_id: this.resourceId
-			})
-			.subscribe(Response => {
-				if (Response["status"] == "success") {
-					this.questions = Response["data"];
-					this.setStepValue();
-					this.questionRef = this.modalService.show(template, {
-						class: "modal-lg"
-					});
-				} else {
-					this.toastr.error(Response["msg"] || "Server error");
-				}
-			});
+				.getResourceQuestion({
+					exercise_type: this.level.toUpperCase(),
+					resource_id: this.resourceId
+				})
+				.subscribe(Response => {
+					if (Response["status"] == "success") {
+						console.log(this.resourceId);
+						this.onVideoUpdated.emit(this.resourceId);
+						this.questions = Response["data"];
+						this.setStepValue();
+						this.questionRef = this.modalService.show(template, {
+							class: "modal-lg"
+						});
+					} else {
+						this.toastr.error(Response["msg"] || "Server error");
+					}
+				});
 		}
 	}
 
@@ -165,8 +188,10 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	}
 
 	savePlayer(player) {
-		this.totalTime = player.getDuration();
+		this.totalTime = Math.floor(player.getDuration());
+		console.log(this.totalTime);
 		this.time = Math.floor(player.getDuration() / 2);
+		console.log(this.time);
 		this.player = player;
 	}
 
@@ -177,7 +202,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	makeVideoCompleted() {
 		this.timer = setTimeout(() => {
 			this.isCompleted = false;
-		}, this.time*1000);
+		}, this.time * 1000);
 	}
 
 	setStepValue() {
@@ -188,33 +213,19 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 		this.nextButtonFlag = !0;
 	}
 	nextQuestion(videoModal?: TemplateRef<any>, value?: any) {
-		let option_ids;
-		if (this.level == 'inquiry')
-			option_ids = document.querySelector("textarea").getAttribute('data-qhoid');
-		else if (this.level == 'mood')
-		{
-		console.log(this.questions[this.value].user_response);
-			let qhoid=null;
-			if(document.querySelector("img[name='mood'].emoji-select")){
-				qhoid = document.querySelector("img[name='mood'].emoji-select").getAttribute('data-qhoid');
-			} else if(document.querySelector("img[name='mood']")){
-				qhoid = document.querySelector("img[name='mood']").getAttribute('data-qhoid');
-			}
-			option_ids = this.questions[this.value].user_response ? qhoid : null;
-		}
-		this.qhoid = option_ids;
 		this.questionnireForm.value.question_id = this.questions[this.value].id;
 		this.questionnireForm.value.exercise_type = this.level;
 		this.questionnireForm.value.qhoid = this.qhoid;
 		this.questionnireForm.value.video_completed = this.video_completed;
 		this.questionnireForm.value.resource_id = this.resourceId;
-		this.questionnireForm.value.content_id = this.contentId;
+		this.questionnireForm.value.content_id =
+			this.contentId || this.pageContentId;
 		this.questionnireForm.value.total_time = this.totalTime;
+		this.questionnireForm.value.callee_page = this.calleePage;
 		this.questionnireForm.value.left_time = this.totalTime - this.spentTime;
-		console.log(this.qhoid);
 		if (value == 0)
 			this.questionnireForm.value.skip_exercise_pre_rating_count = 1;
-		else if (value > 0 || value == 'mood')
+		else if (value > 0 || value == "mood")
 			this.questionnireForm.value.skip_question_post_rating_count = 1;
 		if (this.ratingType)
 			this.questionnireForm.value.pre_rating = this.selected;
@@ -247,7 +258,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 							this.questionRef.hide();
 							this.value = 0;
 							this.dynamic = 0;
-							if (this.level == 'mood') {
+							if (this.level == "mood") {
 								this.questService
 									.getResourceQuestion({
 										exercise_type: this.level.toUpperCase(),
@@ -255,9 +266,20 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 									})
 									.subscribe(response => {
 										if (response["status"] == "success") {
-											this.prePostRating = response["data"];
-											this.prePostDiff = this.prePostRating[1].user_response['post_rating'] - this.prePostRating[0].user_response['pre_rating'];
-											this.openPostMessageModal(videoModal);
+											this.prePostRating =
+												response["data"];
+											this.prePostDiff =
+												this.prePostRating[1]
+													.user_response[
+													"post_rating"
+												] -
+												this.prePostRating[0]
+													.user_response[
+													"pre_rating"
+												];
+											this.openPostMessageModal(
+												videoModal
+											);
 										}
 									});
 							}
@@ -267,6 +289,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 						this.backButtonFlag = this.value > 0;
 					}
 				}
+				this.questionnireForm.reset();
 			});
 		this.selected = "";
 	}
@@ -286,14 +309,34 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	}
 
 	openPostMessageModal(template: TemplateRef<any>) {
-		this.postMessageRef = this.modalService.show(template, { class: "modal-lg" });
+		this.postMessageRef = this.modalService.show(template, {
+			class: "modal-lg"
+		});
 	}
 
-	closeModal(template:BsModalRef){
+	closeModal(template: BsModalRef) {
 		template.hide();
-		console.log('modal closed');
-		!this.isCompleted && this.onVideoUpdated.emit(true);
+		console.log("modal closed");
+		if(!this.isCompleted) this.onVideoUpdated.emit(this.resourceId);
+		this.onCloseModal.emit("closed");
+	}
 
-		this.onCloseModal.emit('closed');
+	addResourceVisited(content){
+
+		this.questService
+				.addResourceVisited({
+					content_id: content.contentId,
+					callee_page: content.callee_page,
+					resource_id: content.resource_id
+				})
+				.subscribe(response => {
+					if (response["status"] == "success") {
+						// this.is_added_favorite = !this.is_added_favorite;
+						// this.toastr.success(
+						// 	response["msg"] || "Favorite saved"
+						// );
+					}
+				});
+
 	}
 }

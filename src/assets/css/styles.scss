@@ -927,6 +927,71 @@ app-breadcrumb[isFooter] {
     margin-bottom: 0;
 }
 
+vg-player {
+    border: 1px solid #e6e6e6;
+    background-image: url(../images/audio_bg.jpg);
+	background-size: 100%;
+	border: none;
+}
+
+.vg-icon-play_arrow:before {
+    content: "\e01b";
+}
+
+vg-time-display, vg-mute, vg-volume {
+    color: #e20dd1 !important;
+}
+
+vg-controls {
+    background: #fff3f3 !important;
+    border-top: 1px solid #e6e6e6;
+	padding: 25px;
+	height: 100px !important;
+
+}
+
+vg-volume {
+    margin-right: 25px !important;
+}
+
+vg-volume .volumeBackground {
+    background-color: #3333336b !important;
+}
+
+vg-volume .volumeValue, .volumeKnob {
+    background-color: #e20dd1 !important;
+}
+
+vg-scrub-bar-current-time {
+    background: #a8a2a2 !important;
+}
+
+.vg-icon-fullscreen{
+	font-size: 40px !important;
+	color: #e20dd1 !important;
+}
+
+.vg-icon-play_arrow,
+.vg-icon-pause,
+.vg-icon-volume_u,
+.vg-icon-fullscreen_exit {
+    background-color: #e20ed1;
+    border-radius: 50%;
+    font-size: 25px;
+}
+
+vg-controls vg-scrub-bar-current-time .background {
+    border: 1px solid #14bcd5 !important;
+}
+
+vg-scrub-bar-current-time .background {
+    background-color: #14bcd5 !important;
+}
+
+vg-scrub-bar-current-time {
+    background: #d7d7d7;
+}
+
 
 /* start container welcome */
 
