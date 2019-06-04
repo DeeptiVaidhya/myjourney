@@ -36,7 +36,7 @@
                                     <p class="h9" *ngIf="(detail?.resource_data?.is_completed || detail?.resource_data?.id == resourceId) && detail?.resource_data?.type == 'AUDIO'"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
                                     <p class="h9">{{ detail?.resource_data?.description }}</p>
                                 </div>
-                                <a class="btn btn-violet btn-block sec-button" (click)="openModal(detail?.resource_data,i)" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+                                <a href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(detail?.resource_data,i)" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
 
                                     </ng-container>
                                     <p class="h8 p-b-10" *ngFor="let sub_topic of topic?.sub_topic">
-                                        <a [routerLink]="sub_topic.slug "><strong>{{ sub_topic.title}}</strong></a>
+                                        <a href="javascript:void(0)" [routerLink]="sub_topic.slug "><strong>{{ sub_topic.title}}</strong></a>
                                     </p>
 
                                     <div class="row section" *ngIf="topic?.resource_data">
@@ -77,7 +77,7 @@
                                                     <p class="h9" *ngIf="(topicRes?.is_completed || topicRes?.id == resourceId) && topicRes?.type == 'AUDIO'"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
                                                     <p class="h9">{{ topicRes?.description }}</p>
                                                 </div>
-                                                <a class="btn btn-violet btn-block sec-button" (click)="openModal(topicRes,i)" target="_blank" title="{{topicRes?.title}}" *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
+                                                <a href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(topicRes,i)" target="_blank" title="{{topicRes?.title}}" *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
                     <div class="content-right-inner" *ngFor="let video of pageContent?.side_resources?.video">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a (click)="openModal(video)" target="_blank">{{ video.title }}</a>
+                                <a href="javascript:void(0)" (click)="openModal(video)" target="_blank">{{ video.title }}</a>
                             </p>
                             <p class="h9" *ngIf="video?.is_completed || resourceId == video.id"><i class="glyphicon glyphicon-ok"></i><b><em>video watched</em></b></p>
                         </div>
@@ -142,7 +142,7 @@
                     <div class="content-right-inner" *ngFor="let audio of pageContent?.side_resources?.audio">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a (click)="openModal(audio)" target="_blank">{{ audio.title }}</a>
+                                <a href="javascript:void(0)" (click)="openModal(audio)" target="_blank">{{ audio.title }}</a>
                             </p>
                             <p class="h9" *ngIf="audio?.is_completed || resourceId == audio.id"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
                         </div>

@@ -125,8 +125,8 @@
             <div class="col-xs-6 col-sm-4 col-md-4 text-center" *ngFor="let chapter of pageContent">
                 <a [routerLink]="user_detail?.is_week_started ? chapter.slug : '/patient/dashboard'" title="chapter.content_name" class="chapter-links">
                     <img src="{{ chapter.image }}" alt="{{ chapter.content_name }}">
-                    <p class="c-pink text-center p-t-10"><b>Week{{ chapter.week_number }}</b></p>
-                    <h6 class="c-pink">{{ chapter.content_name }}</h6>
+                    <h6 class="c-pink text-center p-t-10" *ngIf="chapter.week_number == ''">{{ chapter.content_name }}</h6>
+                    <h6 class="c-pink text-center p-t-10" *ngIf="chapter.week_number != ''">Week {{ chapter.week_number }} <br/>{{ chapter.content_name }}</h6>
                 </a>
             </div>
         </div>
