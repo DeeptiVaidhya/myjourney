@@ -3,12 +3,18 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class DataService {
-	private messageSource = new BehaviorSubject<string>('');
-	currentMessage = this.messageSource.asObservable();
+	public messageSource = new BehaviorSubject<string>('');
+	public ResoursesID = new BehaviorSubject<string>('');
+	public currentMessage = this.messageSource.asObservable();
+	public currentResource = this.ResoursesID.asObservable();
 
 	constructor() {}
 
 	changeMessage(message: string) {
 		this.messageSource.next(message);
+	}
+
+	navigaeToResource(id: string){
+		this.ResoursesID.next(id);
 	}
 }

@@ -36,7 +36,7 @@
                                     <p class="h9" *ngIf="(detail?.resource_data?.is_completed || detail?.resource_data?.id == resourceId) && detail?.resource_data?.type == 'AUDIO'"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
                                     <p class="h9">{{ detail?.resource_data?.description }}</p>
                                 </div>
-                                <a href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(detail?.resource_data,i)" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+                                <a id="resource--{{detail?.resource_data?.id}}" href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(detail?.resource_data,i)" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                                                     <p class="h9" *ngIf="(topicRes?.is_completed || topicRes?.id == resourceId) && topicRes?.type == 'AUDIO'"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
                                                     <p class="h9">{{ topicRes?.description }}</p>
                                                 </div>
-                                                <a href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(topicRes,i)" target="_blank" title="{{topicRes?.title}}" *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
+                                                <a id="resource--{{detail?.resource_data?.id}}" href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(topicRes,i)" target="_blank" title="{{topicRes?.title}}" *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
                                             </div>
                                         </div>
                                     </div>

@@ -13,7 +13,6 @@ export class ResoursesComponent implements OnInit {
 	player:any=[];
 	activeIndex:any;
 	resourceId:any;
-
 	modalIsShown:boolean=false;
 	constructor( public questionnaireService: QuestionnaireService,public toastr: ToastrService) {}
 	breadcrumb = [{ link: '/', title: 'Home' }, { title: 'Resources',class:'active' }];
@@ -32,8 +31,6 @@ export class ResoursesComponent implements OnInit {
 			}
 		);
 	}
-
-
 
 	openModal(resource,index) {
 		console.log(resource);

@@ -18,6 +18,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	pageContent: any;
 	resourceId:any;
 	player:any=[];
+	interval:any;
 	activeIndex:any;
 	breadcrumb = [{ link: "/patient/dashboard", title: "Home" }];
 	chapterLink: any;
@@ -101,6 +102,8 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 						if (!this.is_sub_topic) {
 							this.navigateToElem();
 						}
+
+						this.goToRes();
 					}
 				});
 		});
@@ -133,8 +136,46 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 
 	}
 
+	goToRes(){
+		this.dataService.currentResource.subscribe(param => {
+			let obj: any = param;
+			console.log(obj);
+			if (obj && obj != '') {
+				console.log(document.querySelector("#resource--" + obj));
+				setTimeout(() => {
+					let el = document.querySelector("#resource--" + obj);
+					if (el) {
+						el.scrollIntoView(true);
+						let scrolledY = window.scrollY;
+						if (scrolledY) {
+							window.scrollTo({
+								top:
+									scrolledY -
+									document.querySelectorAll("nav")[0]
+										.clientHeight,
+								left: 0,
+								behavior: "smooth"
+							});
+						}
+					}
+				}, 10);
+			}
+		});
+	}
+
 	ngOnInit() {
-		// console.log(window);
+		
+		this.interval =setInterval(() => {
+		this.questService
+				.updateVisitedChapter({
+					content_id: this.pageContent.id,
+				})
+				.subscribe(response => {
+					if (response["status"] == "success") {
+
+					}
+				});
+			}, 10000);
 	}
 
 	ngOnDestroy() {
@@ -145,7 +186,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 				})
 				.subscribe(response => {
 					if (response["status"] == "success") {
-
+						clearInterval(this.interval);
 					}
 				});
 	}

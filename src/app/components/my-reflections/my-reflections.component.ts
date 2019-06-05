@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
+import { DataService } from "../../service/data.service";
 import { QuestionnaireService } from '../../service/questionnaire.service';
-
 @Component({
 	selector: 'app-my-reflections',
 	templateUrl: './my-reflections.component.html',
@@ -15,7 +16,15 @@ export class MyReflectionsComponent implements OnInit {
 		{ title: 'Average', src: "assets/images/emoji-smirk.png" },
 		{ title: 'Bad', src: "assets/images/emoji-sad.png" });
 	reflection_data: any;
-	constructor(public questionnaireService: QuestionnaireService, public toastr: ToastrService) { }
+	resourceDetail:any;
+	modalIsShown:boolean=false;
+	resourceId:any;
+	constructor(
+		public questionnaireService: QuestionnaireService,
+		public toastr: ToastrService,
+		public router: Router,
+		private dataService: DataService) { }
+
 
 	ngOnInit() {
 		this.reflectionData();
@@ -35,12 +44,34 @@ export class MyReflectionsComponent implements OnInit {
 		);
 	}
 
-	getRoute(route, route1){
+	getRoute(route, route1, resourceId){
 		let str4 = "/patient/dashboard".concat("/"),
 		str3 = str4.concat(route),
 		str2 = str3.concat("/"),
 		str1 = str2.concat(route1);
-		return str1;
+		this.router.navigate([str1]).then(() =>{
+			this.dataService.navigaeToResource(resourceId);
+		});
 	}
+
+	openModal(resource,index) {
+		
+		this.modalIsShown = !this.modalIsShown;
+		this.resourceDetail=resource;
+	}
+
+	modalClosed(){
+		this.modalIsShown=false;
+	}
+	videoTimeUpdated(resource_id){
+		this.resourceId = resource_id;
+		this.reflectionData();
+	}
+
+	// goToElem(obj) {
+	// 	console.log(obj);
+	// 	console.log(this.chapterLink);
+	// 	 //'/patient/dashboard/understanding-breast-cancer'
+	// }
 
 }
