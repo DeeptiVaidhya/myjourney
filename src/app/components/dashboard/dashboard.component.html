@@ -10,12 +10,17 @@
                         <span class="onco-alert"></span>
                     </div>
                     <div class="alert-text">
-                        <p class="h7">
+                        <p class="h7" *ngIf="!is_questionnaire_completed && incompleted_questionnaire == 5">
                             <span>You have a 10-minute survey to complete.</span>
+                        </p>
+                        <p class="h7" *ngIf="!is_questionnaire_completed && incompleted_questionnaire < 5">
+                            <span>You have remaining {{ incompleted_questionnaire }} questionnaire to complete.</span>
+                        </p>
+                        <p class="h7" *ngIf="is_questionnaire_completed">
+                            <span>You have been completed survey.</span>
                         </p>
                     </div>
                     <div class="alert-Complete-btn">
-
                         <button routerLink="/questionnaire/intolerance" type="button" class="btn btn-violet btn-block f-regular">Complete questionnaires</button>
                     </div>
                 </div>

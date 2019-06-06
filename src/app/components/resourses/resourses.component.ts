@@ -31,6 +31,9 @@ export class ResoursesComponent implements OnInit {
 			}
 		);
 	}
+	goToSite(resource:any){
+		window.open(resource.link, "_blank");
+	}
 
 	openModal(resource,index) {
 		console.log(resource);
@@ -45,4 +48,5 @@ export class ResoursesComponent implements OnInit {
 	videoTimeUpdated(resource_id){
 		this.resourceId = resource_id;
 	}
+
 }

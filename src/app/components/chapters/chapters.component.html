@@ -28,7 +28,7 @@
                     <p class="content-p h9" *ngIf="detail?.credit">Credit: {{ detail?.credit }}</p>
                     <div class="row section" *ngIf="detail?.resource_data">
                         <div class="col-xs-12">
-                            <div class="section-content">
+                            <div class="section-content" *ngIf="detail?.resource_data?.type == 'AUDIO' || detail?.resource_data?.type == 'VIDEO'">
                                 <span class="onco-video c-pink sec-icon"></span>
                                 <div class="sec-desc">
                                     <p class="h8">{{ detail?.resource_data?.title }}</p>
@@ -37,6 +37,14 @@
                                     <p class="h9">{{ detail?.resource_data?.description }}</p>
                                 </div>
                                 <a id="resource--{{detail?.resource_data?.id}}" href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(detail?.resource_data,i)" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
+                            </div>
+                            <div class="section-content" *ngIf="detail?.resource_data?.type == 'READING' || detail?.resource_data?.type == 'WEBSITE'">
+                                <span class="onco-video c-pink sec-icon"></span>
+                                <div class="sec-desc">
+                                    <p class="h8">{{ detail?.resource_data?.title }}</p>
+                                    <p class="h9">{{ detail?.resource_data?.description }}</p>
+                                </div>
+                                <a href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="goToSite(detail?.resource_data)" target="_blank" title="{{detail?.resource_data?.title}}" *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
                             </div>
                         </div>
                     </div>
@@ -59,9 +67,6 @@
                                         <div class="text-center content-p content-inner-img" *ngIf="description?.image" [innerHtml]="description?.image"></div>
                                         <p class="content-p h9" *ngIf="description?.credit">Credit: {{ description?.credit }}</p>
 
-
-
-
                                     </ng-container>
                                     <p class="h8 p-b-10" *ngFor="let sub_topic of topic?.sub_topic">
                                         <a href="javascript:void(0)" [routerLink]="sub_topic.slug "><strong>{{ sub_topic.title}}</strong></a>
@@ -69,7 +74,7 @@
 
                                     <div class="row section" *ngIf="topic?.resource_data">
                                         <div class="col-xs-12" *ngFor="let topicRes of topic?.resource_data;let i=index;">
-                                            <div class="section-content">
+                                            <div class="section-content" *ngIf="topicRes?.type == 'VIDEO' && topicRes?.type == 'AUDIO'">
                                                 <span class="onco-video c-pink sec-icon"></span>
                                                 <div class="sec-desc">
                                                     <p class="h8">{{ topicRes?.title }}</p>
@@ -77,7 +82,15 @@
                                                     <p class="h9" *ngIf="(topicRes?.is_completed || topicRes?.id == resourceId) && topicRes?.type == 'AUDIO'"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
                                                     <p class="h9">{{ topicRes?.description }}</p>
                                                 </div>
-                                                <a id="resource--{{detail?.resource_data?.id}}" href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="openModal(topicRes,i)" target="_blank" title="{{topicRes?.title}}" *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
+                                                <a id="resource--{{detail?.resource_data?.id}}" href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="goToSite(topicRes)" target="_blank" title="{{topicRes?.title}}" *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
+                                            </div>
+                                            <div class="section-content" *ngIf="topicRes?.type == 'READING' && topicRes?.type == 'WEBSITE'">
+                                                <span class="onco-video c-pink sec-icon"></span>
+                                                <div class="sec-desc">
+                                                    <p class="h8">{{ topicRes?.title }}</p>
+                                                    <p class="h9">{{ topicRes?.description }}</p>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-violet btn-block sec-button" (click)="goToSite(topicRes)" target="_blank" title="{{topicRes?.title}}" *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +123,7 @@
                     <div class="content-right-inner" *ngFor="let reading of pageContent?.side_resources?.reading">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="{{ reading.link }}" target="_blank" title="{{ reading.title }}">{{ reading.title }}</a>
+                                <a href="javascript:void(0)" (click)="goToSite(reading)" target="_blank" title="{{ reading.title }}">{{ reading.title }}</a>
                             </p>
                         </div>
                         <div class="col-xs-2">
@@ -159,7 +172,7 @@
                     <div class="content-right-inner" *ngFor="let web of pageContent?.side_resources?.website">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="{{ web.link }}" target="_blank" title="{{ web.title }}">{{ web.title }}</a>
+                                <a href="javascript:void(0)" (click)="goToSite(web)" target="_blank" title="{{ web.title }}">{{ web.title }}</a>
                             </p>
                         </div>
                         <div class="col-xs-2">

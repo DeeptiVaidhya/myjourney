@@ -322,7 +322,6 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	}
 
 	addResourceVisited(content){
-
 		this.questService
 				.addResourceVisited({
 					content_id: content.contentId,
@@ -337,6 +336,5 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 						// );
 					}
 				});
-
 	}
 }

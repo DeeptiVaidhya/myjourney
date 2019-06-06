@@ -164,11 +164,12 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-		
+
 		this.interval =setInterval(() => {
 		this.questService
 				.updateVisitedChapter({
 					content_id: this.pageContent.id,
+					showSpinner:false
 				})
 				.subscribe(response => {
 					if (response["status"] == "success") {
@@ -238,6 +239,27 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 				.addVisitedChapter({
 					content_id: content.contentId,
 					callee_page: content.callee_page
+				})
+				.subscribe(response => {
+					if (response["status"] == "success") {
+						// this.is_added_favorite = !this.is_added_favorite;
+						// this.toastr.success(
+						// 	response["msg"] || "Favorite saved"
+						// );
+					}
+				});
+	}
+	goToSite(resource:any){
+		this.addResourceVisited({contentId: this.pageContent.id, callee_page: this.slug, resource_id: resource.id});
+		window.open(resource.link, "_blank");
+	}
+
+	addResourceVisited(content){
+		this.questService
+				.addResourceVisited({
+					content_id: content.contentId,
+					callee_page: content.callee_page,
+					resource_id: content.resource_id
 				})
 				.subscribe(response => {
 					if (response["status"] == "success") {

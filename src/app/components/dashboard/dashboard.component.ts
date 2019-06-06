@@ -19,12 +19,8 @@ export class DashboardComponent implements OnInit {
 	currentWeek:any;
 	weekly_quotes:any;
 	currentWeekInfo:any;
-	// is_questionnaire_completed = false;
-	// total_questionnaire: number = 8;// total questionnaires.
-	incompleted_questionnaire: number = 2;// default all questionnaires are not completed.
-	completed_questionnaire: number = 0;// default 0 questionnaire are completed.
-	// questionnaire_link = 'fact-g7';
-	// questionnaire_links = { 1: 'fact-g7', 2: 'pro-ctcae', 3: 'ies', 4: 'promis' };
+	is_questionnaire_completed = false;// check questionnire completed or not
+	incompleted_questionnaire: number;// default all questionnaires are not completed.
 	all_week_status = '';
 	routeData:any;
 	is_enable_questionnire:any;
@@ -35,12 +31,11 @@ export class DashboardComponent implements OnInit {
 		private questService: QuestionnaireService,
 		public toastr: ToastrService,
 		public router: Router,
-	) { 
-		
+	) {
+
 	}
 
 	ngOnInit() {
-		this.callingChart();
 		localStorage.getItem('username') && (this.username = localStorage.getItem('username'));
 		this.patient_weekly_questionnaire();
 		this.blueJeansSession();
@@ -50,9 +45,9 @@ export class DashboardComponent implements OnInit {
 		this.questService.blueJeansSession().subscribe(
 			result => {
 				if(result['status'] == "success"){
-				this.bluejeansDetails = result['data'];	
+				this.bluejeansDetails = result['data'];
 				}
-				
+
 			},
 			err => {
 				console.log(err);
@@ -61,7 +56,7 @@ export class DashboardComponent implements OnInit {
 	}
 
     patient_weekly_questionnaire(){
-		
+
 		this.questService.patients_weekly_questionnaire().subscribe(
 			result => {
 				console.log(result)
@@ -72,38 +67,18 @@ export class DashboardComponent implements OnInit {
 				this.arm = response['arm'] ? response['arm'] : "";
 				this.user_detail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
 				this.currentWeekInfo = response['data'].hasOwnProperty('week_info') && response['data'].week_info;
-				
 				this.currentWeek = response['data'].week_number;
 				this.is_enable_questionnire = response['data'].enable_questionnire;
+				this.is_questionnaire_completed = response['data'].is_questionnaire_completed;
+				this.incompleted_questionnaire = response['data'].incompleted_questionnaire;
 				if(Object.keys(response['quotes']).length)
 					this.weekly_quotes = response['quotes'];
-					// console.log(this.currentWeek);
 			},
 			err => {
 				console.log(err);
 			}
 		);
 
-	}
-	callingChart() {
-		this.chart = this.AmCharts.makeChart('chartdiv', {
-			type: 'pie',
-			theme: 'light',
-			startDuration: 0,
-			dataProvider: [{ value: this.incompleted_questionnaire, color: '#8934d4' }, { value: this.completed_questionnaire, color: '#dfdfdf' }],
-			titleField: 'title',
-			valueField: 'value',
-			labelRadius: 5,
-			colorField: 'color',
-			radius: '45%',
-			innerRadius: '45%',
-			labelText: '[[title]]',
-		});
-	}
-	ngOnDestroy() {
-		if (this.chart) {
-			this.AmCharts.destroyChart(this.chart);
-		}
 	}
 
 	viewAllAchivement()
