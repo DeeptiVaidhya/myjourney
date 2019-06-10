@@ -22,7 +22,7 @@ export class AchievementsandeventsComponent implements OnInit {
   ngOnInit() {
 	this.questService.patients_weekly_questionnaire().subscribe(
 		result => {
-			
+
 			const response = result;
 			this.userDetail = response['data'] && response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
 			this.currentWeek = response['data'].week_number;
@@ -36,6 +36,10 @@ export class AchievementsandeventsComponent implements OnInit {
 			console.log(err);
 		}
 	);
+  }
+
+  getWeekEvent(text:string){
+	return text.replace(/\r\n|\n/g,"<br/>");
   }
 
 }
