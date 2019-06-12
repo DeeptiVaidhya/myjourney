@@ -13,17 +13,17 @@
                 <div class="col-md-5 col-sm-5 pl-pr-0">
                     <p class="list-heading enabled"><strong>My Achievements</strong></p>
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-3 icon">
+                        <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
                             <i class="onco-events c-d-blue" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'"></i>
-                            <p><strong>Level 1</strong></p>
+                            <p class="p-t-10"><strong>Level 1</strong></p>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-3 icon">
+                        <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
                             <i class="onco-achievements c-pink" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 1) ? '' : 'disabled'"></i>
-                            <p><strong>Level 2</strong></p>
+                            <p class="p-t-10"><strong>Level 2</strong></p>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-3 icon">
+                        <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
                             <i class="onco-award c-orange" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 3) ? '' : 'disabled'"></i>
-                            <p><strong>Level 3</strong></p>
+                            <p class="p-t-10"><strong>Level 3</strong></p>
                         </div>
                     </div>
                 </div>

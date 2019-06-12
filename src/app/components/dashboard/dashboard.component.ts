@@ -93,4 +93,8 @@ export class DashboardComponent implements OnInit {
 
 	}
 
+	getFormatedDate(date:string){
+		return new Date(date.replace(/-/g, "/"));
+	}
+
 }

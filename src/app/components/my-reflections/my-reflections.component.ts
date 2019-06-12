@@ -68,6 +68,10 @@ export class MyReflectionsComponent implements OnInit {
 		this.reflectionData();
 	}
 
+	getFormatedDate(date:string){
+		return new Date(date.replace(/-/g, "/"));
+	}
+
 	// goToElem(obj) {
 	// 	console.log(obj);
 	// 	console.log(this.chapterLink);

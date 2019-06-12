@@ -53,7 +53,7 @@
                                             <div class="row" *ngFor="let questions of resource?.questions; let i=index">
                                                 <!-- {{ resource?.questions.length }} -->
                                                 <div class="col-xs-12" *ngIf="resource?.level == 'inquiry' ? i%3 == 0 : (resource?.level == 'mood' ? (i%2) == 0 : false)">
-                                                    <p class="p-l-r"><em>You have completed this exercise on {{ questions?.created_at | date : 'shortDate'}}</em></p>
+                                                    <p class="p-l-r"><em>You have completed this exercise on {{ getFormatedDate(questions?.created_at) | date : 'shortDate'}}</em></p>
                                                 </div>
                                                 <div class="col-md-8 m-t-10">
                                                     <p class="f-18 m-0 f-bold p-l-r">{{ questions?.short_question }}</p>
