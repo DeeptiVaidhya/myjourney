@@ -57,7 +57,7 @@
             </youtube-player>
         </ng-container>
         <ng-container *ngIf="resourseType == 'AUDIO'">
-            <vg-player style="height: 490px" (onPlayerReady)="onPlayerReady($event)">
+            <vg-player class="audio-bg" (onPlayerReady)="onPlayerReady($event)">
                 <vg-controls>
                     <vg-play-pause></vg-play-pause>
                     <vg-scrub-bar>
@@ -79,12 +79,7 @@
         </ng-container>
         <div class="p-b-20 p-t-40 text-center">
             <button [disabled]="isCompleted && !video_completed" class="btn btn-violet btn-250" (click)="
-					openQuestionModal(
-						(level == 'mood' || level == 'inquiry') && arm == 'INTERVENTION'
-							? excerciseModal
-							: closeModal(videoRef)
-					)
-				">
+					openQuestionModal((level == 'mood' || level == 'inquiry') && arm == 'INTERVENTION' ? excerciseModal: videoRef)">
 				Done
 			</button>
         </div>

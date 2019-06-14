@@ -932,6 +932,7 @@ vg-player {
     background-image: url(../images/audio_bg.jpg);
     background-size: 100%;
     border: none;
+    background-repeat: no-repeat;
 }
 
 .vg-icon-play_arrow:before {
@@ -1706,6 +1707,9 @@ form.signin-form .col-md-3 {
     }
     app-breadcrumb {
         margin-bottom: 25px;
+    }
+    vg-player {
+        background-size: 100% 78%;
     }
 }
 

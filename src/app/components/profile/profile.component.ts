@@ -40,10 +40,10 @@ export class ProfileComponent implements OnInit {
 					this.user_detail['first_name'],
 					Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required]),
 				],
-				last_name: [
-					this.user_detail['last_name'],
-					Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required]),
-				],
+				// last_name: [
+				// 	this.user_detail['last_name'],
+				// 	Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required]),
+				// ],
 				email: [
 					this.user_detail['email'],
 					Validators.compose([

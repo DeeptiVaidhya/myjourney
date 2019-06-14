@@ -2,38 +2,40 @@
     <app-inner-page-header page_title="My Achievements & Events"></app-inner-page-header>
 
     <div class="container">
-        <ng-container *ngFor="let week of weekInfo; let i=index">
-            <div class="row week-list" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'">
-                <div class="col-xs-12 pl-pr-0">
-                    <div class="week">
-                        <span *ngIf="currentWeek != i+1">Week {{ i+1 }}</span>
-                        <span *ngIf="currentWeek == i+1"><b>Week {{ i+1 }} (current week)</b></span>
-                    </div>
-                </div>
-                <div class="col-md-5 col-sm-5 pl-pr-0">
-                    <p class="list-heading enabled"><strong>My Achievements</strong></p>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
-                            <i class="onco-events c-d-blue" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'"></i>
-                            <p class="p-t-10"><strong>Level 1</strong></p>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
-                            <i class="onco-achievements c-pink" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 1) ? '' : 'disabled'"></i>
-                            <p class="p-t-10"><strong>Level 2</strong></p>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
-                            <i class="onco-award c-orange" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 3) ? '' : 'disabled'"></i>
-                            <p class="p-t-10"><strong>Level 3</strong></p>
+        <div class="row m-t-10">
+            <ng-container *ngFor="let week of weekInfo; let i=index">
+                <div class="row week-list" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'">
+                    <div class="col-xs-12 pl-pr-0">
+                        <div class="week">
+                            <span *ngIf="currentWeek != i+1">Week {{ i+1 }}</span>
+                            <span *ngIf="currentWeek == i+1"><b>Week {{ i+1 }} (current week)</b></span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-7 col-sm-7 pl-pr-0 enabled">
-                    <p class="list-heading"><strong>My Events</strong></p>
-                    <div class="col-xs-12">
-                        <p [innerHTML]="getWeekEvent(week?.event)"></p>
+                    <div class="col-md-5 col-sm-5 pl-pr-0">
+                        <p class="list-heading enabled"><strong>My Achievements</strong></p>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
+                                <i class="onco-events c-d-blue" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'"></i>
+                                <p class="p-t-10"><strong>Level 1</strong></p>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
+                                <i class="onco-achievements c-pink" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 1) ? '' : 'disabled'"></i>
+                                <p class="p-t-10"><strong>Level 2</strong></p>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
+                                <i class="onco-award c-orange" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 3) ? '' : 'disabled'"></i>
+                                <p class="p-t-10"><strong>Level 3</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 pl-pr-0 enabled">
+                        <p class="list-heading"><strong>My Events</strong></p>
+                        <div class="col-xs-12">
+                            <p [innerHTML]="getWeekEvent(week?.event)"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </div>
 </div>
