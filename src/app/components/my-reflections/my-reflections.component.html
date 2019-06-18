@@ -28,8 +28,9 @@
                                 </div>
                             </div>
                             <ng-container *ngFor='let resource of data?.resources'>
+							<!-- {{ data?.resources.length }} -->
                                 <div class="row p-b-30" *ngIf="resource?.level == 'inquiry' || resource?.level == 'mood'">
-                                    <ng-container *ngIf="resource.is_completed">
+                                    <ng-container *ngIf="resource?.questions||resource.is_completed">
                                         <div class="col-xs-12">
                                             <div class="bg-l-pink">
                                                 <p class="h8 uppercase f-medium m-0 c-violet">{{ resource?.level == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
@@ -53,7 +54,8 @@
                                             <div class="row" *ngFor="let questions of resource?.questions; let i=index">
                                                 <!-- {{ resource?.questions.length }} -->
                                                 <div class="col-xs-12" *ngIf="resource?.level == 'inquiry' ? i%3 == 0 : (resource?.level == 'mood' ? (i%2) == 0 : false)">
-                                                    <p class="p-l-r"><em>You have completed this exercise on {{ getFormatedDate(questions?.created_at) | date : 'shortDate'}}</em></p>
+                                                    <p class="p-l-r"><em>You completed this exercise on {{ getFormatedDate(questions?.created_at) | date : 'shortDate'}}</em></p>
+													
                                                 </div>
                                                 <div class="col-md-8 m-t-10">
                                                     <p class="f-18 m-0 f-bold p-l-r">{{ questions?.short_question }}</p>
@@ -61,6 +63,7 @@
                                                 <div class="col-xs-12 m-t-10" *ngIf="resource?.level == 'inquiry'">
                                                     <p class="p-l-r"><em>{{ questions?.response }}</em></p>
                                                     <p class="p-l-r"><em>{{ (questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count) ? 'Skipped' : '' }}</em></p>
+													
                                                 </div>
 
                                                 <div class="col-xs-12 m-t-1" *ngIf="resource?.level == 'mood'">
@@ -68,10 +71,13 @@
                                                     <img src="{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.src }}" class="m-r-15 m-t-40 m-b-30 p-l-r">
                                                     <span>{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.title }}</span>
                                                 </div>
+												
+												
                                             </div>
                                         </div>
                                     </ng-container>
-                                    <ng-container *ngIf="!resource.is_completed">
+									
+                                    <ng-container *ngIf="!resource?.questions && !resource.is_completed">
                                         <div class="col-xs-12">
                                             <div class="bg-l-pink">
                                                 <p class="h8 uppercase f-medium m-0 c-violet">{{ resource?.level == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>

@@ -193,8 +193,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	}
 
 	goToElem(obj) {
-		console.log(obj);
-		console.log(this.chapterLink);
+		
 		this.router.navigate([this.chapterLink]).then(() => {
 			this.dataService.changeMessage(obj);
 		}); //'/patient/dashboard/understanding-breast-cancer'

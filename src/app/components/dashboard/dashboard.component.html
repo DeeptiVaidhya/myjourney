@@ -67,15 +67,15 @@
                         <div class="row">
                             <div class="col-xs-4 icon">
                                 <i class="onco-events c-d-blue" [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 30) ? '' : 'disabled') : ''"></i>
-                                <p><strong>Level 1</strong></p>
+
                             </div>
                             <div class="col-xs-4 icon">
                                 <i class="onco-achievements c-pink" [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 30 && weekInfo?.total_watched_video_audio >= 1) ? '' : 'disabled') : ''"></i>
-                                <p><strong>Level 2</strong></p>
+
                             </div>
                             <div class="col-xs-4 icon">
                                 <i class="onco-award" [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 30 && weekInfo?.total_watched_video_audio >= 3) ? '' : 'disabled'): ''"></i>
-                                <p><strong>Level 3</strong></p>
+
                             </div>
                             <div class="col-xs-12 text-right">
                                 <a (click)="viewAllAchivement()" href="javascript:void(0)" class="f-medium">View all</a>
@@ -88,15 +88,15 @@
                     <div class="row">
                         <div class="col-xs-4 icon">
                             <i class="onco-events c-d-blue disabled"></i>
-                            <p><strong>Level 1</strong></p>
+
                         </div>
                         <div class="col-xs-4 icon">
                             <i class="onco-achievements c-pink disabled"></i>
-                            <p><strong>Level 2</strong></p>
+
                         </div>
                         <div class="col-xs-4 icon">
                             <i class="onco-award disabled"></i>
-                            <p><strong>Level 3</strong></p>
+
                         </div>
                         <div class="col-xs-12 text-right">
                             <a (click)="viewAllAchivement()" href="javascript:void(0)" class="f-medium">View all</a>

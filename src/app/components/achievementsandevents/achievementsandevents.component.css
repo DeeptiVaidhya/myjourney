@@ -41,6 +41,10 @@
     color: #e5e9eb;
 }
 
+.m-award {
+    margin-left: 10px;
+}
+
 @media (max-width: 991px) {
     .week-list .icon i {
         font-size: 65px;

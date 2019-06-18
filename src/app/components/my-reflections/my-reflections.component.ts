@@ -72,10 +72,4 @@ export class MyReflectionsComponent implements OnInit {
 		return new Date(date.replace(/-/g, "/"));
 	}
 
-	// goToElem(obj) {
-	// 	console.log(obj);
-	// 	console.log(this.chapterLink);
-	// 	 //'/patient/dashboard/understanding-breast-cancer'
-	// }
-
 }

@@ -25,6 +25,7 @@ export class ResoursesComponent implements OnInit {
 			Response => {
 				if (Response['status'] == 'success') {
 					this.resources_data = Response['data'];
+					console.log(this.resources_data);
 				}else{
 					this.toastr.error(Response['msg']);
 				}
@@ -40,12 +41,14 @@ export class ResoursesComponent implements OnInit {
 		this.activeIndex=index;
 		this.modalIsShown = !this.modalIsShown;
 		this.resourceDetail=resource;
+		console.log(this.resourceDetail);
 	}
 
 	modalClosed(){
 		this.modalIsShown=false;
 	}
 	videoTimeUpdated(resource_id){
+		console.log(resource_id);
 		this.resourceId = resource_id;
 	}
 

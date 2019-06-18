@@ -163,9 +163,6 @@ export class AppComponent implements OnInit {
 				}
 			});
 
-
-
-
 			this.checkDashLink();
 			this.maIsOpen = this.router.url.indexOf('/my-account') === 0;
 			this.isHeaderHidden = ['/forgot-password', '/create-password', '/reset-password'].some(path => {
