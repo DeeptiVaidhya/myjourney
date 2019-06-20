@@ -64,13 +64,15 @@ export class DashboardComponent implements OnInit {
 				if (response.hasOwnProperty('chapters')) {
 					this.pageContent = response['chapters'];
 				}
-				this.arm = response['arm'] ? response['arm'] : "";
-				this.user_detail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
-				this.currentWeekInfo = response['data'].hasOwnProperty('week_info') && response['data'].week_info;
-				this.currentWeek = response['data'].week_number;
-				this.is_enable_questionnire = response['data'].enable_questionnire;
-				this.is_questionnaire_completed = response['data'].is_questionnaire_completed;
-				this.incompleted_questionnaire = response['data'].incompleted_questionnaire;
+				this.arm = response.hasOwnProperty('arm') ? response['arm'] : "";
+				if(response.hasOwnProperty('data')) {
+					this.user_detail = response['data'].hasOwnProperty('user_detail') && response['data'].user_detail;
+					this.currentWeekInfo = response['data'].hasOwnProperty('week_info') && response['data'].week_info;
+					this.currentWeek = response['data'].week_number;
+					this.is_enable_questionnire = response['data'].enable_questionnire;
+					this.is_questionnaire_completed = response['data'].is_questionnaire_completed;
+					this.incompleted_questionnaire = response['data'].incompleted_questionnaire;
+				}
 				if(Object.keys(response['quotes']).length)
 					this.weekly_quotes = response['quotes'];
 			},

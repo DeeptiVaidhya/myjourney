@@ -46,10 +46,12 @@ export class ResoursesComponent implements OnInit {
 
 	modalClosed(){
 		this.modalIsShown=false;
+		console.log("model close function "+this.modalIsShown);
 	}
 	videoTimeUpdated(resource_id){
 		console.log(resource_id);
 		this.resourceId = resource_id;
+		console.log("video time update "+this.modalIsShown);
 	}
 
 }

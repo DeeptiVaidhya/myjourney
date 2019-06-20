@@ -19,6 +19,7 @@ export class MyReflectionsComponent implements OnInit {
 	resourceDetail:any;
 	modalIsShown:boolean=false;
 	resourceId:any;
+	refPaddCounter=0;
 	constructor(
 		public questionnaireService: QuestionnaireService,
 		public toastr: ToastrService,
@@ -30,6 +31,16 @@ export class MyReflectionsComponent implements OnInit {
 		this.reflectionData();
 	}
 
+	// addPadding(){
+	// 	setTimeout(function(){
+	// 		let questRow = document.querySelectorAll('.quest-row');
+	// 		for(let i=0,q=questRow,l=q.length;i<l;i++){
+	// 			(q[i] as HTMLElement).style.paddingLeft=(i*20)+'px';
+	// 		}
+	// 	},100);
+	// }
+	
+
 	reflectionData() {
 		this.questionnaireService.get_resources().subscribe(
 			Response => {
@@ -37,6 +48,7 @@ export class MyReflectionsComponent implements OnInit {
 
 				if (Response['status'] == 'success') {
 					this.reflection_data = Response['data'];
+					// this.addPadding();
 				} else {
 					this.toastr.error(Response['msg']);
 				}

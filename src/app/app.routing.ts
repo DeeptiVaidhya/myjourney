@@ -9,8 +9,8 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { FaqComponent } from "./components/faq/faq.component";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
 import { HomeComponent } from "./components/home/home.component";
-import { MyfavoritesComponent } from "./components/myfavorites/myfavorites.component";
 import { MyReflectionsComponent } from "./components/my-reflections/my-reflections.component";
+import { MyfavoritesComponent } from "./components/myfavorites/myfavorites.component";
 // import { MedicalDecisionsComponent } from './medical-decisions/medical-decisions.component';
 // import { NonPhysicalSideEffectsComponent } from './non-physical-side-effects/non-physical-side-effects.component';
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
@@ -33,29 +33,6 @@ const MAINMENU_ROUTES: Routes = [
 		component: DashboardComponent,
 		canActivate: [PatientGuard],
 	},
-	// {
-	// 	path: "patient/dashboard/understanding-breast-cancer",
-	// 	component: UnderstandingBreastCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/breast-cancer/what-is-breast-cancer",
-	// 	component: WhatIsBreastCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/breast-cancer/who-gets-breast-cancer",
-	// 	component: WhoGetsBreastCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/breast-cancer/what-does-not-cause-breast-cancer",
-	// 	component: WhatDoesnotCauseBreastCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
 	{
 		path: "achievements",
 		component: AchievementsandeventsComponent,
@@ -71,126 +48,6 @@ const MAINMENU_ROUTES: Routes = [
 		component: MyReflectionsComponent,
 		canActivate: [PatientGuard]
 	},
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/breast-cancer/breast-cancer-treatment",
-	// 	component: BreastCancerTreatmentComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/breast-cancer/who-treats-breast-cancer",
-	// 	component: WhoTreatsBreastCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/second-cancer",
-	// 	component: SecondCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/breast-cancer-screening",
-	// 	component: BreastCancerScreeningComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/cervical-cancer-screening",
-	// 	component: CervicalCancerScreeningComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/colorectal-cancer-screening",
-	// 	component: ColorectalCancerScreeningComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/lung-cancer-screening",
-	// 	component: LungCancerScreeningComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/skin-cancer-screening",
-	// 	component: SkinCancerScreeningComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/prevent-second-cancer",
-	// 	component: PreventSecondCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path:
-	// 		"patient/dashboard/understanding-breast-cancer/wellness/sun-protection",
-	// 	component: SunProtectionComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-
-	// {
-	// 	path: "patient/dashboard/eat-well-feel-well",
-	// 	component: EatWellFeelWellComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/healthy-mind",
-	// 	component: HealthyMindComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/healthy-at-any-age",
-	// 	component: HealthyAtAnyAgeComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/staying-active",
-	// 	component: StayingActiveComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/care-after-cancer",
-	// 	component: CareAfterCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/life-after-cancer",
-	// 	component: LifeAfterCancerComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/wrapping-up",
-	// 	component: WrappingUpComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-
-	// Questionnaire
-	// {
-	// 	path: "patient/dashboard/pro-ctcae",
-	// 	component: ProCtcaeComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/promis",
-	// 	component: PromisComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-
-	// {
-	// 	path: "patient/dashboard/decision-making",
-	// 	component: DecisionMakingComponent,
-	// 	canActivate: [PatientGuard]
-	// },
-	// {
-	// 	path: "patient/dashboard/ies",
-	// 	component: IesComponent,
-	// 	canActivate: [PatientGuard]
-	// },
 	{
 		path: "patient/dashboard/report",
 		component: ReportComponent,

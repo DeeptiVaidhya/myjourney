@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from "@angular/core";
+import {
+	AfterViewInit,
+	Component,
+	EventEmitter,
+	Input,
+	OnInit,
+	Output,
+	TemplateRef,
+	ViewChild
+} from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { ToastrService } from "ngx-toastr";
@@ -104,7 +113,8 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 			// && this.arm == 'INTERVENTION'
 			if (this.modalIsShown && this.resourceDetail) {
 				this.openModal(
-					(this.resourceDetail.level == "mood" && this.arm == 'INTERVENTION')
+					this.resourceDetail.level == "mood" &&
+						this.arm == "INTERVENTION"
 						? this.preInfo
 						: this.videoModal
 				);
@@ -132,11 +142,12 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	}
 
 	openModal(template: TemplateRef<any>) {
-
 		this.level = this.resourceDetail.level;
 		this.video_completed = this.resourceDetail.is_completed;
 		this.resourseType = this.resourceDetail.type;
-		this.pageContentId = this.contentId ? this.contentId : this.resourceDetail.chapter_content_id;
+		this.pageContentId = this.contentId
+			? this.contentId
+			: this.resourceDetail.chapter_content_id;
 		if (this.resourseType == "VIDEO")
 			this.currentSrc = this.resourceDetail.link.split("v=")[1];
 		else if (this.resourseType == "AUDIO")
@@ -144,9 +155,12 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 		this.resourceId =
 			this.resourceDetail.resources_id || this.resourceDetail.id;
 
-		this.addResourceVisited({contentId:this.pageContentId, callee_page: this.calleePage, resource_id: this.resourceId});
+		this.addResourceVisited({
+			contentId: this.pageContentId,
+			callee_page: this.calleePage,
+			resource_id: this.resourceId
+		});
 		this.videoRef = this.modalService.show(template, { class: "modal-lg" });
-
 	}
 
 	openQuestionModal(template: TemplateRef<any>, ratingType?: any) {
@@ -246,14 +260,19 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 						this.selected = "";
 						this.value++;
 						this.dynamic++;
+						console.log("value " + this.value);
+						console.log("dynamic " + this.dynamic);
 					} else {
 						this.questionnireForm.reset();
 						if (value == 0) {
 							this.questionRef.hide();
+							this.onCloseModal.emit("closed");
 						}
 						if (this.dynamic < this.questions.length - 1) {
 							this.value++;
 							this.dynamic++;
+							console.log("value " + this.value);
+							console.log("dynamic " + this.dynamic);
 						} else {
 							this.questionRef.hide();
 							this.value = 0;
@@ -282,6 +301,8 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 											);
 										}
 									});
+							} else {
+								this.onCloseModal.emit("closed");
 							}
 						}
 						this.nextButtonFlag =
@@ -317,24 +338,24 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 	closeModal(template: BsModalRef) {
 		template.hide();
 		console.log("modal closed");
-		if(!this.isCompleted) this.onVideoUpdated.emit(this.resourceId);
+		if (!this.isCompleted) this.onVideoUpdated.emit(this.resourceId);
 		this.onCloseModal.emit("closed");
 	}
 
-	addResourceVisited(content){
+	addResourceVisited(content) {
 		this.questService
-				.addResourceVisited({
-					content_id: content.contentId,
-					callee_page: content.callee_page,
-					resource_id: content.resource_id
-				})
-				.subscribe(response => {
-					if (response["status"] == "success") {
-						// this.is_added_favorite = !this.is_added_favorite;
-						// this.toastr.success(
-						// 	response["msg"] || "Favorite saved"
-						// );
-					}
-				});
+			.addResourceVisited({
+				content_id: content.contentId,
+				callee_page: content.callee_page,
+				resource_id: content.resource_id
+			})
+			.subscribe(response => {
+				if (response["status"] == "success") {
+					// this.is_added_favorite = !this.is_added_favorite;
+					// this.toastr.success(
+					// 	response["msg"] || "Favorite saved"
+					// );
+				}
+			});
 	}
 }

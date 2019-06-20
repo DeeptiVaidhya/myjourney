@@ -10,35 +10,33 @@ import { QuestionnaireService } from "../../service/questionnaire.service";
 	styleUrls: ["./chapters.component.css"]
 })
 export class ChaptersComponent implements OnDestroy, OnInit {
-
 	slug: string = "";
 	topic: string = "";
 	is_sub_topic: boolean = false;
 	is_added_favorite: boolean = false;
 	pageContent: any;
-	resourceId:any;
-	player:any=[];
-	interval:any;
-	activeIndex:any;
+	resourceId: any;
+	player: any = [];
+	interval: any;
+	activeIndex: any;
 	breadcrumb = [{ link: "/patient/dashboard", title: "Home" }];
 	chapterLink: any;
-	modalIsShown:boolean=false;
-	arm:string;
-	resourceDetail:any;
+	modalIsShown: boolean = false;
+	arm: string;
+	resourceDetail: any;
 	constructor(
 		public route: ActivatedRoute,
 		public questService: QuestionnaireService,
 		public toastr: ToastrService,
 		private router: Router,
-		private dataService: DataService,
-
+		private dataService: DataService
 	) {
 		this.route.params.subscribe(param => {
 			this.slug = param.sub_topic
 				? param.sub_topic
 				: param.chapter
-					? param.chapter
-					: "";
+				? param.chapter
+				: "";
 			this.topic = param.topic && !param.sub_topic ? param.topic : "";
 			this.is_sub_topic = !!param.sub_topic;
 			this.questService
@@ -52,9 +50,11 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 					if (response["status"] == "success") {
 						this.pageContent = response["data"];
 						this.is_added_favorite = response["is_added_favorite"];
-						if(this.pageContent.id)
-						{
-							this.visitedChapter({contentId:this.pageContent.id, callee_page: this.pageContent.slug});
+						if (this.pageContent.id) {
+							this.visitedChapter({
+								contentId: this.pageContent.id,
+								callee_page: this.pageContent.slug
+							});
 						}
 						let obj: any;
 						let bread = this.pageContent["breadcrumb"];
@@ -133,14 +133,13 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 				}, 10);
 			}
 		});
-
 	}
 
-	goToRes(){
+	goToRes() {
 		this.dataService.currentResource.subscribe(param => {
 			let obj: any = param;
 			console.log(obj);
-			if (obj && obj != '') {
+			if (obj && obj != "") {
 				console.log(document.querySelector("#resource--" + obj));
 				setTimeout(() => {
 					let el = document.querySelector("#resource--" + obj);
@@ -164,36 +163,33 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-
-		this.interval =setInterval(() => {
-		this.questService
+		this.interval = setInterval(() => {
+			this.questService
 				.updateVisitedChapter({
 					content_id: this.pageContent.id,
-					showSpinner:false
+					showSpinner: false
 				})
 				.subscribe(response => {
 					if (response["status"] == "success") {
-
 					}
 				});
-			}, 10000);
+		}, 10000);
 	}
 
 	ngOnDestroy() {
 		this.dataService.changeMessage(null);
 		this.questService
-				.updateVisitedChapter({
-					content_id: this.pageContent.id,
-				})
-				.subscribe(response => {
-					if (response["status"] == "success") {
-						clearInterval(this.interval);
-					}
-				});
+			.updateVisitedChapter({
+				content_id: this.pageContent.id
+			})
+			.subscribe(response => {
+				if (response["status"] == "success") {
+					clearInterval(this.interval);
+				}
+			});
 	}
 
 	goToElem(obj) {
-		
 		this.router.navigate([this.chapterLink]).then(() => {
 			this.dataService.changeMessage(obj);
 		}); //'/patient/dashboard/understanding-breast-cancer'
@@ -218,55 +214,60 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 			this.toastr.error("Invalid content or not a sub topic.");
 		}
 	}
-	openModal(resource,index) {
-		this.activeIndex=index;
+	openModal(resource, index) {
+		this.activeIndex = index;
 		this.modalIsShown = !this.modalIsShown;
-		this.resourceDetail=resource;
+		this.resourceDetail = resource;
 	}
 
-	modalClosed(){
-		this.modalIsShown=false;
+	modalClosed() {
+		this.modalIsShown = false;
+		
 	}
 
-	videoTimeUpdated(resource_id){
+	videoTimeUpdated(resource_id) {
 		this.resourceId = resource_id;
+		
 	}
 
-	visitedChapter(content)
-	{
+	visitedChapter(content) {
 		this.questService
-				.addVisitedChapter({
-					content_id: content.contentId,
-					callee_page: content.callee_page
-				})
-				.subscribe(response => {
-					if (response["status"] == "success") {
-						// this.is_added_favorite = !this.is_added_favorite;
-						// this.toastr.success(
-						// 	response["msg"] || "Favorite saved"
-						// );
-					}
-				});
+			.addVisitedChapter({
+				content_id: content.contentId,
+				callee_page: content.callee_page
+			})
+			.subscribe(response => {
+				if (response["status"] == "success") {
+					// this.is_added_favorite = !this.is_added_favorite;
+					// this.toastr.success(
+					// 	response["msg"] || "Favorite saved"
+					// );
+				}
+			});
 	}
-	goToSite(resource:any){
-		this.addResourceVisited({contentId: this.pageContent.id, callee_page: this.slug, resource_id: resource.id});
+	goToSite(resource: any) {
+		this.addResourceVisited({
+			contentId: this.pageContent.id,
+			callee_page: this.slug,
+			resource_id: resource.id
+		});
 		window.open(resource.link, "_blank");
 	}
 
-	addResourceVisited(content){
+	addResourceVisited(content) {
 		this.questService
-				.addResourceVisited({
-					content_id: content.contentId,
-					callee_page: content.callee_page,
-					resource_id: content.resource_id
-				})
-				.subscribe(response => {
-					if (response["status"] == "success") {
-						// this.is_added_favorite = !this.is_added_favorite;
-						// this.toastr.success(
-						// 	response["msg"] || "Favorite saved"
-						// );
-					}
-				});
+			.addResourceVisited({
+				content_id: content.contentId,
+				callee_page: content.callee_page,
+				resource_id: content.resource_id
+			})
+			.subscribe(response => {
+				if (response["status"] == "success") {
+					// this.is_added_favorite = !this.is_added_favorite;
+					// this.toastr.success(
+					// 	response["msg"] || "Favorite saved"
+					// );
+				}
+			});
 	}
 }
