@@ -18,6 +18,14 @@
     <app-breadcrumb [breadcrumb]="breadcrumb" (onClickTitle)="goToElem($event)"></app-breadcrumb>
     <!--back_link="/patient/dashboard" back_title="Dashboard"-->
     <div class="container">
+		<div class="row p-b-50" *ngIf = "next_previous_subtopic?.next_url || next_previous_subtopic?.prev_url">
+			<div class="col-md-6 text-left">
+				<a  href="javascript:void(0)" routerLink ="/patient/dashboard/{{next_previous_subtopic?.prev_url}}" class="btn btn-violet btn-250 sec-button" *ngIf = "next_previous_subtopic?.prev_url">Previous</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a  href="javascript:void(0)" routerLink ="/patient/dashboard/{{next_previous_subtopic?.next_url}}" class="btn btn-violet btn-250 sec-button" *ngIf = "next_previous_subtopic?.next_url">Next</a>
+			</div>
+		</div>
         <div class="row">
             <!-- start content-left -->
             <div class="col-md-7 col-sm-12 col-xs-12">

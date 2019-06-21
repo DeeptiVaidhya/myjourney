@@ -12,108 +12,145 @@
                 <form class="signin-form" [formGroup]="loginForm" (ngSubmit)="signIn()" autocomplete="off">
                     <div class="form-group col-md-4 col-sm-4">
                         <input formControlName="username" id="username" type="text" class="form-control input-lg" placeholder="Email address" />
-                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">This field is required.</p>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="
+								loginForm.controls['username'].hasError(
+									'required'
+								) && loginForm.controls['username'].touched
+							">
+                            This field is required.
+                        </p>
                     </div>
                     <div class="form-group col-md-4 col-sm-4">
                         <input id="password" formControlName="password" type="password" class="form-control input-lg" placeholder="Password" />
-                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">This field is required.</p>
-                        <a routerLink="/forgot-password" class="forgot-password">Forgot password?</a>
+                        <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="
+								loginForm.controls['password'].hasError(
+									'required'
+								) && loginForm.controls['password'].touched
+							">
+                            This field is required.
+                        </p>
+                        <a routerLink="/forgot-password" class="forgot-password">Forgot password?</a
+						>
+						<div class="m-t-11">
+							<input
+								type="checkbox"
+								class="rem-check"
+								formControlName="remember_me"
+							/>
+							Remember me<br />
+						</div>
+					</div>
+
+					<div class="form-group col-md-3 col-sm-3 btn-signin-block">
+						<button class="btn btn-violet btn-block" [disabled]="">
+							Sign In
+						</button>
+					</div>
+				</form>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-12 col-sm-12 what-is-oncotool">
+				<div class="h3">
+					<strong> What is My Journey? </strong>
+				</div>
+				<a href="javascript:void(0)" (click)="scroll(what_is_oncotool)">
+					<img
+						src="assets/images/white_arrow_bottom.png"
+						alt="Blue Arrow"
+					/>
+				</a>
                     </div>
-                    <div class="form-group col-md-3 col-sm-3 btn-signin-block">
-                        <button class="btn btn-violet btn-block" [disabled]="">Sign In</button>
-                    </div>
-                </form>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end container-fluid -->
+
+    <!-- start What is oncotool -->
+    <div class="container" #what_is_oncotool>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h1 class="heading">What is My Journey?</h1>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="img-responsive">
+                    <img class="img-responsive img-center" src="assets/images/tailored_to_you.jpg" alt="Image" />
+                </div>
+                <div class="detail-text">
+                    <div class="h3">Tailored to You</div>
+                    <p>
+                        My Journey is an interactive website designed for breast cancer survivors. Inside you will find information, videos, and resources, all of which were carefully chosen with you in mind.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="img-responsive">
+                    <img class="img-responsive img-center" src="assets/images/based_on_research.jpg" alt="Image" />
+                </div>
+                <div class="detail-text">
+                    <div class="h3">Based on Research</div>
+                    <p>
+                        All of the material in My Journey is based on research in breast cancer. We collected relevant information based on feedback from patients and oncology providers, and organized it all in one place.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="img-responsive">
+                    <img class="img-responsive img-center" src="assets/images/benefits_of_participating.jpg" alt="Image" />
+                </div>
+                <div class="detail-text">
+                    <div class="h3">Benefits of Participating</div>
+                    <p>
+                        You will have access to all of the information, videos, and resources developed for breast cancer survivors. Our hope is that My Journey will improve the wellbeing of breast cancer survivors who have been prescribed a hormone therapy treatment.
+                    </p>
+                </div>
             </div>
             <div class="clearfix"></div>
-            <div class="col-md-12 col-sm-12 what-is-oncotool">
+            <div class="col-md-12 blue-arrow-bottom">
                 <div class="h3">
-                    <strong> What is My Journey? </strong>
+                    <strong>What can I do on My Journey?</strong>
                 </div>
-                <a href="javascript:void(0)" (click)="scroll(what_is_oncotool)">
-                    <img src="assets/images/white_arrow_bottom.png" alt="Blue Arrow" />
+                <a href="javascript:void(0)" (click)="scroll(get_in_touch)">
+                    <img src="assets/images/pink_arrow_bottom.png" alt="Image" />
                 </a>
             </div>
         </div>
-        <!-- end row -->
     </div>
-    <!-- end container -->
-</div>
-<!-- end container-fluid -->
-
-<!-- start What is oncotool -->
-<div class="container" #what_is_oncotool>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <h1 class="heading">What is My Journey?</h1>
-        </div>
-        <div class="col-md-4 col-sm-4">
-            <div class="img-responsive">
-                <img class="img-responsive img-center" src="assets/images/tailored_to_you.jpg" alt="Image" />
-            </div>
-            <div class="detail-text">
-                <div class="h3">Tailored to You</div>
-                <p>My Journey is an interactive website designed for breast cancer survivors. Inside you will find information, videos, and resources, all of which were carefully chosen with you in mind.</p>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-4">
-            <div class="img-responsive">
-                <img class="img-responsive img-center" src="assets/images/based_on_research.jpg" alt="Image" />
-            </div>
-            <div class="detail-text">
-                <div class="h3">Based on Research</div>
-                <p>All of the material in My Journey is based on research in breast cancer. We collected relevant information based on feedback from patients and oncology providers, and organized it all in one place.</p>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-4">
-            <div class="img-responsive">
-                <img class="img-responsive img-center" src="assets/images/benefits_of_participating.jpg" alt="Image" />
-            </div>
-            <div class="detail-text">
-                <div class="h3">Benefits of Participating</div>
-                <p>You will have access to all of the information, videos, and resources developed for breast cancer survivors. Our hope is that My Journey will improve the wellbeing of breast cancer survivors who have been prescribed a hormone therapy treatment.</p>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-12 blue-arrow-bottom">
-            <div class="h3">
-                <strong>What can I do on My Journey?</strong>
-            </div>
-            <a href="javascript:void(0)" (click)="scroll(get_in_touch)">
-                <img src="assets/images/pink_arrow_bottom.png" alt="Image" />
-            </a>
-        </div>
-
-    </div>
-</div>
-<!-- start what is oncotool -->
-<!-- start learn more about oncotool -->
-<div class="learn-more-about" #get_in_touch>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 text-center">
-                <img class="img-responsive img-center" src="assets/images/big_arrow_bottom.png" alt="Image" />
-            </div>
-            <div class="col-md-12 col-sm-12">
-                <h1 class="heading">Learn More About My Journey</h1>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-6 col-sm-6">
-                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="true" [styles]="styleArray">
-                    <agm-marker iconUrl="assets/images/map_marker.png" [latitude]="lat" [longitude]="lng"></agm-marker>
-                </agm-map>
-            </div>
-            <div class="col-md-6 col-sm-6 get-in-touch">
-                <h2 class="c-d-pink">Get in Touch<br/> with Us</h2>
-                <p>Northwestern University Feinberg School of Medicine
-                    <br />633 N Saint Clair, 19th Floor
-                    <br />Chicago, IL 60611
-                </p>
-                <p><strong>Telephone:</strong> 312-503-2866
-                    <br /> <strong>Email:</strong>
-                    <a class="link" href="mailto:myjourney@northwestern.edu"> myjourney@northwestern.edu</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    <!-- start what is oncotool -->
+    <!-- start learn more about oncotool -->
+    <div class="learn-more-about" #get_in_touch>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <img class="img-responsive img-center" src="assets/images/big_arrow_bottom.png" alt="Image" />
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <h1 class="heading">Learn More About My Journey</h1>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 col-sm-6">
+                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="true" [styles]="styleArray">
+                        <agm-marker iconUrl="assets/images/map_marker.png" [latitude]="lat" [longitude]="lng"></agm-marker>
+                    </agm-map>
+                </div>
+                <div class="col-md-6 col-sm-6 get-in-touch">
+                    <h2 class="c-d-pink">
+                        Get in Touch<br /> with Us
+                    </h2>
+                    <p>
+                        Northwestern University Feinberg School of Medicine
+                        <br />633 N Saint Clair, 19th Floor <br />Chicago, IL 60611
+                    </p>
+                    <p>
+                        <strong>Telephone:</strong> 312-503-2866 <br />
+                        <strong>Email:</strong>
+                        <a class="link" href="mailto:myjourney@northwestern.edu">
+						myjourney@northwestern.edu</a
+					>
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- end learn more about oncotool -->

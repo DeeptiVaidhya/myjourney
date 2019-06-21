@@ -1,68 +1,68 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../service/auth.service';
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { AuthService } from "../../service/auth.service";
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.css'],
+	selector: "app-home",
+	templateUrl: "./home.component.html",
+	styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
 	lat: Number = 41.893838;
 	lng: Number = -87.622379;
 	styleArray = [
 		{
-			elementType: 'geometry',
+			elementType: "geometry",
 			stylers: [
 				{
-					color: '#f5f5f5',
-				},
-			],
+					color: "#f5f5f5"
+				}
+			]
 		},
 		{
-			elementType: 'labels.icon',
+			elementType: "labels.icon",
 			stylers: [
 				{
-					visibility: 'off',
-				},
-			],
+					visibility: "off"
+				}
+			]
 		},
 		{
-			elementType: 'labels.text.fill',
+			elementType: "labels.text.fill",
 			stylers: [
 				{
-					color: '#616161',
-				},
-			],
+					color: "#616161"
+				}
+			]
 		},
 		{
-			elementType: 'labels.text.stroke',
+			elementType: "labels.text.stroke",
 			stylers: [
 				{
-					color: '#f5f5f5',
-				},
-			],
+					color: "#f5f5f5"
+				}
+			]
 		},
 		{
-			featureType: 'road',
-			elementType: 'geometry',
+			featureType: "road",
+			elementType: "geometry",
 			stylers: [
 				{
-					color: '#ffffff',
-				},
-			],
+					color: "#ffffff"
+				}
+			]
 		},
 		{
-			featureType: 'water',
-			elementType: 'geometry',
+			featureType: "water",
+			elementType: "geometry",
 			stylers: [
 				{
-					color: '#9B77AB',
-				},
-			],
-		},
+					color: "#9B77AB"
+				}
+			]
+		}
 	];
 	public loginForm: FormGroup;
 	data: any;
@@ -75,48 +75,45 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 		this.loginForm = new FormGroup({
-			username: new FormControl('', { validators: [Validators.required] }),
-			password: new FormControl('', { validators: [Validators.required] }),
+			username: new FormControl("", {
+				validators: [Validators.required]
+			}),
+			password: new FormControl("", {
+				validators: [Validators.required]
+			}),
+			remember_me: new FormControl("")
 		});
-
-		if (localStorage.getItem('token') && localStorage.getItem('role')) {
-			const role = localStorage.getItem('role');
-			let path = '/patient/dashboard';
+		this.checkCookie();
+		if (localStorage.getItem("token") && localStorage.getItem("role")) {
+			const role = localStorage.getItem("role");
+			let path = "/patient/dashboard";
 			switch (role) {
-				// case '2':
-				// 	path = '/researcher/dashboard';
-				// 	break;
-				// case '3':
-				// 	path = '/provider/dashboard';
-				// 	break;
-				case '3':
-					path = '/patient/dashboard';
+				case "3":
+					path = "/patient/dashboard";
 					break;
 			}
 			this.router.navigate([path]);
-			console.log(role);
 		}
 	}
 
 	signIn() {
 		if (this.loginForm.valid) {
+			if (this.loginForm.value.remember_me) {
+				this.setCookie("username", "password", 365);
+			} else {
+				this.setCookie("username", "password", -1);
+			}
 			this.authService.login(this.loginForm.value).subscribe(
 				result => {
 					this.data = result;
-					if (this.data.status === 'success') {
-						localStorage.setItem('token', this.data.token);
-						localStorage.setItem('role', this.data.role);
-						localStorage.setItem('username', this.data.username);
-						let path = '/patient/dashboard';
+					if (this.data.status === "success") {
+						localStorage.setItem("token", this.data.token);
+						localStorage.setItem("role", this.data.role);
+						localStorage.setItem("username", this.data.username);
+						let path = "/patient/dashboard";
 						switch (this.data.role) {
-							// case '2':
-							// 	path = '/researcher/dashboard';
-							// 	break;
-							// case '3':
-							// 	path = '/provider/dashboard';
-							// 	break;
-							case '3':
-								path = '/patient/dashboard';
+							case "3":
+								path = "/patient/dashboard";
 								break;
 						}
 						this.router.navigate([path]).then(() => {
@@ -132,6 +129,55 @@ export class HomeComponent implements OnInit {
 	}
 
 	scroll(el) {
-		el.scrollIntoView({ behavior: 'smooth' });
+		el.scrollIntoView({ behavior: "smooth" });
+	}
+
+	setCookie(username, password, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+		var expires = "expires=" + d.toUTCString();
+		document.cookie =
+			username +
+			"=" +
+			this.loginForm.value.username +
+			";" +
+			expires +
+			";path=/";
+		document.cookie =
+			password +
+			"=" +
+			this.loginForm.value.password +
+			";" +
+			expires +
+			";path=/";
+	}
+
+	getCookie(cname) {
+		let name = cname + "=";
+		let ca = document.cookie.split(";");
+		for (let i = 0; i < ca.length; i++) {
+			let c = ca[i];
+			while (c.charAt(0) == " ") {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+
+	checkCookie() {
+		let username = this.getCookie("username");
+		let password = this.getCookie("password");
+		if (username != "") {
+			this.loginForm.controls["username"].setValue(username);
+			this.loginForm.controls["password"].setValue(password);
+			this.loginForm.controls["remember_me"].setValue(true);
+		} else {
+			if (username != "" && username != null) {
+				this.setCookie("username", "password", 365);
+			}
+		}
 	}
 }

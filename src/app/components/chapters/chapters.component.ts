@@ -15,6 +15,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	is_sub_topic: boolean = false;
 	is_added_favorite: boolean = false;
 	pageContent: any;
+	next_previous_subtopic: any;
 	resourceId: any;
 	player: any = [];
 	interval: any;
@@ -32,6 +33,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 		private dataService: DataService
 	) {
 		this.route.params.subscribe(param => {
+			this.breadcrumb=[{ link: "/patient/dashboard", title: "Home" }];
 			this.slug = param.sub_topic
 				? param.sub_topic
 				: param.chapter
@@ -49,6 +51,10 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 				.subscribe(response => {
 					if (response["status"] == "success") {
 						this.pageContent = response["data"];
+						this.next_previous_subtopic = this.pageContent[
+							"next_prev_sub_topic"
+						];
+						console.log(this.next_previous_subtopic);
 						this.is_added_favorite = response["is_added_favorite"];
 						if (this.pageContent.id) {
 							this.visitedChapter({
@@ -222,12 +228,10 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 
 	modalClosed() {
 		this.modalIsShown = false;
-		
 	}
 
 	videoTimeUpdated(resource_id) {
 		this.resourceId = resource_id;
-		
 	}
 
 	visitedChapter(content) {

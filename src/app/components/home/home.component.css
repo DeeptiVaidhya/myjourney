@@ -26,5 +26,16 @@ agm-map {
     font-size: 15px;
     border-bottom: 1px solid #fff;
     line-height: 22px;
-    padding-top: 4px;
+    padding-top: 10px;
+}
+
+.rem-check {
+    height: auto;
+    margin-top: 0;
+    zoom: 1.5;
+    vertical-align: middle;
+}
+
+.m-t-11 {
+    margin-top: 11px;
 }
