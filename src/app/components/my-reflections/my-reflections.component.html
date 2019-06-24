@@ -58,14 +58,14 @@
 												</div>
 												<div class="quest-row">
 													<div class="col-md-8 m-t-10">
-														<p class="f-18 m-0 f-bold p-l-r">{{ questions?.short_question }}</p>
+														<p class="f-18 m-0 f-bold p-l-r"><span class="p-l-10">{{ questions?.short_question }}</span></p>
 													</div>
 													<div class="col-xs-12 m-t-10" *ngIf="resource?.level == 'inquiry'">
-														<p class="p-l-r"><em>{{ questions?.response }}</em></p>
-														<p class="p-l-r"><em>{{ (questions?.skip_question_post_rating_count ? 'Skipped' : (questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
+														<p class="p-l-r"><em class="p-l-10" *ngIf ="questions?.response">{{ questions?.response }}</em></p>
+														<p class="p-l-r"><em class="p-l-10" *ngIf ="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_post_rating_count ? 'Skipped' : (questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
 													</div>
 													<div class="col-xs-12 m-t-1" *ngIf="resource?.level == 'mood'">
-														<p class="p-l-r"><em>{{ (questions?.skip_question_pre_rating_count ? 'Skipped' : (questions?.skip_question_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
+														<p class="p-l-r"><em class="p-l-10" *ngIf ="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_pre_rating_count ? 'Skipped' : (questions?.skip_question_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
 														<img src="{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.src }}" class="m-r-15 m-t-40 m-b-30 p-l-r">
 														<span>{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.title }}</span>
 													</div>
