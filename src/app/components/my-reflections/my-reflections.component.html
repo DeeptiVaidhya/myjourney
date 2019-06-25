@@ -27,7 +27,8 @@
                                     <p>{{ data?.reflection_description }}</p>
                                 </div>
                             </div>
-                            <ng-container *ngFor='let resource of data?.resources'>
+                            <!-- <ng-container *ngFor='let chap of data?.week_chapters'> -->
+								<ng-container *ngFor ="let resource of data?.resources">
 							<!-- {{ data?.resources.length }} -->
                                 <div class="row p-b-30" *ngIf="resource?.level == 'inquiry' || resource?.level == 'mood'">
                                     <ng-container *ngIf="resource?.questions||resource.is_completed">
@@ -96,8 +97,9 @@
                                             <p class="p-l-r"><em>It looks like you have not completed any questions for this exercise yet. Click on the exercise if you would like to answer them now.</em></p>
                                         </div>
                                     </ng-container>
-                                </div>
-                            </ng-container>
+								</div>
+								</ng-container>
+                            <!-- </ng-container> -->
                         </div>
                     </accordion-group>
                 </accordion>

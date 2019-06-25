@@ -31,18 +31,8 @@ export class MyReflectionsComponent implements OnInit {
 		this.reflectionData();
 	}
 
-	// addPadding(){
-	// 	setTimeout(function(){
-	// 		let questRow = document.querySelectorAll('.quest-row');
-	// 		for(let i=0,q=questRow,l=q.length;i<l;i++){
-	// 			(q[i] as HTMLElement).style.paddingLeft=(i*20)+'px';
-	// 		}
-	// 	},100);
-	// }
-	
-
 	reflectionData() {
-		this.questionnaireService.get_resources().subscribe(
+		this.questionnaireService.get_reflection_data().subscribe(
 			Response => {
 				console.log(Response);
 

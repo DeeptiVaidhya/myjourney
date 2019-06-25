@@ -5,7 +5,7 @@ import { HelperService } from './helper.service';
 
 @Injectable()
 export class QuestionnaireService {
-	constructor(public helperService:HelperService) { }
+	constructor(public helperService: HelperService) {}
 
 	/**
 	 *
@@ -13,7 +13,12 @@ export class QuestionnaireService {
 	 * Get Chapter/Sub-topic details
 	 */
 	chapterDetails(data): Observable<any> {
-		return this.helperService.makeHttpRequest('educational/chapter-details', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"educational/chapter-details",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
@@ -22,14 +27,24 @@ export class QuestionnaireService {
 	 * Toggle favorite for a sub topic and a user
 	 */
 	updateFavorite(data): Observable<any> {
-		return this.helperService.makeHttpRequest('educational/update-favorite', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"educational/update-favorite",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
 	 * @desc Function is used to show total questionnaire completed within current week.
 	 */
 	patients_weekly_questionnaire() {
-		return this.helperService.makeHttpRequest('questionnaire/dash-weekly-questionnaire', 'get', {},true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/dash-weekly-questionnaire",
+			"get",
+			{},
+			true
+		);
 	}
 
 	/**
@@ -38,7 +53,12 @@ export class QuestionnaireService {
 	 */
 
 	get_questionnaire(data) {
-		return this.helperService.makeHttpRequest('questionnaire/questionnaire', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/questionnaire",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
@@ -46,71 +66,130 @@ export class QuestionnaireService {
 	 * @desc Function is used to save questionnaire answer given by user.
 	 */
 	save_questionnaire(data) {
-		return this.helperService.makeHttpRequest('questionnaire/save-answer', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/save-answer",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
 	 * @desc Function is used to get current running week information.
 	 */
 	get_current_week() {
-		return this.helperService.makeHttpRequest('questionnaire/questionnaire/week-info', 'get', {},true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/questionnaire/week-info",
+			"get",
+			{},
+			true
+		);
 	}
 
 	/**
 	 * @desc Function is used to get favorite subtopic selected by user.
 	 */
-	getFavoriteSubTopic()
-	{
-		return this.helperService.makeHttpRequest('educational/my-favorite', 'get', {},true);
+	getFavoriteSubTopic() {
+		return this.helperService.makeHttpRequest(
+			"educational/my-favorite",
+			"get",
+			{},
+			true
+		);
 	}
 
 	/**
-	* @desc Function is used to get resourses data
+	 * @desc Function is used to get resourses data
 	 */
 	get_resources() {
-		return this.helperService.makeHttpRequest('educational/resources', 'get', {},true);
+		return this.helperService.makeHttpRequest(
+			"educational/resources",
+			"get",
+			{},
+			true
+		);
+	}
+	/**
+	 * @desc Function is used to get reflection data
+	 */
+	get_reflection_data() {
+		return this.helperService.makeHttpRequest(
+			"educational/reflection",
+			"get",
+			{},
+			true
+		);
 	}
 
 	/**
-	* @desc Function is used to get resourses data
+	 * @desc Function is used to get resourses data
 	 */
 	getResourceQuestion(data) {
-		return this.helperService.makeHttpRequest('questionnaire/resourse-question', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/resourse-question",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
-	* @desc Function is used to get bluejeans Session
+	 * @desc Function is used to get bluejeans Session
 	 */
 	blueJeansSession() {
-		return this.helperService.makeHttpRequest('educational/bluejeans-session', 'get', {},true);
+		return this.helperService.makeHttpRequest(
+			"educational/bluejeans-session",
+			"get",
+			{},
+			true
+		);
 	}
 
 	/**
-	* @desc Function is used to get bluejeans Session
-	*/
+	 * @desc Function is used to get bluejeans Session
+	 */
 	submitResourceQuestionResponse(data) {
-		return this.helperService.makeHttpRequest('questionnaire/resourse-question-response', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/resourse-question-response",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
-	* @desc Function is used to add chapter subtopic as visited
-	*/
+	 * @desc Function is used to add chapter subtopic as visited
+	 */
 	addVisitedChapter(data) {
-		return this.helperService.makeHttpRequest('questionnaire/add-to-visited', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/add-to-visited",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
-	* @desc Function is used to add chapter subtopic as visited
-	*/
+	 * @desc Function is used to add chapter subtopic as visited
+	 */
 	updateVisitedChapter(data) {
-		return this.helperService.makeHttpRequest('questionnaire/update-visited-chapter-subtopic', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/update-visited-chapter-subtopic",
+			"post",
+			data,
+			true
+		);
 	}
 
 	/**
-	* @desc Function is used to add resource as visited
-	*/
+	 * @desc Function is used to add resource as visited
+	 */
 	addResourceVisited(data) {
-		return this.helperService.makeHttpRequest('questionnaire/add-visited-resource', 'post', data,true);
+		return this.helperService.makeHttpRequest(
+			"questionnaire/add-visited-resource",
+			"post",
+			data,
+			true
+		);
 	}
-
 }
