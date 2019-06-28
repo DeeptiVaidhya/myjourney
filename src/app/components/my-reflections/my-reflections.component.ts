@@ -64,6 +64,7 @@ export class MyReflectionsComponent implements OnInit {
 
 	modalClosed(){
 		this.modalIsShown=false;
+		this.reflectionData();
 	}
 	videoTimeUpdated(resource_id){
 		this.resourceId = resource_id;

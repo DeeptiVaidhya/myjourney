@@ -33,7 +33,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 		private dataService: DataService
 	) {
 		this.route.params.subscribe(param => {
-			this.breadcrumb=[{ link: "/patient/dashboard", title: "Home" }];
+			this.breadcrumb = [{ link: "/patient/dashboard", title: "Home" }];
 			this.slug = param.sub_topic
 				? param.sub_topic
 				: param.chapter
@@ -169,6 +169,10 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
+		// window.addEventListener("beforeunload",function (event){
+		// 	console.log(event);
+		// 	return "Are you sure to close the window ?";
+		// });
 		this.interval = setInterval(() => {
 			this.questService
 				.updateVisitedChapter({

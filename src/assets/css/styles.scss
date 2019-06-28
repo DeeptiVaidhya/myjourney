@@ -453,8 +453,8 @@ h6 {
     cursor: pointer;
 }
 
-.m-0{
-    margin:0;
+.m-0 {
+    margin: 0;
 }
 
 input:-webkit-autofill,
@@ -745,8 +745,16 @@ a:active {
     margin-top: 60px;
 }
 
+.m-t-20 {
+    margin-top: 20px;
+}
+
 .m-r-15 {
     margin-right: 15px;
+}
+
+.m-l-20 {
+    margin-left: 20px;
 }
 
 .d-flex {
@@ -930,24 +938,26 @@ app-breadcrumb[isFooter] {
 vg-player {
     border: 1px solid #e6e6e6;
     background-image: url(../images/audio_bg.jpg);
-	background-size: 100%;
-	border: none;
+    background-size: 100%;
+    border: none;
+    background-repeat: no-repeat;
 }
 
 .vg-icon-play_arrow:before {
     content: "\e01b";
 }
 
-vg-time-display, vg-mute, vg-volume {
+vg-time-display,
+vg-mute,
+vg-volume {
     color: #e20dd1 !important;
 }
 
 vg-controls {
     background: #fff3f3 !important;
     border-top: 1px solid #e6e6e6;
-	padding: 25px;
-	height: 100px !important;
-
+    padding: 25px;
+    height: 100px !important;
 }
 
 vg-volume {
@@ -958,7 +968,8 @@ vg-volume .volumeBackground {
     background-color: #3333336b !important;
 }
 
-vg-volume .volumeValue, .volumeKnob {
+vg-volume .volumeValue,
+.volumeKnob {
     background-color: #e20dd1 !important;
 }
 
@@ -966,9 +977,9 @@ vg-scrub-bar-current-time {
     background: #a8a2a2 !important;
 }
 
-.vg-icon-fullscreen{
-	font-size: 40px !important;
-	color: #e20dd1 !important;
+.vg-icon-fullscreen {
+    font-size: 40px !important;
+    color: #e20dd1 !important;
 }
 
 .vg-icon-play_arrow,
@@ -1462,26 +1473,30 @@ form.signin-form .col-md-3 {
 
 
 /*end researcher*/
+
 .cont-tbl table {
-	min-height: .01%;
+    min-height: .01%;
     overflow-x: auto;
     width: 100%;
     max-width: 100%;
     margin-bottom: 20px;
 }
 
-.cont-tbl thead tr,.cont-tbl tbody tr:first-child {
-	background: #f8f9fb;
+.cont-tbl thead tr,
+.cont-tbl tbody tr:first-child {
+    background: #f8f9fb;
 }
 
-.cont-tbl thead tr th, .cont-tbl tbody tr:first-child td {
+.cont-tbl thead tr th,
+.cont-tbl tbody tr:first-child td {
     padding: 15px 10px;
     color: #d42dc2;
     font-size: 20px;
     font-family: 'Montserrat-Light';
     text-align: center;
-	font-weight: normal;
-	opacity: 0.9; /* Added this*/
+    font-weight: normal;
+    opacity: 0.9;
+    /* Added this*/
 }
 
 .cont-tbl tbody tr td {
@@ -1496,6 +1511,10 @@ form.signin-form .col-md-3 {
 // Fact-G7 Graph Report CSS
 #fact-g7-chart .amcharts-main-div {
     min-height: 350px;
+}
+
+.enabled {
+    color: #666;
 }
 
 
@@ -1696,6 +1715,9 @@ form.signin-form .col-md-3 {
     }
     app-breadcrumb {
         margin-bottom: 25px;
+    }
+    vg-player {
+        background-size: 100% 78%;
     }
 }
 

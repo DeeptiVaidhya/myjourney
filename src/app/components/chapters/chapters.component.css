@@ -16,3 +16,8 @@
 .d-flex {
     display: flex;
 }
+
+.p-t-b {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
