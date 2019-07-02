@@ -28,24 +28,18 @@
 								</td>
 								<td *ngFor="let option of options">
 									<span class="radio-container">
-										<input
-											type="radio"
-											title="{{ option.option_label }}"
-											name="option[{{ question.id }}]"
-											value="{{ option.id }}"
+										<input type="radio" title="{{ option.option_label }}"
+											name="option[{{ question.id }}]" value="{{ option.id }}"
 											attr.data-question-id="{{
 												question.id
-											}}"
-											attr.group-id="{{
+											}}" attr.group-id="{{
 												option.question_groups_id
-											}}"
-											[checked]="
+											}}" [checked]="
 												question?.answer_option_id ==
 												option?.id
 													? 'checked'
 													: ''
-											"
-										/>
+											" />
 										<span></span>
 									</span>
 								</td>
@@ -57,11 +51,7 @@
 		</div>
 		<div class="row sumbit-section">
 			<div class="col-xs-12 text-center">
-				<button
-					class="btn btn-violet btn-250 b-r-100"
-					type="button"
-					(click)="save()"
-				>
+				<button class="btn btn-violet btn-250 b-r-100" type="button" (click)="save()">
 					Submit
 				</button>
 				<!-- </div> -->

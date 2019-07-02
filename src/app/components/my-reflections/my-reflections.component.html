@@ -32,7 +32,7 @@
 							<!-- {{ data?.resources.length }} -->
                                 <div class="row p-b-30" *ngIf="resource?.level == 'inquiry' || resource?.level == 'mood'">
 							<!-- {{resource?.questions?.length||resource.is_completed}} -->
-                                    <ng-container *ngIf="resource?.questions?.length||resource.is_completed">
+                                    <ng-container *ngIf="resource?.questions?.length||resource?.is_completed">
                                         <div class="col-xs-12">
                                             <div class="bg-l-pink">
                                                 <p class="h8 uppercase f-medium m-0 c-violet">{{ resource?.level == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
@@ -67,7 +67,7 @@
 														<p class="p-l-r"><em class="p-l-40" *ngIf ="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_post_rating_count ? 'Skipped' : (questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
 													</div>
 													<div class="col-xs-12 m-t-1" *ngIf="resource?.level == 'mood'">
-														<p class="p-l-r"><em class="p-l-40" *ngIf ="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_pre_rating_count ? 'Skipped' : (questions?.skip_question_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
+														<p class="p-l-r"><em class="p-l-40" *ngIf ="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ ((questions?.skip_question_pre_rating_count || questions?.skip_question_post_rating_count) ? 'Skipped' : (questions?.skip_question_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
 														<span class="p-l-40"><img src="{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.src }}" class="m-r-15 m-t-40 m-b-30 p-l-r"></span>
 														<span>{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.title }}</span>
 													</div>

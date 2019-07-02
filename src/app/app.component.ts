@@ -98,10 +98,7 @@ export class AppComponent implements OnInit {
 				break;
 		}
 	}
-	// @HostListener("window:beforeunload", ["$event"])
-	// beforeunloadHandler(event) {
-	// 	alert("hello");
-	// }
+
 	ngOnInit() {
 		this.checkDashLink();
 		this.router.events.subscribe(evt => {
@@ -142,7 +139,6 @@ export class AppComponent implements OnInit {
 					localStorage.setItem("arm", this.armAllocate);
 					// console.log(this.isWeekStarted);
 					this.reset();
-					
 				}
 			});
 
@@ -159,8 +155,6 @@ export class AppComponent implements OnInit {
 				: false;
 
 			window.scrollTo(0, 0);
-			
 		});
-
 	}
 }

@@ -185,6 +185,23 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 						this.toastr.error(Response["msg"] || "Server error");
 					}
 				});
+		} else {
+			console.log(this.resourceDetail);
+			this.questionnireForm.value.exercise_type = this.level;
+			this.questionnireForm.value.video_completed = this.video_completed;
+			this.questionnireForm.value.resource_id = this.resourceId;
+			this.questionnireForm.value.content_id =
+				this.contentId || this.pageContentId;
+			this.questionnireForm.value.total_time = this.totalTime;
+			this.questionnireForm.value.callee_page = this.calleePage;
+			this.questionnireForm.value.left_time =
+				this.totalTime - this.spentTime;
+			this.questService
+				.submitResourceQuestionResponse(this.questionnireForm.value)
+				.subscribe(response => {
+					if (response["status"] == "success") {
+					}
+				});
 		}
 	}
 

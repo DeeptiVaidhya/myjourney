@@ -2,14 +2,19 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import "rxjs/add/observable/interval";
+import { AuthService } from "../../service/auth.service";
 import { DataService } from "../../service/data.service";
 import { QuestionnaireService } from "../../service/questionnaire.service";
+
 @Component({
 	selector: "app-chapters",
 	templateUrl: "./chapters.component.html",
 	styleUrls: ["./chapters.component.css"]
 })
 export class ChaptersComponent implements OnDestroy, OnInit {
+	public isLoggedIn: Boolean = true;
+	timedOut = false;
+	isHeaderHidden = false;
 	slug: string = "";
 	topic: string = "";
 	is_sub_topic: boolean = false;
@@ -30,6 +35,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 		public questService: QuestionnaireService,
 		public toastr: ToastrService,
 		private router: Router,
+		private authService: AuthService,
 		private dataService: DataService
 	) {
 		this.route.params.subscribe(param => {
@@ -169,10 +175,6 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-		// window.addEventListener("beforeunload",function (event){
-		// 	console.log(event);
-		// 	return "Are you sure to close the window ?";
-		// });
 		this.interval = setInterval(() => {
 			this.questService
 				.updateVisitedChapter({
@@ -184,6 +186,25 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 					}
 				});
 		}, 10000);
+
+		this.interval = setInterval(() => {
+			this.authService.updatesessionTime().subscribe(response => {
+				if (response["status"] == "success") {
+				}
+			});
+		}, 10000);
+
+		// window.addEventListener("beforeunload", function(e) {
+		// 	var confirmationMessage = true;
+		// 	(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+		// 	this.console.log(confirmationMessage);
+
+		// 	confirm("Are you sure to exit?"); //Webkit, Safari, Chrome
+		// });
+		// let self = this;
+		// window.addEventListener("unload", function(){
+		// 	self.logOutSession();
+		// });
 	}
 
 	ngOnDestroy() {
@@ -224,8 +245,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 			this.toastr.error("Invalid content or not a sub topic.");
 		}
 	}
-	openModal(resource, index) {
-		this.activeIndex = index;
+	openModal(resource) {
 		this.modalIsShown = !this.modalIsShown;
 		this.resourceDetail = resource;
 	}

@@ -40,7 +40,7 @@
                                                 <p class="h9" *ngIf="(resource?.is_completed || resource.id==resourceId) && resource?.type == 'AUDIO'"><i class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
                                                 <p class="h9">{{resource?.description}}</p>
                                             </div>
-                                            <a href="javascript:void(0)" (click)="openModal(resource,i)" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="Precision Medicine in Cancer Treatment">{{resource?.type}}</a>
+                                            <a href="javascript:void(0)" (click)="openModal(resource)" target="_blank" class="btn btn-violet btn-block sec-button gaes-cls" data-ga-action="Read More" title="Precision Medicine in Cancer Treatment">{{resource?.type}}</a>
                                         </div>
                                         <div class="section-content" *ngIf="resource?.type == 'WEBSITE' || resource?.type == 'READING'">
                                             <span class="onco-article c-pink sec-icon"></span>

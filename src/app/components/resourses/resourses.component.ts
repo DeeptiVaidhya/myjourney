@@ -36,22 +36,16 @@ export class ResoursesComponent implements OnInit {
 		window.open(resource.link, "_blank");
 	}
 
-	openModal(resource,index) {
-		console.log(resource);
-		this.activeIndex=index;
+	openModal(resource) {
 		this.modalIsShown = !this.modalIsShown;
 		this.resourceDetail=resource;
-		console.log(this.resourceDetail);
 	}
 
 	modalClosed(){
 		this.modalIsShown=false;
-		console.log("model close function "+this.modalIsShown);
 	}
 	videoTimeUpdated(resource_id){
-		console.log(resource_id);
 		this.resourceId = resource_id;
-		console.log("video time update "+this.modalIsShown);
 	}
 
 }
