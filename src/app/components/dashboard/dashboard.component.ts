@@ -37,12 +37,6 @@ export class DashboardComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.interval = setInterval(() => {
-			this.authService.updatesessionTime().subscribe(response => {
-				if (response["status"] == "success") {
-				}
-			});
-		}, 10000);
 		localStorage.getItem("username") &&
 			(this.username = localStorage.getItem("username"));
 		this.patient_weekly_questionnaire();
@@ -61,10 +55,7 @@ export class DashboardComponent implements OnInit {
 			}
 		);
 	}
-	ngOnDestroy() {
-		clearInterval(this.interval);
-	}
-
+	
 	patient_weekly_questionnaire() {
 		this.questService.patients_weekly_questionnaire().subscribe(
 			result => {

@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 	timedOut = false;
 	isHeaderHidden = false;
 	lastPing?: Date = null;
-
+	interval: any;
 	pathsWtLogin: any = [
 		"/home",
 		"/about-us",
@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
 						localStorage.clear();
 						this.timedOut = true;
 						this.isLoggedIn = false;
+						clearInterval(this.interval);
 						this.router.navigate(["/home"]).then(() => {
 							this.toastr.error(
 								"Your session has been expired. Please log in to continue."
@@ -114,6 +115,7 @@ export class AppComponent implements OnInit {
 					(response.hasOwnProperty("status") &&
 						response["status"] == "INVALID_TOKEN")
 				) {
+					clearInterval(this.interval);
 					console.log("Token Expired");
 					console.log(
 						this.pathsWtLogin.some(path => {
@@ -137,6 +139,7 @@ export class AppComponent implements OnInit {
 					this.isWeekStarted = response["is_week_started"];
 					this.armAllocate = response["arm"];
 					localStorage.setItem("arm", this.armAllocate);
+					
 					// console.log(this.isWeekStarted);
 					this.reset();
 				}
@@ -156,5 +159,17 @@ export class AppComponent implements OnInit {
 
 			window.scrollTo(0, 0);
 		});
+		this.interval = setInterval(() => {
+			if (this.isLoggedIn) {
+				this.authService
+					.updatesessionTime()
+					.subscribe(response => {
+						// if (response["status"] == "success") {
+						// }
+					});
+				
+			}
+		}, 10000);
+	
 	}
 }

@@ -186,25 +186,6 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 					}
 				});
 		}, 10000);
-
-		this.interval = setInterval(() => {
-			this.authService.updatesessionTime().subscribe(response => {
-				if (response["status"] == "success") {
-				}
-			});
-		}, 10000);
-
-		// window.addEventListener("beforeunload", function(e) {
-		// 	var confirmationMessage = true;
-		// 	(e || window.event).returnValue = confirmationMessage; //Gecko + IE
-		// 	this.console.log(confirmationMessage);
-
-		// 	confirm("Are you sure to exit?"); //Webkit, Safari, Chrome
-		// });
-		// let self = this;
-		// window.addEventListener("unload", function(){
-		// 	self.logOutSession();
-		// });
 	}
 
 	ngOnDestroy() {
