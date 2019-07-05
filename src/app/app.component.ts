@@ -6,170 +6,174 @@ import { CONSTANTS } from "./config/constants";
 import { AuthService } from "./service/auth.service";
 
 @Component({
-	selector: "app-root",
-	templateUrl: "./app.component.html",
-	styleUrls: ["./app.component.css"]
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-	maIsOpen: boolean;
-	public role: any;
-	link: any;
+    maIsOpen: boolean;
+    public role: any;
+    link: any;
 
-	public isLoggedIn: Boolean = true;
-	public isWeekStarted: boolean;
-	public armAllocate: string;
-	// Auto logout variables
-	idleState = "Not started.";
-	timedOut = false;
-	isHeaderHidden = false;
-	lastPing?: Date = null;
-	interval: any;
-	pathsWtLogin: any = [
-		"/home",
-		"/about-us",
-		"/contact-us",
-		"/faq",
-		"/terms-conditions",
-		"/create-password",
-		"/forgot-password",
-		"/reset-password"
-	];
+    public isLoggedIn: Boolean = true;
+    public isWeekStarted: boolean;
+    public armAllocate: string;
+    // Auto logout variables
+    idleState = "Not started.";
+    timedOut = false;
+    isHeaderHidden = false;
+    lastPing?: Date = null;
+    interval: any;
+    window_focus: Boolean = false;
+    pathsWtLogin: any = [
+        "/home",
+        "/about-us",
+        "/contact-us",
+        "/faq",
+        "/terms-conditions",
+        "/create-password",
+        "/forgot-password",
+        "/reset-password"
+    ];
 
-	constructor(
-		private router: Router,
-		private authService: AuthService,
-		public toastr: ToastrService,
-		private idle: Idle
-	) {
-		// this.toastr.setRootViewContainerRef(vRef);
+    constructor(
+        private router: Router,
+        private authService: AuthService,
+        public toastr: ToastrService,
+        private idle: Idle
+    ) {
 
-		// sets an idle timeout of 5 seconds, for testing purposes.
-		idle.setIdle(CONSTANTS.SESSION_TIMEOUT);
-		// sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
-		idle.setTimeout(0);
-		// sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
-		idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
+        // this.toastr.setRootViewContainerRef(vRef);
 
-		//idle.onIdleEnd.subscribe(() => (this.idleState = 'No longer idle.'));
-		idle.onTimeout.subscribe(() => {
-			this.idleState = "Timed out!";
-			this.timedOut = true;
-		});
-		idle.onIdleStart.subscribe(() => {
-			this.authService.logout().subscribe(
-				result => {
-					if (result.status === "success") {
-						localStorage.removeItem("token");
-						this.idleState = "You've gone idle!";
-						localStorage.clear();
-						this.timedOut = true;
-						this.isLoggedIn = false;
-						clearInterval(this.interval);
-						this.router.navigate(["/home"]).then(() => {
-							this.toastr.error(
-								"Your session has been expired. Please log in to continue."
-							);
-						});
-					}
-				},
-				err => {
-					console.log(err);
-				}
-			);
-		});
-	}
+        // sets an idle timeout of 5 seconds, for testing purposes.
+        idle.setIdle(CONSTANTS.SESSION_TIMEOUT);
+        // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
+        idle.setTimeout(0);
+        // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
+        idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
-	reset() {
-		this.idle.watch();
-		this.idleState = "Started.";
-		this.timedOut = false;
-	}
+        //idle.onIdleEnd.subscribe(() => (this.idleState = 'No longer idle.'));
+        idle.onTimeout.subscribe(() => {
+            this.idleState = 'Timed out!';
+            this.timedOut = true;
+        });
+        idle.onIdleStart.subscribe(() => {
+            this.authService.logout().subscribe(
+                result => {
+                    if (result.status === 'success') {
+                        localStorage.removeItem('token');
+                        this.idleState = 'You\'ve gone idle!';
+                        localStorage.clear();
+                        this.timedOut = true;
+                        this.isLoggedIn = false;
+                        clearInterval(this.interval);
+                        this.router.navigate(['/home']).then(() => {
+                            this.toastr.error(
+                                'Your session has been expired. Please log in to continue.'
+                            );
+                        });
+                    }
+                },
+                err => {
+                    console.log(err);
+                }
+            );
+        });
+    }
+    reset() {
+        this.idle.watch();
+        this.idleState = 'Started.';
+        this.timedOut = false;
+    }
 
-	checkDashLink() {
-		this.role = localStorage.getItem("role");
-		switch (this.role) {
-			case "3":
-				this.link = {
-					dashboard: "patient/dashboard",
-					profile: "patient/profile"
-				};
-				break;
-			default:
-				this.link = {};
-				break;
-		}
-	}
+    checkDashLink() {
+        this.role = localStorage.getItem('role');
+        switch (this.role) {
+            case '3':
+                this.link = {
+                    dashboard: 'patient/dashboard',
+                    profile: 'patient/profile'
+                };
+                break;
+            default:
+                this.link = {};
+                break;
+        }
+    }
 
-	ngOnInit() {
-		this.checkDashLink();
-		this.router.events.subscribe(evt => {
-			if (!(evt instanceof NavigationEnd)) {
-				return;
-			}
+    ngOnInit() {
+        this.checkDashLink();
+        this.router.events.subscribe(evt => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
 
-			this.authService.checkLogin().subscribe(response => {
-				console.log(response.length && !response[0]);
-				//(response.length && !response[0]) ||
-				if (
-					(response.length && !response[0]) ||
-					(response.hasOwnProperty("status") &&
-						response["status"] == "INVALID_TOKEN")
-				) {
-					clearInterval(this.interval);
-					console.log("Token Expired");
-					console.log(
-						this.pathsWtLogin.some(path => {
-							console.log(this.router.url.indexOf(path));
-							return this.router.url.indexOf(path) === 0; // current path starts with this path string
-						})
-					);
-					// this.isLoggedIn = false;
-					localStorage.clear(); // forcefully logout and clear localstorage, if token not found
-					this.isLoggedIn = false;
-					this.isHeaderHidden = false;
-					if (
-						!this.pathsWtLogin.some(path => {
-							return this.router.url.indexOf(path) === 0; // current path starts with this path string
-						})
-					) {
-						this.router.navigate(["/home"]);
-					}
-				} else {
-					this.isLoggedIn = true;
-					this.isWeekStarted = response["is_week_started"];
-					this.armAllocate = response["arm"];
-					localStorage.setItem("arm", this.armAllocate);
-					
-					// console.log(this.isWeekStarted);
-					this.reset();
-				}
-			});
+            this.authService.checkLogin().subscribe(response => {
+                console.log(response.length && !response[0]);
+                // (response.length && !response[0]) ||
+                if (
+                    (response.length && !response[0]) ||
+                    (response.hasOwnProperty('status') &&
+                        response['status'] == 'INVALID_TOKEN')
+                ) {
+                    clearInterval(this.interval);
+                    console.log('Token Expired');
+                    console.log(
+                        this.pathsWtLogin.some(path => {
+                            console.log(this.router.url.indexOf(path));
+                            return this.router.url.indexOf(path) === 0; // current path starts with this path string
+                        })
+                    );
+                    // this.isLoggedIn = false;
+                    localStorage.clear(); // forcefully logout and clear localstorage, if token not found
+                    this.isLoggedIn = false;
+                    this.isHeaderHidden = false;
+                    if (
+                        !this.pathsWtLogin.some(path => {
+                            return this.router.url.indexOf(path) === 0; // current path starts with this path string
+                        })
+                    ) {
+                        this.router.navigate(['/home']);
+                    }
+                } else {
+                    this.isLoggedIn = true;
+                    this.isWeekStarted = response['is_week_started'];
+                    this.armAllocate = response['arm'];
+                    localStorage.setItem('arm', this.armAllocate);
 
-			this.checkDashLink();
-			this.maIsOpen = this.router.url.indexOf("/my-account") === 0;
-			this.isHeaderHidden = [
-				"/forgot-password",
-				"/create-password",
-				"/reset-password"
-			].some(path => {
-				return this.router.url.indexOf(path) === 0; // current path starts with this path string
-			})
-				? true
-				: false;
+                    // console.log(this.isWeekStarted);
+                    this.reset();
+                }
+            });
 
-			window.scrollTo(0, 0);
-		});
-		this.interval = setInterval(() => {
-			if (this.isLoggedIn) {
-				this.authService
-					.updatesessionTime()
-					.subscribe(response => {
-						// if (response["status"] == "success") {
-						// }
-					});
-				
-			}
-		}, 10000);
-	
-	}
+            this.checkDashLink();
+            this.maIsOpen = this.router.url.indexOf('/my-account') === 0;
+            this.isHeaderHidden = [
+                '/forgot-password',
+                '/create-password',
+                '/reset-password'
+            ].some(path => {
+                return this.router.url.indexOf(path) === 0; // current path starts with this path string
+            })
+                ? true
+                : false;
+
+            window.scrollTo(0, 0);
+            clearInterval(this.interval);
+                this.interval = setInterval(() => {
+                    if (
+                        this.isLoggedIn &&
+                        document.hasFocus()
+                    ) {
+                        this.authService
+                            .updatesessionTime({
+                                showSpinner: false,
+                                focus: true
+                            })
+                            .subscribe();
+                    }
+                }, 10000);
+        });
+    }
+
 }

@@ -145,11 +145,11 @@ export class AuthService {
 	/**
 	 * @desc Logout function for each user.
 	 */
-	updatesessionTime(): Observable<any> {
+	updatesessionTime(data): Observable<any> {
 		return this.helperService.makeHttpRequest(
 			"auth/update-session-time",
-			"get",
-			{ showSpinner: false },
+			"post",
+			data,
 			true
 		);
 	}
