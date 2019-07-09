@@ -81,7 +81,7 @@ const MAINMENU_ROUTES: Routes = [
 	// Common Routes
 	{ path: "create-password/:code", component: ChangePasswordComponent },
 	{ path: "reset-password/:code", component: ChangePasswordComponent },
-	{ path: "reset-password", component: ChangePasswordComponent },
+	// { path: "reset-password", component: ChangePasswordComponent },
 	{ path: "forgot-password", component: ForgotPasswordComponent },
 	{ path: "resources", component: ResoursesComponent },
 	{ path: "about-us", component: AboutUsComponent },
