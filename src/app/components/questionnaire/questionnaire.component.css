@@ -48,12 +48,12 @@
     font-weight: bold;
 }
 
-.col-md-5 .btn {
+.col-md-6 .btn {
     height: 50px;
     font-size: 13px;
     line-height: 26px;
     margin-top: 20px;
-    width: 200px;
+    width: 250px;
 
 }
 

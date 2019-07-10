@@ -67,7 +67,7 @@
             <div class="col-md-7 col-sm-6 col-xs-12 v-middle">
                 <ng-container *ngFor="let weekInfo of currentWeekInfo; let i=index">
                     <div class="achievements-bg" *ngIf="currentWeek == weekInfo?.week_number"
-                        [ngClass]="currentWeek>0 ? (currentWeek == weekInfo?.week_number ? disabled : '') : ''">
+                        [ngClass]="currentWeek>0 ? (currentWeek == weekInfo?.week_number ? 'disabled' : '') : ''">
                         <h6>My Achievements & Events</h6>
                         <div class="row">
                             <div class="col-xs-4 icon">

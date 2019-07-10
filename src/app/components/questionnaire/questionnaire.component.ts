@@ -82,12 +82,14 @@ export class QuestionnaireComponent implements OnInit {
 
     highlightQuestions() {
         this.modalRef.hide();
-        let tr = document.querySelectorAll("tr.quest-row");
+        let tr = document.querySelectorAll("tr.quest-row"),td;
         for (let i = 0, l = tr.length; i < l; i++) {
-            !tr[i].querySelector("input[name^='option[']:checked") &&
-                ((tr[i].querySelector(
-                    ".c-purple"
-                ) as HTMLTableColElement).style.color = "#FF0000");
+            td = tr[i].querySelector(".c-purple") as HTMLTableColElement;
+            if(tr[i].querySelector("input[name^='option[']:checked")){
+                td.removeAttribute('style');
+            } else {
+                td.style.color = '#FF0000';
+            }
         }
     }
 
