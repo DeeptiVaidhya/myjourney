@@ -19,6 +19,7 @@ export class QuestionnaireComponent implements OnInit {
     total_question_groups = 0;
     page_number = 1;
     type: string = "";
+    groupId: any;
     symptom_percentage = 0;
     totalQuestions: number = 0;
     weekInfoId: any;
@@ -35,7 +36,7 @@ export class QuestionnaireComponent implements OnInit {
         public toastr: ToastrService,
         public questionnaireService: QuestionnaireService,
         private modalService: BsModalService
-    ) {}
+    ) { }
     /**
      * @desc Set all Pro-Ctcae Questions on Page View Init
      */
@@ -61,6 +62,7 @@ export class QuestionnaireComponent implements OnInit {
                     this.totalQuestions = this.questions.length;
                     console.log(this.totalQuestions);
                     this.options = Response["options"];
+                    this.groupId = Response["group_id"];
                     this.group_title = Response["group_title"];
                     this.weekInfoId = Response["week_info"]["id"];
                     this.short_description = Response["short_description"];
@@ -82,10 +84,10 @@ export class QuestionnaireComponent implements OnInit {
 
     highlightQuestions() {
         this.modalRef.hide();
-        let tr = document.querySelectorAll("tr.quest-row"),td;
+        let tr = document.querySelectorAll("tr.quest-row"), td;
         for (let i = 0, l = tr.length; i < l; i++) {
             td = tr[i].querySelector(".c-purple") as HTMLTableColElement;
-            if(tr[i].querySelector("input[name^='option[']:checked")){
+            if (tr[i].querySelector("input[name^='option[']:checked")) {
                 td.removeAttribute('style');
             } else {
                 td.style.color = '#FF0000';
@@ -118,6 +120,12 @@ export class QuestionnaireComponent implements OnInit {
                     response: response
                 });
             }
+            if (this.confirm_submition && option_ids.length == 0) {
+                data.push({
+                    question_groups_id: this.groupId,
+                    week_info_id: this.weekInfoId,
+                });
+            }
 
             this.questionnaireService
                 .save_questionnaire(data)
@@ -128,10 +136,10 @@ export class QuestionnaireComponent implements OnInit {
                             this.type == "intolerance"
                                 ? ["/questionnaire/rumination"]
                                 : this.type == "rumination"
-                                ? ["/questionnaire/promis"]
-                                : this.type == "promis"
-                                ? ["/questionnaire/fact"]
-                                : ["/patient/dashboard"];
+                                    ? ["/questionnaire/promis"]
+                                    : this.type == "promis"
+                                        ? ["/questionnaire/fact"]
+                                        : ["/patient/dashboard"];
                         this.router.navigate(path).then(() => {
                             this.toastr.success(Response["msg"]);
                             this.confirm_submition = false;
@@ -142,6 +150,7 @@ export class QuestionnaireComponent implements OnInit {
                     }
                 });
         } else {
+
             this.openModal(template);
         }
     }

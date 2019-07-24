@@ -5,21 +5,23 @@
             <div class="col-xs-12">
                 <p class="content-p">
                     <strong>On this page you will find your answers
-						to questions for the mindfulness activities.  Exercises are organized by week
-						on this page, even if you have not completed the activity yet. You can re-do
-						any of these activities at any time.</strong>
+                        to questions for the mindfulness activities. Exercises are organized by week
+                        on this page, even if you have not completed the activity yet. You can re-do
+                        any of these activities at any time.</strong>
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <accordion class="main-accordion panel-group" [closeOthers]="true" *ngFor="let  data of reflection_data; let i = index">
+                <accordion class="main-accordion panel-group" [closeOthers]="true"
+                    *ngFor="let  data of reflection_data; let i = index">
                     <accordion-group #res1>
                         <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic">
-                            <span class="col-xs-10 h6">Week {{ i+1 }}: {{ data?.reflection_title }}</span>
+                            <span class="col-xs-10 h6">Week {{ data?.current_week ? data?.current_week : i+1+':' }}
+                                {{ data?.reflection_title }}</span>
                             <span class="col-xs-2 text-right h6">
-								<i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
-							</span>
+                                <i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
+                            </span>
                         </div>
                         <div class="accordion-inner">
                             <div class="row">
@@ -28,78 +30,107 @@
                                 </div>
                             </div>
                             <!-- <ng-container *ngFor='let chap of data?.week_chapters'> -->
-								<ng-container *ngFor ="let resource of data?.resources">
-							<!-- {{ data?.resources.length }} -->
-                                <div class="row p-b-30" *ngIf="resource?.level == 'inquiry' || resource?.level == 'mood'">
-							<!-- {{resource?.questions?.length||resource.is_completed}} -->
+                            <ng-container *ngFor="let resource of data?.resources">
+
+                                <div class="row p-b-30"
+                                    *ngIf="resource?.level == 'inquiry' || resource?.level == 'mood'">
+                                    <!-- {{resource?.questions?.length||resource.is_completed}} -->
                                     <ng-container *ngIf="resource?.questions?.length||resource?.is_completed">
                                         <div class="col-xs-12">
                                             <div class="bg-l-pink">
-                                                <p class="h8 uppercase f-medium m-0 c-violet">{{ resource?.level == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
+                                                <p class="h8 uppercase f-medium m-0 c-violet">
+                                                    {{ resource?.level == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 m-b-10">
                                             <div class="bg-l-gray">
                                                 <div class="row">
                                                     <div class="col-md-8">
-                                                        <p (click)="openModal(resource)" class="h8 m-0 c-pink f-bold c-pointer">{{ resource?.title }}</p>
+                                                        <p (click)="openModal(resource)"
+                                                            class="h8 m-0 c-pink f-bold c-pointer">{{ resource?.title }}
+                                                        </p>
                                                     </div>
 
                                                     <div class="col-md-4 text-right">
-                                                        <a href="javascript:void(0)" (click)="getRoute(data?.slug, resource?.chapter_content_slug, resource?.id)" class="h9 f-bold">Back to content</a>
+                                                        <a href="javascript:void(0)"
+                                                            (click)="getRoute((data?.current_week ? resource?.chap_slug : data?.slug), (data?.current_week ? resource?.slug: resource?.chapter_content_slug), resource?.resources_id)"
+                                                            class="h9 f-bold">Back to content</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-xs-12 m-b-10">
-                                            <div class="row" *ngFor="let questions of resource?.questions; let i=index;">
+                                            <div class="row"
+                                                *ngFor="let questions of resource?.questions; let i=index;">
                                                 <!-- {{ resource?.questions.length }} -->
-                                                <div class="col-xs-12"  *ngIf="resource?.level == 'inquiry' ? (i%3 == 0 || questions?.skip_exercise_pre_rating_count==1) : (resource?.level == 'mood' ? (i%2 == 0 || questions?.skip_exercise_pre_rating_count==1) : false)">
-													<p class="p-l-r"><em class="under-line">You completed this exercise on {{ getFormatedDate(questions?.created_at) | date : 'shortDate'}}</em></p>
-												</div>
-												<div class="quest-row">
-													<div class="col-md-8 m-t-10">
-														<p class="f-18 m-0 f-bold p-l-r"><span class="p-l-40">{{ questions?.short_question }}</span></p>
-													</div>
-													<div class="col-xs-12 m-t-10" *ngIf="resource?.level == 'inquiry'">
-														<p class="p-l-r"><em class="p-l-40" *ngIf ="questions?.response">{{ questions?.response }}</em></p>
-														<p class="p-l-r"><em class="p-l-40" *ngIf ="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_post_rating_count ? 'Skipped' : (questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
-													</div>
-													<div class="col-xs-12 m-t-1" *ngIf="resource?.level == 'mood'">
-														<p class="p-l-r"><em class="p-l-40" *ngIf ="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ ((questions?.skip_question_pre_rating_count || questions?.skip_question_post_rating_count) ? 'Skipped' : (questions?.skip_question_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em></p>
-														<span class="p-l-40"><img src="{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.src }}" class="m-r-15 m-t-40 m-b-30 p-l-r"></span>
-														<span>{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.title }}</span>
-													</div>
-												</div>
+                                                <div class="col-xs-12"
+                                                    *ngIf="resource?.level == 'inquiry' ? (i%3 == 0 || questions?.skip_exercise_pre_rating_count==1) : (resource?.level == 'mood' ? (i%2 == 0 || questions?.skip_exercise_pre_rating_count==1) : false)">
+                                                    <p class="p-l-r"><em class="under-line">You completed this exercise
+                                                            on
+                                                            {{ getFormatedDate(questions?.created_at) | date : 'shortDate'}}</em>
+                                                    </p>
+                                                </div>
+                                                <div class="quest-row">
+                                                    <div class="col-md-8 m-t-10">
+                                                        <p class="f-18 m-0 f-bold p-l-r"><span
+                                                                class="p-l-40">{{ questions?.skip_exercise_pre_rating_count ? '' :questions?.short_question }}</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-xs-12 m-t-10" *ngIf="resource?.level == 'inquiry'">
+                                                        <p class="p-l-r"><em class="p-l-40"
+                                                                *ngIf="questions?.response">{{ questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : questions?.response }}</em>
+                                                        </p>
+                                                        <p class="p-l-r"><em class="p-l-40"
+                                                                *ngIf="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_post_rating_count ? 'Skipped' : (questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-xs-12 m-t-1" *ngIf="resource?.level == 'mood'">
+                                                        <p class="p-l-r"><em class="p-l-40"
+                                                                *ngIf="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ ((questions?.skip_question_pre_rating_count || questions?.skip_question_post_rating_count) ? 'Skipped' : (questions?.skip_question_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em>
+                                                        </p>
+                                                        <span class="p-l-40"><img
+                                                                src="{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.src }}"
+                                                                class="m-r-15 m-t-40 m-b-30 p-l-r"></span>
+                                                        <span>{{ moodOption[moodOption.length-(questions?.pre_rating || questions?.post_rating)]?.title }}</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </ng-container>
-									
+
                                     <ng-container *ngIf="!resource?.questions?.length && !resource.is_completed">
                                         <div class="col-xs-12">
                                             <div class="bg-l-pink">
-                                                <p class="h8 uppercase f-medium m-0 c-violet">{{ resource?.level == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
+                                                <p class="h8 uppercase f-medium m-0 c-violet">
+                                                    {{ resource?.level == 'inquiry' ? 'REFLECTION' : 'MOOD' }}</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 m-b-10">
                                             <div class="bg-l-gray">
                                                 <div class="row">
                                                     <div class="col-md-8">
-                                                        <p (click)="openModal(resource)" class="h8 m-0 c-pink f-bold c-pointer">{{ resource?.title }}</p>
+                                                        <p (click)="openModal(resource)"
+                                                            class="h8 m-0 c-pink f-bold c-pointer">{{ resource?.title }}
+                                                        </p>
                                                     </div>
                                                     <div class="col-md-4 text-right">
-                                                        <a href="javascript:void(0)" (click)="getRoute(data?.slug, resource?.chapter_content_slug, resource?.resources_id)" class="h9 f-bold">Back to content</a>
+                                                        {{ data?.current_week }}
+                                                        <a href="javascript:void(0)"
+                                                            (click)="getRoute((data?.current_week ? resource?.slug : data?.slug), (data?.current_week ? resource?.chap_slug: resource?.chapter_content_slug), resource?.resources_id)"
+                                                            class="h9 f-bold">Back to content</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
-                                            <p class="p-l-r"><em>It looks like you have not completed any questions for this exercise yet. Click on the exercise if you would like to answer them now.</em></p>
+                                            <p class="p-l-r"><em>It looks like you have not completed any questions for
+                                                    this exercise yet. Click on the exercise if you would like to answer
+                                                    them now.</em></p>
                                         </div>
                                     </ng-container>
-								</div>
-								</ng-container>
+                                </div>
+                            </ng-container>
                             <!-- </ng-container> -->
                         </div>
                     </accordion-group>
@@ -108,4 +139,6 @@
         </div>
     </div>
 </div>
-<app-inquiry-mood-modal [contentId]="false" [resourceDetail]="resourceDetail" *ngIf="!!modalIsShown" [modalIsShown]="modalIsShown" (onCloseModal)="modalClosed()" (onVideoUpdated)="videoTimeUpdated(is_completed)"></app-inquiry-mood-modal>
+<app-inquiry-mood-modal [contentId]="false" [resourceDetail]="resourceDetail" *ngIf="!!modalIsShown"
+    [modalIsShown]="modalIsShown" (onCloseModal)="modalClosed()" (onVideoUpdated)="videoTimeUpdated(is_completed)">
+</app-inquiry-mood-modal>

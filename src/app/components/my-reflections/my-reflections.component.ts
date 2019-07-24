@@ -16,10 +16,10 @@ export class MyReflectionsComponent implements OnInit {
 		{ title: 'Average', src: "assets/images/emoji-smirk.png" },
 		{ title: 'Bad', src: "assets/images/emoji-sad.png" });
 	reflection_data: any;
-	resourceDetail:any;
-	modalIsShown:boolean=false;
-	resourceId:any;
-	refPaddCounter=0;
+	resourceDetail: any;
+	modalIsShown: boolean = false;
+	resourceId: any;
+	refPaddCounter = 0;
 	constructor(
 		public questionnaireService: QuestionnaireService,
 		public toastr: ToastrService,
@@ -46,32 +46,32 @@ export class MyReflectionsComponent implements OnInit {
 		);
 	}
 
-	getRoute(route, route1, resourceId){
+	getRoute(route, route1, resourceId) {
 		let str4 = "/patient/dashboard".concat("/"),
-		str3 = str4.concat(route),
-		str2 = str3.concat("/"),
-		str1 = str2.concat(route1);
-		this.router.navigate([str1]).then(() =>{
+			str3 = str4.concat(route),
+			str2 = str3.concat("/"),
+			str1 = str2.concat(route1);
+		this.router.navigate([str1]).then(() => {
 			this.dataService.navigaeToResource(resourceId);
 		});
 	}
 
-	openModal(resource,index) {
-		
+	openModal(resource, index) {
+
 		this.modalIsShown = !this.modalIsShown;
-		this.resourceDetail=resource;
+		this.resourceDetail = resource;
 	}
 
-	modalClosed(){
-		this.modalIsShown=false;
+	modalClosed() {
+		this.modalIsShown = false;
 		this.reflectionData();
 	}
-	videoTimeUpdated(resource_id){
+	videoTimeUpdated(resource_id) {
 		this.resourceId = resource_id;
 		this.reflectionData();
 	}
 
-	getFormatedDate(date:string){
+	getFormatedDate(date: string) {
 		return new Date(date.replace(/-/g, "/"));
 	}
 

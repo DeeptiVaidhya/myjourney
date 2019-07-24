@@ -1,13 +1,4 @@
-import {
-	AfterViewInit,
-	Component,
-	EventEmitter,
-	Input,
-	OnInit,
-	Output,
-	TemplateRef,
-	ViewChild
-} from "@angular/core";
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { ToastrService } from "ngx-toastr";
@@ -307,11 +298,11 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 											this.prePostDiff =
 												this.prePostRating[1]
 													.user_response[
-													"post_rating"
+												"post_rating"
 												] -
 												this.prePostRating[0]
 													.user_response[
-													"pre_rating"
+												"pre_rating"
 												];
 											this.openPostMessageModal(
 												videoModal
@@ -326,6 +317,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 							this.value < this.questions.length - 1;
 						this.backButtonFlag = this.value > 0;
 					}
+					this.questionnireForm.reset();
 				}
 				this.questionnireForm.reset();
 			});

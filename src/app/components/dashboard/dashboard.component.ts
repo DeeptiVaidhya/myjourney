@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
         public toastr: ToastrService,
         public router: Router,
         private authService: AuthService
-    ) {}
+    ) { }
 
     ngOnInit() {
         localStorage.getItem("username") &&
