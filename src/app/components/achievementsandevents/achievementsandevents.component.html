@@ -4,34 +4,43 @@
     <div class="container">
         <div class="row m-t-40">
             <div class="col-md-12">
-                <h6>This page has a list of all your events and achievements during the 8 weeks of the study. There are 3 achievement levels you can receive:</h6>
+                <h6>This page has a list of all your events and achievements during the 8 weeks of the study. There are
+                    3 achievement levels you can receive:</h6>
                 <p class="m-t-20 m-award"><strong> 1 - Ribbon: 30 minutes of activity</strong></p>
-                <p class="m-t-20 m-award"><strong> 2 - Medal: 30 minutes of activity & 2 videos or audios completed</strong></p>
-                <p class="m-t-20 m-award"><strong> 3 - Trophy: 30 minutes of activity & 5 videos or audios completed</strong></p>
+                <p class="m-t-20 m-award"><strong> 2 - Medal: 30 minutes of activity & 2 videos or audios
+                        completed</strong></p>
+                <p class="m-t-20 m-award"><strong> 3 - Trophy: 30 minutes of activity & 5 videos or audios
+                        completed</strong></p>
             </div>
         </div>
         <div class="row m-t-15">
             <ng-container *ngFor="let week of weekInfo; let i=index">
-                <div class="row week-list" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'">
+                <div class="row week-list"
+                    [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'"
+                    *ngIf="(week?.is_study_week == '0' || (week?.is_study_week == '1' && week?.is_current_week))">
                     <div class="col-xs-12 pl-pr-0">
                         <div class="week">
-                            <span *ngIf="currentWeek != i+1">Week {{ i+1 }}</span>
-                            <span *ngIf="currentWeek == i+1"><b>Week {{ i+1 }} (current week)</b></span>
+                            <span *ngIf="!week?.is_current_week">Week {{ week?.week_number }}</span>
+                            <span *ngIf="week?.is_current_week"><b>Week {{ week?.week_number }} (current
+                                    week)</b></span>
                         </div>
                     </div>
                     <div class="col-md-5 col-sm-5 pl-pr-0">
                         <p class="list-heading enabled"><strong>My Achievements</strong></p>
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
-                                <i class="onco-events c-d-blue" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'"></i>
+                                <i class="onco-events c-d-blue"
+                                    [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'"></i>
 
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
-                                <i class="onco-achievements c-pink" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 2) ? '' : 'disabled'"></i>
+                                <i class="onco-achievements c-pink"
+                                    [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 2) ? '' : 'disabled'"></i>
 
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-3 icon text-center">
-                                <i class="onco-award c-orange" [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 5) ? '' : 'disabled'"></i>
+                                <i class="onco-award c-orange"
+                                    [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30 && week?.total_watched_video_audio >= 5) ? '' : 'disabled'"></i>
 
                             </div>
                         </div>

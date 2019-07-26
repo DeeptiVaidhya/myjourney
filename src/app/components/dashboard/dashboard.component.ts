@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
     is_enable_questionnaire: any;
     routlink: any = "understanding-breast-cancer";
     bluejeansDetails: any;
+    weekCompleted: boolean;
     constructor(
         private AmCharts: AmChartsService,
         private questService: QuestionnaireService,
@@ -79,6 +80,7 @@ export class DashboardComponent implements OnInit {
                         response[
                             "data"
                         ].enable_questionnaire;
+                    this.weekCompleted = response['is_week_completed'];
                     console.log(
                         this.is_enable_questionnaire
                     );
@@ -97,7 +99,7 @@ export class DashboardComponent implements OnInit {
     }
 
     viewAllAchivement() {
-        if (this.currentWeek > 0) {
+        if (this.currentWeek > 0 || this.weekCompleted) {
             this.router.navigate(["/achievements"]);
         } else {
             this.toastr.error("Week not started yet");

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PatientGuard implements CanActivate {
 	canActivate(
 		next: ActivatedRouteSnapshot,

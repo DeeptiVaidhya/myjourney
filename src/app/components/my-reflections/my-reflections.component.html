@@ -17,7 +17,7 @@
                     *ngFor="let  data of reflection_data; let i = index">
                     <accordion-group #res1>
                         <div accordion-heading class="row clearfix gaes-cls" data-ga-action="Expand topic">
-                            <span class="col-xs-10 h6">Week {{ data?.current_week ? data?.current_week : i+1+':' }}
+                            <span class="col-xs-10 h6">Class {{ data?.current_week ? data?.current_week : i+1+':' }}
                                 {{ data?.reflection_title }}</span>
                             <span class="col-xs-2 text-right h6">
                                 <i [ngClass]="res1?.isOpen ? 'onco-minus' : 'onco-plus'" class="more-less"></i>
