@@ -20,9 +20,10 @@ export class ProfileComponent implements OnInit {
 	save_user_data: any = [];
 	previous_email: any;
 	username: any;
+	emailCheck: boolean = false;
 	is_previous_password: Boolean = true;
 	is_previous_password_msg = '';
-	breadcrumb = [{ link: '/', title: 'Home' }, { title: 'My Details', class:'active' }];
+	breadcrumb = [{ link: '/', title: 'Home' }, { title: 'My Details', class: 'active' }];
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -38,12 +39,9 @@ export class ProfileComponent implements OnInit {
 			{
 				first_name: [
 					this.user_detail['first_name'],
-					Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required]),
+					Validators.compose([Validators.pattern(/^[a-zA-Z]+[a-zA-Z '".-]*$/), Validators.required]),
 				],
-				// last_name: [
-				// 	this.user_detail['last_name'],
-				// 	Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required]),
-				// ],
+
 				email: [
 					this.user_detail['email'],
 					Validators.compose([
@@ -147,6 +145,10 @@ export class ProfileComponent implements OnInit {
 					} else {
 						this.is_unique_email_msg = '';
 						this.is_unique_email = true;
+
+					}
+					if (this.is_unique_email) {
+						this.saveProfiledata();
 					}
 				},
 				err => {
@@ -159,6 +161,7 @@ export class ProfileComponent implements OnInit {
 
 
 	getUserProfile() {
+
 		this.authService.get_profile().subscribe(
 			response => {
 				this.data = response;
@@ -172,9 +175,14 @@ export class ProfileComponent implements OnInit {
 				console.log(err);
 			}
 		);
+
 	}
 
 	updateProfile() {
+		this.isEmailUnique(this.profileForm.value.email);
+	}
+
+	saveProfiledata() {
 		if (this.profileForm.valid && this.is_unique_email && this.is_current_password && this.is_previous_password) {
 			this.profileForm.value['previous_username'] = this.save_user_data['username'];
 			this.profileForm.value['previous_email'] = this.save_user_data['email'];
@@ -195,6 +203,5 @@ export class ProfileComponent implements OnInit {
 			);
 		}
 	}
-
 
 }

@@ -139,8 +139,14 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
         this.pageContentId = this.contentId
             ? this.contentId
             : this.resourceDetail.chapter_content_id;
-        if (this.resourseType == "VIDEO")
+
+        if (this.resourseType == "VIDEO") {
             this.currentSrc = this.resourceDetail.link.split("v=")[1];
+            if (!this.currentSrc) {
+                this.currentSrc = this.resourceDetail.link.split("/")[3];
+            }
+        }
+
         else if (this.resourseType == "AUDIO")
             this.currentSrc = this.resourceDetail.link;
         this.resourceId =
