@@ -25,7 +25,7 @@
             <div class="col-md-7 col-sm-12 col-xs-12">
                 <h4 class="c-pink p-b-20">{{ pageContent?.first_paragraph }}</h4>
                 <ng-container *ngFor="let detail of pageContent?.content_details;let i=index;">
-                    <p class="content-p cont-tbl" *ngIf="detail?.text" [innerHtml]="detail?.text | safeHtml"></p>
+                    <p class="content-p cont-tbl" *ngIf="detail?.text" [innerHtml]="detail?.text"></p>
                     <div class="text-center content-p content-inner-img" *ngIf="detail?.image"
                         [innerHtml]="detail?.image"></div>
                     <p class="content-p h9" *ngIf="detail?.credit">Credit: {{ detail?.credit }}</p>
@@ -46,8 +46,7 @@
                                 </div>
                                 <a id="resource--{{detail?.resource_data?.id}}" href="javascript:void(0)"
                                     class="btn btn-violet btn-block sec-button"
-                                    (click)="openModal(detail?.resource_data)"
-                                    title="{{detail?.resource_data?.title}}"
+                                    (click)="openModal(detail?.resource_data)" title="{{detail?.resource_data?.title}}"
                                     *ngIf="detail?.resource_data?.link">{{ detail?.resource_data?.type }}</a>
                             </div>
                             <div class="section-content"

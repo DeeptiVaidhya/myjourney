@@ -43,8 +43,8 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 			this.slug = param.sub_topic
 				? param.sub_topic
 				: param.chapter
-				? param.chapter
-				: "";
+					? param.chapter
+					: "";
 			this.topic = param.topic && !param.sub_topic ? param.topic : "";
 			this.is_sub_topic = !!param.sub_topic;
 			this.questService
@@ -199,6 +199,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 					clearInterval(this.interval);
 				}
 			});
+		clearInterval(this.interval);
 	}
 
 	goToElem(obj) {
