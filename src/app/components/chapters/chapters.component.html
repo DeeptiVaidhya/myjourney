@@ -65,6 +65,7 @@
                     </div>
                 </ng-container>
                 <div class="row" *ngFor="let topic of pageContent?.topic; let i = index">
+
                     <div class="col-xs-12">
                         <accordion class="main-accordion" [closeOthers]="true">
                             <accordion-group id="topic--{{topic?.slug}}">
@@ -76,6 +77,7 @@
                                     </span>
                                 </div>
                                 <div class="accordion-inner">
+                                    <!-- {{topic?.first_paragraph}} -->
                                     <p class="content-p" *ngIf="topic?.first_paragraph"
                                         [innerHtml]="topic?.first_paragraph"></p>
 
@@ -96,6 +98,7 @@
                                     <div class="row section" *ngIf="topic?.resource_data">
                                         <div class="col-xs-12"
                                             *ngFor="let topicRes of topic?.resource_data;let i=index;">
+                                            {{topicRes?.type}}
                                             <div class="section-content"
                                                 *ngIf="topicRes?.type == 'VIDEO' || topicRes?.type == 'AUDIO'">
                                                 <span class="onco-video c-pink sec-icon"></span>
