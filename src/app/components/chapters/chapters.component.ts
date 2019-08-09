@@ -176,15 +176,17 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 
 	ngOnInit() {
 		this.interval = setInterval(() => {
-			this.questService
-				.updateVisitedChapter({
-					content_id: this.pageContent.id,
-					showSpinner: false
-				})
-				.subscribe(response => {
-					if (response["status"] == "success") {
-					}
-				});
+			if (this.isLoggedIn && document.hasFocus()) {
+				this.questService
+					.updateVisitedChapter({
+						content_id: this.pageContent.id,
+						showSpinner: false
+					})
+					.subscribe(response => {
+						if (response["status"] == "success") {
+						}
+					});
+			}
 		}, 10000);
 	}
 

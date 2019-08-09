@@ -98,7 +98,6 @@
                                     <div class="row section" *ngIf="topic?.resource_data">
                                         <div class="col-xs-12"
                                             *ngFor="let topicRes of topic?.resource_data;let i=index;">
-                                            {{topicRes?.type}}
                                             <div class="section-content"
                                                 *ngIf="topicRes?.type == 'VIDEO' || topicRes?.type == 'AUDIO'">
                                                 <span class="onco-video c-pink sec-icon"></span>
