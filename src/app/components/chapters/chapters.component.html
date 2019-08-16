@@ -116,7 +116,7 @@
                                                 <a id="resource--{{detail?.resource_data?.id}}"
                                                     href="javascript:void(0)"
                                                     class="btn btn-violet btn-block sec-button"
-                                                    (click)="openModal(topicRes)" title="{{topicRes?.title}}"
+                                                    (click)="openModal(topicRes, topic?.id)" title="{{topicRes?.title}}"
                                                     *ngIf="topicRes?.link">{{ topicRes?.type }}</a>
                                             </div>
                                             <div class="section-content"
@@ -199,7 +199,8 @@
                     <div class="content-right-inner" *ngFor="let audio of pageContent?.side_resources?.audio">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="javascript:void(0)" (click)="openModal(audio)">{{ audio.title }}</a>
+                                <a class="res-icon" href="javascript:void(0)"
+                                    (click)="openModal(audio)">{{ audio.title }}</a>
                             </p>
                             <p class="h9" *ngIf="audio?.is_completed || resourceId == audio.id"><i
                                     class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>
@@ -218,7 +219,7 @@
                     <div class="content-right-inner" *ngFor="let web of pageContent?.side_resources?.website">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="javascript:void(0)" (click)="goToSite(web)" target="_blank"
+                                <a class="res-icon" href="javascript:void(0)" (click)="goToSite(web)" target="_blank"
                                     title="{{ web.title }}">{{ web.title }}</a>
                             </p>
                         </div>
@@ -244,7 +245,7 @@
     </div>
 </div>
 
-<app-inquiry-mood-modal [calleePage]="slug" [contentId]="pageContent?.id" [resourceDetail]="resourceDetail"
+<app-inquiry-mood-modal [calleePage]="slug" [contentId]="contentId" [resourceDetail]="resourceDetail"
     *ngIf="!!modalIsShown" [modalIsShown]="modalIsShown" (onCloseModal)="modalClosed()"
     (onVideoUpdated)="videoTimeUpdated($event)"></app-inquiry-mood-modal>
 <app-breadcrumb [breadcrumb]="breadcrumb" (onClickTitle)="goToElem($event)" isFooter="!1"></app-breadcrumb>

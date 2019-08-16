@@ -5,7 +5,7 @@ import { HelperService } from './helper.service';
 
 @Injectable()
 export class QuestionnaireService {
-	constructor(public helperService: HelperService) {}
+	constructor(public helperService: HelperService) { }
 
 	/**
 	 *
@@ -127,6 +127,18 @@ export class QuestionnaireService {
 	getResourceQuestion(data) {
 		return this.helperService.makeHttpRequest(
 			"questionnaire/resourse-question",
+			"post",
+			data,
+			true
+		);
+	}
+
+	/**
+	 * @desc Function is used to get resourses responses given by participants
+	 */
+	getResourceQuestionResponses(data) {
+		return this.helperService.makeHttpRequest(
+			"questionnaire/resourse-question-responses",
 			"post",
 			data,
 			true

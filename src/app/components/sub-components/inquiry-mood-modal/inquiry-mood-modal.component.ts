@@ -115,21 +115,19 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 
     onPlayerReady(api: VgAPI) {
         this.api = api;
-        this.api.getDefaultMedia().subscriptions.play.subscribe(() => {
-            (this.totalTime = Math.floor(this.api.getDefaultMedia().duration)),
-                (this.time = this.totalTime / 2);
-
+        this.api.getDefaultMedia().subscriptions.timeUpdate.subscribe(() => {
+            this.totalTime = Math.floor(this.api.getDefaultMedia().duration);
+            this.time = this.totalTime / 2;
             this.spentTime = Math.floor(this.api.getDefaultMedia().currentTime);
-
             this.time =
                 this.spentTime > this.time ? 0 : this.time - this.spentTime;
-
             this.makeVideoCompleted();
         });
 
         this.api.getDefaultMedia().subscriptions.pause.subscribe(() => {
             clearTimeout(this.timer);
         });
+
     }
 
     openModal(template: TemplateRef<any>) {
@@ -213,8 +211,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                 this.contentId || this.pageContentId;
             this.questionnireForm.value.total_time = this.totalTime;
             this.questionnireForm.value.callee_page = this.calleePage;
-            this.questionnireForm.value.left_time =
-                this.totalTime - this.spentTime;
+            this.questionnireForm.value.left_time = this.totalTime - this.spentTime;
             this.questService
                 .submitResourceQuestionResponse(this.questionnireForm.value)
                 .subscribe(response => {
@@ -265,6 +262,8 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
         this.nextButtonFlag = !0;
     }
     nextQuestion(videoModal?: TemplateRef<any>, value?: any) {
+        console.log(this.totalTime);
+        console.log(this.spentTime);
         this.questionnireForm.value.question_id = this.questions[this.value].id;
         this.questionnireForm.value.exercise_type = this.level;
         this.questionnireForm.value.qhoid = this.qhoid;
@@ -323,20 +322,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                                     })
                                     .subscribe(response => {
                                         if (response["status"] == "success") {
-                                            this.prePostRating =
-                                                response["data"];
-                                            this.prePostDiff =
-                                                this.prePostRating[1]
-                                                    .user_response[
-                                                "post_rating"
-                                                ] -
-                                                this.prePostRating[0]
-                                                    .user_response[
-                                                "pre_rating"
-                                                ];
-                                            this.openPostMessageModal(
-                                                videoModal
-                                            );
+                                            this.getPrePostRating(videoModal);
                                         }
                                     });
                             } else {
@@ -348,8 +334,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                         this.backButtonFlag = this.value > 0;
                     }
                     this.questionnireForm.reset();
-                    if (!this.isCompleted) this.onVideoUpdated.emit(this.resourceId);
-                    this.onCloseModal.emit("closed");
+
                 }
                 this.questionnireForm.reset();
             });
@@ -398,5 +383,26 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                     // );
                 }
             });
+    }
+
+    getPrePostRating(videoModal?: TemplateRef<any>) {
+        this.questService
+            .getResourceQuestionResponses({
+                exercise_type: this.level.toUpperCase(),
+                resource_id: this.resourceId
+            })
+            .subscribe(response => {
+                if (response["status"] == "success") {
+                    console.log(response['data']);
+                    this.prePostRating =
+                        response["data"];
+                    this.prePostDiff =
+                        this.prePostRating[1]["post_rating"] - this.prePostRating[0]["pre_rating"];
+                    this.openPostMessageModal(
+                        videoModal
+                    );
+                }
+            });
+
     }
 }

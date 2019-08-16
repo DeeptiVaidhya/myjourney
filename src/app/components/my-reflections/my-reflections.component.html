@@ -82,7 +82,7 @@
                                                                 *ngIf="questions?.response">{{ questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : questions?.response }}</em>
                                                         </p>
                                                         <p class="p-l-r"><em class="p-l-40"
-                                                                *ngIf="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_post_rating_count ? 'Skipped' : (questions?.skip_exercise_pre_rating_count ? 'Exercise Skipped' : '' ))}}</em>
+                                                                *ngIf="questions?.skip_question_post_rating_count || questions?.skip_exercise_pre_rating_count">{{ (questions?.skip_question_post_rating_count ? 'Skipped' : '')}}</em>
                                                         </p>
                                                     </div>
                                                     <div class="col-xs-12 m-t-1" *ngIf="resource?.level == 'mood'">

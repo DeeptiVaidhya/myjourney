@@ -30,6 +30,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	modalIsShown: boolean = false;
 	arm: string;
 	resourceDetail: any;
+	contentId: any;
 	constructor(
 		public route: ActivatedRoute,
 		public questService: QuestionnaireService,
@@ -57,14 +58,15 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 				.subscribe(response => {
 					if (response["status"] == "success") {
 						this.pageContent = response["data"];
+						this.contentId = this.pageContent.id;
 						this.next_previous_subtopic = this.pageContent[
 							"next_prev_sub_topic"
 						];
 						console.log(this.next_previous_subtopic);
 						this.is_added_favorite = response["is_added_favorite"];
-						if (this.pageContent.id) {
+						if (this.contentId) {
 							this.visitedChapter({
-								contentId: this.pageContent.id,
+								contentId: this.contentId,
 								callee_page: this.pageContent.slug
 							});
 						}
@@ -179,7 +181,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 			if (this.isLoggedIn && document.hasFocus()) {
 				this.questService
 					.updateVisitedChapter({
-						content_id: this.pageContent.id,
+						content_id: this.contentId,
 						showSpinner: false
 					})
 					.subscribe(response => {
@@ -194,7 +196,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 		this.dataService.changeMessage(null);
 		this.questService
 			.updateVisitedChapter({
-				content_id: this.pageContent.id
+				content_id: this.contentId
 			})
 			.subscribe(response => {
 				if (response["status"] == "success") {
@@ -229,8 +231,12 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 			this.toastr.error("Invalid content or not a sub topic.");
 		}
 	}
-	openModal(resource) {
+	openModal(resource, contentId?: any) {
+		console.log(contentId);
 		this.modalIsShown = !this.modalIsShown;
+		if (contentId) {
+			this.contentId = contentId;
+		}
 		this.resourceDetail = resource;
 	}
 
@@ -250,16 +256,13 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 			})
 			.subscribe(response => {
 				if (response["status"] == "success") {
-					// this.is_added_favorite = !this.is_added_favorite;
-					// this.toastr.success(
-					// 	response["msg"] || "Favorite saved"
-					// );
+
 				}
 			});
 	}
 	goToSite(resource: any) {
 		this.addResourceVisited({
-			contentId: this.pageContent.id,
+			contentId: this.contentId,
 			callee_page: this.slug,
 			resource_id: resource.id
 		});
@@ -275,10 +278,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 			})
 			.subscribe(response => {
 				if (response["status"] == "success") {
-					// this.is_added_favorite = !this.is_added_favorite;
-					// this.toastr.success(
-					// 	response["msg"] || "Favorite saved"
-					// );
+
 				}
 			});
 	}
