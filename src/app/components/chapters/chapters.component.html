@@ -180,7 +180,8 @@
                     <div class="content-right-inner" *ngFor="let video of pageContent?.side_resources?.video">
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
-                                <a href="javascript:void(0)" (click)="openModal(video)">{{ video.title }}</a>
+                                <a href="javascript:void(0)"
+                                    (click)="openModal(video, video?.chapter_has_content_id)">{{ video.title }}</a>
                             </p>
                             <p class="h9" *ngIf="video?.is_completed || resourceId == video.id"><i
                                     class="glyphicon glyphicon-ok"></i><b><em>video watched</em></b></p>
@@ -200,7 +201,7 @@
                         <div class="col-xs-10">
                             <p class="h8 c-pink">
                                 <a class="res-icon" href="javascript:void(0)"
-                                    (click)="openModal(audio)">{{ audio.title }}</a>
+                                    (click)="openModal(audio, audio?.chapter_has_content_id)">{{ audio.title }}</a>
                             </p>
                             <p class="h9" *ngIf="audio?.is_completed || resourceId == audio.id"><i
                                     class="glyphicon glyphicon-ok"></i><b><em>Audio played</em></b></p>

@@ -283,7 +283,6 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
         else if (!this.ratingType)
             this.questionnireForm.value.post_rating = this.selected;
 
-        console.log(this.questionnireForm.value);
         this.questService
             .submitResourceQuestionResponse(this.questionnireForm.value)
             .subscribe(response => {
@@ -301,6 +300,8 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                         console.log("dynamic " + this.dynamic);
                     } else {
                         this.questionnireForm.reset();
+                        this.totalTime = 0;
+                        this.questionnireForm.value.left_time = 0;
                         if (value == 0) {
                             this.questionRef.hide();
                             this.onCloseModal.emit("closed");
@@ -336,7 +337,6 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                     this.questionnireForm.reset();
 
                 }
-                this.questionnireForm.reset();
             });
         this.selected = "";
     }
@@ -393,11 +393,10 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
             })
             .subscribe(response => {
                 if (response["status"] == "success") {
-                    console.log(response['data']);
                     this.prePostRating =
                         response["data"];
                     this.prePostDiff =
-                        this.prePostRating[1]["post_rating"] - this.prePostRating[0]["pre_rating"];
+                        this.prePostRating[0]["post_rating"] - this.prePostRating[1]["pre_rating"];
                     this.openPostMessageModal(
                         videoModal
                     );
