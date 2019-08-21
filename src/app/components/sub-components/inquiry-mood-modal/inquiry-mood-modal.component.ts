@@ -196,7 +196,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                     .submitResourceQuestionResponse(this.questionnireForm.value)
                     .subscribe(response => {
                         if (response["status"] == "success") {
-                            if (!this.isCompleted) this.onVideoUpdated.emit(this.resourceId);
+                            this.onVideoUpdated.emit(this.resourceId);
                             this.onCloseModal.emit("closed");
                         }
                     });
@@ -216,7 +216,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                 .submitResourceQuestionResponse(this.questionnireForm.value)
                 .subscribe(response => {
                     if (response["status"] == "success") {
-                        if (!this.isCompleted) this.onVideoUpdated.emit(this.resourceId);
+                        this.onVideoUpdated.emit(this.resourceId);
                         this.onCloseModal.emit("closed");
                     }
                 });
@@ -304,6 +304,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                         this.questionnireForm.value.left_time = 0;
                         if (value == 0) {
                             this.questionRef.hide();
+                            this.onVideoUpdated.emit(this.resourceId);
                             this.onCloseModal.emit("closed");
                         }
                         if (this.dynamic < this.questions.length - 1) {
@@ -311,6 +312,8 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                             this.dynamic++;
                             console.log("value " + this.value);
                             console.log("dynamic " + this.dynamic);
+                            this.onVideoUpdated.emit(this.resourceId);
+                            this.onCloseModal.emit("closed");
                         } else {
                             this.questionRef.hide();
                             this.value = 0;
@@ -327,6 +330,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                                         }
                                     });
                             } else {
+                                this.onVideoUpdated.emit(this.resourceId);
                                 this.onCloseModal.emit("closed");
                             }
                         }
@@ -364,7 +368,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
     closeModal(template: BsModalRef) {
         template.hide();
         console.log("modal closed");
-        if (!this.isCompleted) this.onVideoUpdated.emit(this.resourceId);
+        this.onVideoUpdated.emit(this.resourceId);
         this.onCloseModal.emit("closed");
     }
 

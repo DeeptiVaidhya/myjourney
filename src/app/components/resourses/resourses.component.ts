@@ -48,7 +48,7 @@ export class ResoursesComponent implements OnInit {
 		this.modalIsShown = false;
 	}
 	videoTimeUpdated(resource_id) {
-		this.resourceId = resource_id;
+		this.getResources();
 	}
 
 }

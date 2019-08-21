@@ -39,6 +39,9 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 		private authService: AuthService,
 		private dataService: DataService
 	) {
+		this.getContent();
+	}
+	getContent() {
 		this.route.params.subscribe(param => {
 			this.breadcrumb = [{ link: "/patient/dashboard", title: "Home" }];
 			this.slug = param.sub_topic
@@ -48,6 +51,7 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 					: "";
 			this.topic = param.topic && !param.sub_topic ? param.topic : "";
 			this.is_sub_topic = !!param.sub_topic;
+
 			this.questService
 				.chapterDetails({
 					type: "slug",
@@ -245,7 +249,8 @@ export class ChaptersComponent implements OnDestroy, OnInit {
 	}
 
 	videoTimeUpdated(resource_id) {
-		this.resourceId = resource_id;
+		// this.resourceId = resource_id;
+		this.getContent();
 	}
 
 	visitedChapter(content) {
