@@ -193,6 +193,9 @@
     height: 220px;
     border-radius: 50%;
 }
+.m-t-25{
+    margin-top: 25px;
+}
 
 @media (max-width: 1199px) {
     .complete-notification .alert-text {

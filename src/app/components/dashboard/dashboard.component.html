@@ -2,9 +2,6 @@
     <app-inner-page-header page_title="Hi, {{user_detail.first_name}}"></app-inner-page-header>
     <div class="container">
         <div class="row p-b-20" *ngIf="incompleted_questionnaire >0 || is_enable_questionnaire == '1'">
-            <!-- {{currentWeek}}
-            {{(currentWeek >= 4 || is_enable_questionnire == '1') && currentWeek >0}} -->
-            <!-- <div class="col-md-12 complete-notification" *ngIf="(all_week_status=='' ? (is_questionnaire_completed ? is_questionnaire_completed : incompleted_questionnaire!=0): false)"> -->
             <div class="col-md-12 complete-notification"
                 *ngIf="(currentWeek == 4 || is_enable_questionnaire == '1') && currentWeek>0">
 
@@ -13,10 +10,10 @@
                         <span class="onco-alert"></span>
                     </div>
                     <div class="alert-text">
-                        <p class="h7" *ngIf="!is_questionnaire_completed && incompleted_questionnaire == 5">
+                        <p class="h7" *ngIf="!is_questionnaire_completed && incompleted_questionnaire == 4">
                             <span>You have a 10-minute survey to complete.</span>
                         </p>
-                        <p class="h7" *ngIf="!is_questionnaire_completed && incompleted_questionnaire < 5">
+                        <p class="h7" *ngIf="!is_questionnaire_completed && incompleted_questionnaire < 4">
                             <span>You have remaining {{ incompleted_questionnaire }} questionnaire to complete.</span>
                         </p>
                         <p class="h7" *ngIf="is_questionnaire_completed">
@@ -42,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="row p-b-30">
+        <div class="row p-b-30" [ngClass]="incompleted_questionnaire == 0 ? 'm-t-25' : ''">
             <div class="col-md-5 col-sm-6 col-xs-12 v-middle">
                 <!-- start text -->
                 <div class="img-text-bg text-center" *ngIf="arm=='INTERVENTION'">
@@ -72,7 +69,7 @@
                         <div class="row">
                             <div class="col-xs-4 icon">
                                 <i class="onco-events c-d-blue"
-                                    [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 30) ? '' : 'disabled') : ''"></i>
+                                    [ngClass]="currentWeek ? ((weekInfo?.week_number >= i+1 && weekInfo?.total_time_spent_in_week >= 20) ? '' : 'disabled') : ''"></i>
 
                             </div>
                             <div class="col-xs-4 icon">
