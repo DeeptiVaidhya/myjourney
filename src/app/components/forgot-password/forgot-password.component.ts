@@ -39,13 +39,16 @@ export class ForgotPasswordComponent implements OnInit {
 	}
 
 	// Check Email is exits or not
-	isEmailUnique(email) {
+	isEmailUnique() {
 		if (this.form.controls['email'].valid) {
-			const email_info = { current_email: email };
+			const email_info = { current_email: this.form.value.email };
 			this.authService.isEmailUnique(email_info).subscribe(
 				response => {
 					this.is_unique_email = response['status'] == 'success';
 					this.is_unique_email_msg = !this.is_unique_email ? 'This Email address does not exist in system..' : '';
+					if (this.is_unique_email) {
+						this.forgotPassword();
+					}
 				},
 				err => {
 					console.log(err);

@@ -16,7 +16,7 @@
         <div class="row m-t-15">
             <ng-container *ngFor="let week of weekInfo; let i=index">
                 <div class="row week-list"
-                    [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 30) ? '' : 'disabled'"
+                    [ngClass]="(week?.week_number >= i+1 && week?.total_time_spent_in_week >= 20) ? '' : 'disabled'"
                     *ngIf="(week?.is_study_week == '0' || (week?.is_study_week == '1' && week?.is_current_week))">
                     <div class="col-xs-12 pl-pr-0">
                         <div class="week">
