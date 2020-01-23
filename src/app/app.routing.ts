@@ -71,8 +71,8 @@ const MAINMENU_ROUTES: Routes = [
 	},
 	{
 		path: "patient/dashboard/:chapter/:sub_topic",
-		component: ChaptersComponent,
-		canActivate: [PatientGuard]
+	 	component: ChaptersComponent,
+	 	canActivate: [PatientGuard]
 	},
 
 
