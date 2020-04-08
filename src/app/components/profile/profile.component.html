@@ -57,8 +57,7 @@
                             Password field is required.</p>
                         <p class="error m-0-auto" col-12 ion-text color="danger"
                             *ngIf="profileForm.controls.password.hasError('pattern') && profileForm.controls['password'].dirty">
-                            * The new password must be 8 characters long with a combination of upper and lower case
-                            letters, numbers AND symbols.</p>
+                           * The new password must be 8 characters long with a combination of upper and lower case letters, numbers and symbols ({{allowed_symbol}}).</p>
                         <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="!is_previous_password">
                             {{is_previous_password_msg}}</p>
                     </div>

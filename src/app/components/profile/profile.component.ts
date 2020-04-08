@@ -23,6 +23,8 @@ export class ProfileComponent implements OnInit {
 	emailCheck: boolean = false;
 	is_previous_password: Boolean = true;
 	is_previous_password_msg = '';
+	allowed_symbol = "$@!%*?&";
+	isNotAllowedSymbol = false;
 	breadcrumb = [{ link: '/', title: 'Home' }, { title: 'My Details', class: 'active' }];
 
 	constructor(
@@ -55,7 +57,8 @@ export class ProfileComponent implements OnInit {
 				password: [
 					'',
 					Validators.compose([
-						Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/),
+						Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@!%*?&])[A-Za-z\d$@!%*?&]{8,}/),
+						// Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/),
 					]),
 				],
 				confirm_password: ['']
@@ -76,9 +79,9 @@ export class ProfileComponent implements OnInit {
 
 	// Check Current Password
 	isCurrentPassword(password) {
-		if (this.profileForm.controls['password'].valid && password != '') {
+		if (this.profileForm.controls['password'].valid && password != '' && password != null) {
 			const password_info = {
-				password: password,
+				password: encodeURIComponent(password),
 			};
 			this.authService.isCurrentPassword(password_info).subscribe(
 				result => {
@@ -105,7 +108,7 @@ export class ProfileComponent implements OnInit {
 	isPreviousPassword(password) {
 		if (this.profileForm.controls['password'].valid && password !== '') {
 			const password_info = {
-				password: password,
+				password: encodeURIComponent(password),
 			};
 			this.authService.isPreviousPassword(password_info).subscribe(
 				result => {
@@ -183,25 +186,45 @@ export class ProfileComponent implements OnInit {
 	}
 
 	saveProfiledata() {
-		if (this.profileForm.valid && this.is_unique_email && this.is_current_password && this.is_previous_password) {
-			this.profileForm.value['previous_username'] = this.save_user_data['username'];
-			this.profileForm.value['previous_email'] = this.save_user_data['email'];
-			// console.log(this.profileForm.value);
-			this.authService.update_profile(this.profileForm.value).subscribe(
-				result => {
-					this.data = result;
-					if (this.data.status === 'success') {
-						this.toastr.success(this.data.msg);
-						this.getUserProfile();
-					} else {
-						this.toastr.error(this.data.msg);
+		const form = JSON.parse(JSON.stringify(this.profileForm.value));
+		let allowed_char_flag = this.notAllowedSymbol(this.profileForm.value['password']);
+		setTimeout(()=>{   
+			if (this.profileForm.valid && this.is_unique_email && this.is_current_password && this.is_previous_password && !allowed_char_flag) {
+				form['previous_username'] = this.save_user_data['username'];
+				form['previous_email'] = this.save_user_data['email'];
+
+				form['password'] = encodeURIComponent(this.profileForm.value['password']);
+				form['confirm_password'] = encodeURIComponent(this.profileForm.value['confirm_password']);
+				form['current_password'] = encodeURIComponent(this.profileForm.value['current_password']);
+
+				this.authService.update_profile(form).subscribe(
+					result => {
+						this.data = result;
+						if (this.data.status === 'success') {
+							this.toastr.success(this.data.msg);
+							this.profileForm.reset();
+							this.getUserProfile();
+						} else {
+							this.toastr.error(this.data.msg);
+						}
+					},
+					err => {
+						console.log(err);
 					}
-				},
-				err => {
-					console.log(err);
-				}
-			);
+				);
+			}
+		 }, 1000);
+	}
+
+	notAllowedSymbol(password) {
+		let flag = (/[\\" "#'()+,-./:;<=>[\]^_`{|}~]/g.test(password));
+		if (flag) {
+			let error = "Allowed special characters are " + this.allowed_symbol + " only.";
+			this.toastr.error(error);
 		}
+
+		this.isNotAllowedSymbol = flag;
+		return flag;
 	}
 
 }

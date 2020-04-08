@@ -23,8 +23,11 @@ export class ChangePasswordComponent implements OnInit {
 		'is_capital': false,
 		'is_small': false,
 		'is_symbol': false,
+		'is_not_symbol': false,
 		'is_number': false
 	}
+	allowed_symbol = "$@!%*?&";
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
@@ -48,7 +51,7 @@ export class ChangePasswordComponent implements OnInit {
 				password: ['',
 					Validators.compose([
 						Validators.required,
-						Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/),
+						// Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/),
 					]),
 				],
 				confirm_password: ['', {
@@ -59,10 +62,9 @@ export class ChangePasswordComponent implements OnInit {
 				validator: this.match_password,
 			}
 		);
-		if (this.code === undefined) {	
-			this.form.addControl('access_code',new FormControl('', Validators.required) );
-		}	
-	
+		if (this.code === undefined) {
+			this.form.addControl('access_code', new FormControl('', Validators.required));
+		}
 
 		// this.checkCode();
 
@@ -90,7 +92,7 @@ export class ChangePasswordComponent implements OnInit {
 					console.log(err);
 				}
 			);
-		} 
+		}
 	}
 
 	// checkAccessCode(access_code){
@@ -104,24 +106,43 @@ export class ChangePasswordComponent implements OnInit {
 	// }
 
 	save() {
-		if (this.form.valid) {
-			const input = this.form.value;
-			input.code = this.code;
-			this.authService.change_password(input).subscribe(
-				result => {
-					this.data = result;
-					if (this.data.status === 'success') {
-						this.is_success = true;
-					} else {
-						this.toastr.error(this.data.msg);
-						console.log(this.data);
+		let allowed_char_flag = this.check_password_validaty();
+		setTimeout(()=>{    //<<<---    using ()=> syntax
+		      if (this.form.valid && allowed_char_flag) {
+				const input = JSON.parse(JSON.stringify(this.form.value));
+				input.code = this.code;
+				input.password = encodeURIComponent(this.form.value['password']);
+				input.confirm_password = encodeURIComponent(this.form.value['confirm_password']);
+
+				this.authService.change_password(input).subscribe(
+					result => {
+						this.data = result;
+						if (this.data.status === 'success') {
+							this.is_success = true;
+						} else {
+							this.toastr.error(this.data.msg);
+							console.log(this.data);
+						}
+					},
+					err => {
+						console.log(err);
 					}
-				},
-				err => {
-					console.log(err);
-				}
-			);
+				);
+			}
+		 }, 1000);
+		
+	}
+
+	check_password_validaty() {
+		let p = this.is_password_valid;
+
+		if (p.is_not_symbol) {
+			let error = 'Allowed special characters are ' + this.allowed_symbol + ' only.';
+			this.toastr.error(error);
+			this.is_password_valid.is_symbol = !1;
 		}
+
+		return (p.is_length && p.is_space && p.is_capital && p.is_small && p.is_symbol && p.is_number && !p.is_not_symbol);
 	}
 
 
@@ -131,8 +152,13 @@ export class ChangePasswordComponent implements OnInit {
 			'is_space': !(/\s/g.test(password)),
 			'is_capital': (/[A-Z]/g.test(password)),
 			'is_small': (/[a-z]/g.test(password)),
-			'is_symbol': (/[$@$!%*?&]/g.test(password)),
+			'is_symbol': (/[$@!%*?&]/g.test(password)),
+			'is_not_symbol': (/[\\" "#'()+,-./:;<=>[\]^_`{|}~]/g.test(password)),
 			'is_number': (/\d/g.test(password))
+		}
+
+		if (this.is_password_valid.is_not_symbol) {
+			this.is_password_valid.is_symbol = !1;
 		}
 	}
 
