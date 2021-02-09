@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
 		}
 	];
 	public loginForm: FormGroup;
+	passType: any='password';
 	data: any;
 
 	constructor(
@@ -179,5 +180,9 @@ export class HomeComponent implements OnInit {
 				this.setCookie("username", "password", 365);
 			}
 		}
+	}
+
+	showPassword(evt){
+		this.passType=evt.target.checked?'text':'password';
 	}
 }

@@ -19,9 +19,13 @@
 							">
                             This field is required.
                         </p>
+						<div class="check-box">
+                            <input type="checkbox" class="rem-check" formControlName="remember_me" />
+                            <span>Remember me</span><br />
+                        </div>
                     </div>
                     <div class="form-group col-md-4 col-sm-4">
-                        <input id="password" formControlName="password" type="password" class="form-control input-lg" placeholder="Password" />
+                        <input id="password" formControlName="password" type="{{passType}}" class="form-control input-lg" placeholder="Password" />
                         <p class="error m-0-auto" col-12 ion-text color="danger" *ngIf="
 								loginForm.controls['password'].hasError(
 									'required'
@@ -31,14 +35,10 @@
                         </p>
                         <a routerLink="/forgot-password" class="forgot-password">Forgot password?</a
 						>
-						<div class="m-t-11">
-							<input
-								type="checkbox"
-								class="rem-check"
-								formControlName="remember_me"
-							/>
-							Remember me<br />
-						</div>
+						<div class="check-box">
+							<input type="checkbox" class="rem-check" (change)="showPassword($event)"/>
+                            <span>Show Password</span><br />
+                        </div>
 					</div>
 
 					<div class="form-group col-md-3 col-sm-3 btn-signin-block">

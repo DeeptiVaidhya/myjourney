@@ -26,7 +26,7 @@ agm-map {
     font-size: 15px;
     border-bottom: 1px solid #fff;
     line-height: 22px;
-    padding-top: 10px;
+    padding-top: 3px;
 }
 
 .rem-check {
@@ -35,7 +35,14 @@ agm-map {
     zoom: 1.5;
     vertical-align: middle;
 }
+.check-box, span{
+    color: #fff;
+    font-size: 15px;
+    line-height: 22px;
+    padding-top: 4px;
+    font-weight: bold;
+}
 
-.m-t-11 {
-    margin-top: 11px;
+.check-box span{
+    margin-left: 10px;
 }

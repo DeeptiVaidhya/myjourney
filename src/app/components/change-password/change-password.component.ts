@@ -27,7 +27,7 @@ export class ChangePasswordComponent implements OnInit {
 		'is_number': false
 	}
 	allowed_symbol = "$@!%*?&";
-
+	passType:any='password';
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
@@ -162,4 +162,7 @@ export class ChangePasswordComponent implements OnInit {
 		}
 	}
 
+	showPassword(evt){
+		this.passType=evt.target.checked?'text':'password';
+	}
 }
