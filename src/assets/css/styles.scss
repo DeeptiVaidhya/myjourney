@@ -1077,7 +1077,7 @@ form.signin-form .col-md-3 {
 }
 
 .what-is-oncotool {
-    padding-top: 150px;
+    padding-top: 210px;
 }
 
 .what-is-oncotool .h3 {
@@ -1119,7 +1119,10 @@ form.signin-form .col-md-3 {
 }
 
 .blue-arrow-bottom {
-    padding-top: 60px;
+   position: relative;
+    top: 13px;
+    z-index: 1;
+    padding-top: 0px;
 }
 
 .blue-arrow-bottom .h3 {
@@ -1575,7 +1578,7 @@ form.signin-form .col-md-3 {
         padding-right: 0;
     }
     .what-is-oncotool {
-        padding-top: 100px;
+        padding-top: 160px;
     }
 }
 
