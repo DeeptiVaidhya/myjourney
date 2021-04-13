@@ -4,6 +4,9 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { ToastrService } from "ngx-toastr";
 import { VgAPI } from "videogular2/core";
 import { QuestionnaireService } from "../../../service/questionnaire.service";
+import { CONSTANTS } from "../../../config/constants";
+import { Idle } from "@ng-idle/core";
+
 
 @Component({
     selector: "app-inquiry-mood-modal",
@@ -56,6 +59,9 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
     };
     questionnireForm: FormGroup;
     arm: string;
+    lastQuesOpId=null;
+    setTimeInterval=null;
+
     @Input("contentId") contentId: any = "";
     @Input("calleePage") calleePage: any = "";
     @Input("resourceDetail") resourceDetail: any;
@@ -68,12 +74,9 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
     @Output() onVideoUpdated = new EventEmitter();
 
     constructor(
-        //public route: ActivatedRoute,
         public questService: QuestionnaireService,
         public toastr: ToastrService,
-        //private router: Router,
-        //private dataService: DataService,
-
+        private idle: Idle,
         private formBuilder: FormBuilder,
         public modalService: BsModalService
     ) {
@@ -97,6 +100,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.arm = localStorage.getItem("arm");
+        // this.idle.setIdle(30); // test for 15 seconds (X+30)
     }
 
     ngAfterViewInit() {
@@ -111,6 +115,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                 );
             }
         }, 1);
+
     }
 
     onPlayerReady(api: VgAPI) {
@@ -119,9 +124,19 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
             this.totalTime = Math.floor(this.api.getDefaultMedia().duration);
             this.time = this.totalTime / 2;
             this.spentTime = Math.floor(this.api.getDefaultMedia().currentTime);
+        
             this.time =
                 this.spentTime > this.time ? 0 : this.time - this.spentTime;
             this.makeVideoCompleted();
+        
+            if(this.spentTime%10==0){
+                this.updateResourceTime();
+            }
+
+            if(this.spentTime==0 && this.totalTime>=CONSTANTS.SESSION_TIMEOUT){
+               console.log('sp',this.spentTime,'total',this.totalTime);
+               this.idle.setIdle(this.totalTime+30); // test for 15 seconds (X+30)
+            }
         });
 
         this.api.getDefaultMedia().subscriptions.pause.subscribe(() => {
@@ -161,6 +176,9 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
     openQuestionModal(template: TemplateRef<any>, ratingType?: any) {
         this.videoRef.hide();
         this.ratingType = ratingType;
+
+        this.updateResourceTime();
+
         if (this.arm == 'INTERVENTION') {
             if (this.level == "mood" || this.level == "inquiry") {
                 this.questService
@@ -182,20 +200,12 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                         }
                     });
             } else {
-                console.log(this.resourceDetail);
-                this.questionnireForm.value.exercise_type = this.level;
-                this.questionnireForm.value.video_completed = this.video_completed;
-                this.questionnireForm.value.resource_id = this.resourceId;
-                this.questionnireForm.value.content_id =
-                    this.contentId || this.pageContentId;
-                this.questionnireForm.value.total_time = this.totalTime;
-                this.questionnireForm.value.callee_page = this.calleePage;
-                this.questionnireForm.value.left_time =
-                    this.totalTime - this.spentTime;
+               let form = this.getFormValues();
                 this.questService
-                    .submitResourceQuestionResponse(this.questionnireForm.value)
+                    .submitResourceQuestionResponse(form)
                     .subscribe(response => {
                         if (response["status"] == "success") {
+                            this.lastQuesOpId =response["data"]["ques_opt_id"];
                             this.onVideoUpdated.emit(this.resourceId);
                             this.onCloseModal.emit("closed");
                         }
@@ -203,17 +213,9 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
             }
 
         } else {
-            console.log(this.resourceDetail);
-            this.questionnireForm.value.exercise_type = this.level;
-            this.questionnireForm.value.video_completed = this.video_completed;
-            this.questionnireForm.value.resource_id = this.resourceId;
-            this.questionnireForm.value.content_id =
-                this.contentId || this.pageContentId;
-            this.questionnireForm.value.total_time = this.totalTime;
-            this.questionnireForm.value.callee_page = this.calleePage;
-            this.questionnireForm.value.left_time = this.totalTime - this.spentTime;
+           let form = this.getFormValues();
             this.questService
-                .submitResourceQuestionResponse(this.questionnireForm.value)
+                .submitResourceQuestionResponse(form)
                 .subscribe(response => {
                     if (response["status"] == "success") {
                         this.onVideoUpdated.emit(this.resourceId);
@@ -223,32 +225,82 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
         }
     }
 
+    getFormValues(isResUpdate=0){
+        this.questionnireForm.value.exercise_type = this.level;
+        this.questionnireForm.value.video_completed = this.video_completed;
+        this.questionnireForm.value.resource_id = this.resourceId;
+        this.questionnireForm.value.content_id =
+            this.contentId || this.pageContentId;
+        this.questionnireForm.value.total_time = this.totalTime;
+        this.questionnireForm.value.callee_page = this.calleePage;
+        this.questionnireForm.value.left_time = this.totalTime - this.spentTime;
+
+        this.questionnireForm.value.is_res_update = isResUpdate;
+        this.questionnireForm.value.last_ques_op_id = this.lastQuesOpId;
+
+        return this.questionnireForm.value;
+    }
+
+    updateResourceTime(){
+        let form = this.getFormValues(1);
+        form['showSpinner'] = false;
+        this.questService
+            .submitResourceQuestionResponse(form)
+            .subscribe(response => {
+                if (response["status"] == "success") {
+                    this.lastQuesOpId =response["data"]["ques_opt_id"];
+                }
+            });
+
+            // console.log(CONSTANTS.SESSION_TIMEOUT);
+            // CONSTANTS.SESSION_TIMEOUT=3600;
+    }
+
     onStateChange(event) {
         this.ytEvent = event.data;
         this.spentTime = this.player.getCurrentTime();
+
         if (this.ytEvent == 1) {
             this.time =
                 this.spentTime > this.time ? 0 : this.time - this.spentTime;
             this.makeVideoCompleted();
-        }
-        if (this.ytEvent == 2) {
+        } else if (this.ytEvent == 2) {
             clearTimeout(this.timer);
+        }else if(this.ytEvent == 0){
+            clearInterval(this.setTimeInterval);
         }
+
+        if(this.spentTime==0 && this.totalTime>=CONSTANTS.SESSION_TIMEOUT){
+           console.log('sp',this.spentTime,'total',this.totalTime);
+       
+           this.idle.setIdle(this.totalTime+30); // test for 15 seconds (X+30)
+        }    
+    
+        this.updateResourceTime();
     }
 
     savePlayer(player) {
         this.totalTime = Math.floor(player.getDuration());
-        console.log(this.totalTime);
-        this.time = Math.floor(player.getDuration() / 2);
-        console.log(this.time);
+         // this.time = Math.floor(player.getDuration() / 2);
+        // console.log(this.time);
         this.player = player;
+
+        this.setTimeInterval = setInterval(()=>{
+            this.spentTime = this.player.getCurrentTime();
+            if(this.modalIsShown){
+               this.updateResourceTime();
+            } else { 
+               clearInterval(this.setTimeInterval);
+            }
+            
+        },10000);
     }
 
     playVideo() {
         this.player.playVideo();
     }
-
-    makeVideoCompleted() {
+    
+     makeVideoCompleted() {
         this.timer = setTimeout(() => {
             this.isCompleted = false;
         }, this.time * 1000);
@@ -261,19 +313,15 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
         this.backButtonFlag = !1;
         this.nextButtonFlag = !0;
     }
+    
     nextQuestion(videoModal?: TemplateRef<any>, value?: any) {
         console.log(this.totalTime);
         console.log(this.spentTime);
+
+        this.getFormValues();
         this.questionnireForm.value.question_id = this.questions[this.value].id;
-        this.questionnireForm.value.exercise_type = this.level;
         this.questionnireForm.value.qhoid = this.qhoid;
-        this.questionnireForm.value.video_completed = this.video_completed;
-        this.questionnireForm.value.resource_id = this.resourceId;
-        this.questionnireForm.value.content_id =
-            this.contentId || this.pageContentId;
-        this.questionnireForm.value.total_time = this.totalTime;
-        this.questionnireForm.value.callee_page = this.calleePage;
-        this.questionnireForm.value.left_time = this.totalTime - this.spentTime;
+
         if (value == 0)
             this.questionnireForm.value.skip_exercise_pre_rating_count = 1;
         else if (value > 0 || value == "mood")
@@ -287,6 +335,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
             .submitResourceQuestionResponse(this.questionnireForm.value)
             .subscribe(response => {
                 if (response["status"] == "success") {
+                    this.lastQuesOpId =response["data"]["ques_opt_id"];
                     if (this.ratingType == "prerating") {
                         this.questionRef.hide();
                         this.videoRef = this.modalService.show(videoModal, {
@@ -344,6 +393,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
             });
         this.selected = "";
     }
+    
     previousQuestion(): void {
         if (this.value >= 1) {
             this.value--;
@@ -370,6 +420,8 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
         console.log("modal closed");
         this.onVideoUpdated.emit(this.resourceId);
         this.onCloseModal.emit("closed");
+        clearInterval(this.setTimeInterval);
+        this.updateResourceTime();
     }
 
     addResourceVisited(content) {
@@ -383,7 +435,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
                 if (response["status"] == "success") {
                     // this.is_added_favorite = !this.is_added_favorite;
                     // this.toastr.success(
-                    // 	response["msg"] || "Favorite saved"
+                    //     response["msg"] || "Favorite saved"
                     // );
                 }
             });
