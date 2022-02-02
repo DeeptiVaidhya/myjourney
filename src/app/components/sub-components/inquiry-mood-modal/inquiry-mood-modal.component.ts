@@ -125,8 +125,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
             this.time = this.totalTime / 2;
             this.spentTime = Math.floor(this.api.getDefaultMedia().currentTime);
         
-            this.time =
-                this.spentTime > this.time ? 0 : this.time - this.spentTime;
+            this.time = this.spentTime > this.time ? 0 : this.time - this.spentTime;
             this.makeVideoCompleted();
         
             if(this.spentTime%10==0){
@@ -244,8 +243,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
     updateResourceTime(){
         let form = this.getFormValues(1);
         form['showSpinner'] = false;
-        this.questService
-            .submitResourceQuestionResponse(form)
+        this.questService.submitResourceQuestionResponse(form)
             .subscribe(response => {
                 if (response["status"] == "success") {
                     this.lastQuesOpId =response["data"]["ques_opt_id"];
@@ -300,7 +298,7 @@ export class InquiryMoodModalComponent implements OnInit, AfterViewInit {
         this.player.playVideo();
     }
     
-     makeVideoCompleted() {
+    makeVideoCompleted() {
         this.timer = setTimeout(() => {
             this.isCompleted = false;
         }, this.time * 1000);
